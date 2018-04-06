@@ -1,0 +1,24 @@
+<div class="container spacer">
+    <div class="panel panel-primary ">
+      <div class="panel-heading">
+        <h5>Liste des projets</h5>
+      </div>
+      <div class="panel-body">
+        <div class="navbar-form navbar-right" >
+          <input type="text" [(ngModel)]="motCle" placeholder="Rechercher" />
+          <button type="button" class="btn btn-default" (click)="chercher()">chercher</button>
+        </div>
+        <table class="table table-striped">
+          <tr>
+            <th>Intitulé</th><th>Commune</th><th>Montant Programmé</th><th>Secteur</th>
+          </tr>
+          <tr *ngFor="let p of pageProjets?.content">
+            <th>{{p.intitule}}</th>
+            <th>{{p.commune}}</th>
+            <th>{{p.montantProgramme}}</th>
+            <th>{{p.secteur.libelleSecteur}}</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
