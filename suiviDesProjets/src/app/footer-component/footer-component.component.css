@@ -1,0 +1,6 @@
+/* Set black background color, white text and some padding */
+footer {
+    background-color: #e3eddb;
+    color: black;
+    padding: 15px;
+  }

@@ -1,3 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 .spacer{ 
-    margin-top: 20px; }
+    margin-top: 20px; 
+}
+
+.nospacer{
+    margin-top: 0px;
+}
+body {
+    background-image: url("assets/background.png");
+ }

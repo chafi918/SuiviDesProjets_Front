@@ -1,6 +1,32 @@
-<div class="container spacer ">
-    <button routerLink="/projets" class="btn btn-primary">Liste des Projets</button>
-</div>
+<app-header-component></app-header-component>
 <div>
-    <router-outlet></router-outlet>
+    <div class="container-fluid text-center">
+        <div class="row content">
+            <div class="col-sm-1 sidenav">
+                <div class="home-button-container">
+                    <button class="button button4"><i class="fas fa-list-ul" aria-hidden="true"></i></button>
+                    <div class="button4-content">Liste des projets</div>
+                </div>  
+              <div class="home-button-container">
+                    <button class="button button4"><i class="fas fa-paperclip" aria-hidden="true"></i></button>
+                    <div class="button4-content">Documents</div>
+                </div>  
+              <div class="home-button-container dropdownButton">
+                    <button class="button button4"><i class="fas fa-cogs" aria-hidden="true"></i></button>
+                    <div class="button4-content">Paramétres</div>
+                    <div class="dropdown-content">
+                        <a href="/projets">Statuts</a>
+                        <a href="/projets">Secteurs</a>
+                        <a href="/projets">Entreprise</a>
+                        <a href="/projets">Utilisateurs</a>
+                      </div>
+                </div>
+              </div>
+              <div class="col-sm-11 text-left"> 
+                  <router-outlet></router-outlet>
+              </div>
+        </div>
+    </div>
 </div>
+<app-footer-component></app-footer-component>
+

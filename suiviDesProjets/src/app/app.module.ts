@@ -8,6 +8,8 @@ import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 import { ProjetService } from '../services/projets.service';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponentComponent } from './header-component/header-component.component';
+import { FooterComponentComponent } from './footer-component/footer-component.component';
 
 const appRoutes:Routes=[
   {path:'projets', component:ProjetsComponent}
@@ -16,7 +18,9 @@ const appRoutes:Routes=[
 @NgModule({
   declarations: [
     AppComponent,
-    ProjetsComponent
+    ProjetsComponent,
+    HeaderComponentComponent,
+    FooterComponentComponent
   ],
   imports: [
     BrowserModule,HttpModule,RouterModule.forRoot(appRoutes),FormsModule
