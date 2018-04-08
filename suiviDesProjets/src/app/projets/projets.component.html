@@ -9,10 +9,13 @@
                 <input type="text" [(ngModel)]="motCle" placeholder="Rechercher" />
                 <div class="selectRecherche">
                     <select class="custom-select">
-                        <option value="intitulé" selected>Mot clé</option>
+                        <option value="chercher" selected>Chercher Par</option>
+                        <option value="intitule">Intitulé</option>
                         <option value="statut">Statut</option>
                         <option value="secteur">Secteur</option>
                         <option value="commune">Commune</option>
+                        <option value="royal">Royal</option>
+                        <option value="masque">Masqué</option>
                       </select>
                 </div>
                 <button type="button" class="btn btn-default" (click)="chercher()"><i class="fas fa-search"></i></button>
@@ -23,9 +26,6 @@
                   <th>Commune</th>
                   <th>Montant Programmé</th>
                   <th>Secteur</th>
-                  <th>Statut</th>
-                  <th>Royal</th>
-                  <th>chargé du projet</th>
                   <th>Modifier</th>
                 </tr>
                 <tr *ngFor="let p of pageProjets?.content">
@@ -33,9 +33,6 @@
                   <td>{{p.commune}}</td>
                   <td>{{p.montantProgramme}}</td>
                   <td>{{p.secteur.libelleSecteur}}</td>
-                  <td>{{p.statut.libelleStatut}}</td>
-                  <td>{{p.estProjetRoyal}}</td>
-                  <td>{{p.chargeDuProjet}}</td>
                   <td><a href="/projets"><i class="fas fa-edit editIcon"></i></a></td>
                 </tr>
               </table>

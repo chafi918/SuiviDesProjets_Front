@@ -1,0 +1,43 @@
+<div class="container spacer">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h5>Liste des utilisateurs</h5>
+      </div>
+      <div class="panel-body">
+          <div class="navbar-form navbar-right row" >
+              <input type="text" [(ngModel)]="motCle" placeholder="Rechercher" />
+              <div class="selectRecherche">
+                  <select class="custom-select">
+                      <option value="chercher" selected>Chercher Par</option>
+                      <option value="motCle">Mot clé</option>
+                    </select>
+              </div>
+              <button type="button" class="btn btn-default" (click)="chercher()"><i class="fas fa-search"></i></button>
+            </div>
+        <div class="navbar-form" >
+        <table class="table table-striped">
+          <tr>
+            <td>Nom</td>
+            <td>Prénom</td>
+            <td>E-mail</td>
+            <td>Login</td>
+            <td>Mot de passe</td>
+            <td>Division</td>
+            <td>Profil</td>
+            <th>Modifier</th>
+          </tr>
+          <tr *ngFor="let u of pageUsers?.content">
+            <td>{{u.nomUser}}</td>
+            <td>{{u.prenomUser}}</td>
+            <td>{{u.mailUser}}</td>
+            <td>{{u.loginUser}}</td>
+            <td>{{u.mdpUser}}</td>
+            <td>{{u.division.libelleDivision}}</td>
+            <td>{{u.profil.libelleProfil}}</td>
+             
+            <td><a href="/users"><i class="fas fa-edit editIcon"></i></a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+</div>
