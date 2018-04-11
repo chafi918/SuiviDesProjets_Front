@@ -14,6 +14,7 @@ export class DivisionComponent implements OnInit {
   pageDivisions:any;
   pages:Array<number>;
   currentPage:number=0;
+  libelleDivision:string;
 
   constructor(public http:Http,public divisionService:DivisionService,public router:Router) { }
 
@@ -23,6 +24,13 @@ export class DivisionComponent implements OnInit {
       this.pageDivisions=data;
       this.pages=new Array(data.totalPages);}
     ,err=>{console.log(err);})
+  }
+
+  chercher(){
+    this.divisionService.chercherDivision(this.libelleDivision)
+    .subscribe(data=>{
+      this.pageDivisions=data;
+    },err=>{console.log(err);})
   }
 
   ajouterDivision(){

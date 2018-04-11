@@ -39,4 +39,10 @@ export class DivisionService{
     return this.http.delete("http://localhost:8080/division/"+id)
     .map(resp=>resp.json());
 }
+
+    chercherDivision(libelleDivision:string){
+        return this.http.get("http://localhost:8080/division/getDivisionsByName?name="+libelleDivision)
+        .map(resp=>resp.json());
+
+    }
 }

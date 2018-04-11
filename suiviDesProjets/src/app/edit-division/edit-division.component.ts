@@ -10,7 +10,7 @@ import { DivisionService } from '../../services/division.service';
 })
 export class EditDivisionComponent implements OnInit {
   division:Division = new Division();
-  motCle:string;
+  libelleDivision:string;
   pageDivisions:any;
   idDivision:number;
   pages:Array<number>;
@@ -30,6 +30,13 @@ export class EditDivisionComponent implements OnInit {
     this.divisionService.getDivision(this.idDivision)
     .subscribe(data=>{this.division=data; console.log(data);}
     ,err=>{console.log(err);})
+  }
+
+  chercher(){
+    this.divisionService.chercherDivision(this.libelleDivision)
+    .subscribe(data=>{
+      this.pageDivisions=data;
+    },err=>{console.log(err);})
   }
 
   updateDivision(){
