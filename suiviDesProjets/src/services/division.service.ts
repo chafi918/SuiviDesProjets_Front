@@ -13,6 +13,11 @@ export class DivisionService{
     .map(resp=>resp.json());
    }
 
+   getDivisionsParPage(page:number){
+    return this.http.get("http://localhost:8080/division/getDivision?page="+page)
+    .map(resp=>resp.json());
+   }
+
    getDivision(id:number){
     return this.http.get("http://localhost:8080/division/"+id)
     .map(resp=>resp.json());
@@ -29,4 +34,9 @@ export class DivisionService{
     return this.http.put("http://localhost:8080/division/"+division.idDivision,division)
     .map(resp=>resp.json());
    }
+
+   deleteDivision(id:number){
+    return this.http.delete("http://localhost:8080/division/"+id)
+    .map(resp=>resp.json());
+}
 }

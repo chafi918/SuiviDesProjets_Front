@@ -13,6 +13,8 @@ export class EditDivisionComponent implements OnInit {
   motCle:string;
   pageDivisions:any;
   idDivision:number;
+  pages:Array<number>;
+  currentPage:number=0;
 
   constructor(public activatedRoute:ActivatedRoute,public divisionService:DivisionService,public router:Router) { 
     this.idDivision=activatedRoute.snapshot.params['id'];
@@ -21,7 +23,8 @@ export class EditDivisionComponent implements OnInit {
 
   ngOnInit() {
     this.divisionService.getDivisions()
-    .subscribe(data=>{this.pageDivisions=data;}
+    .subscribe(data=>{this.pageDivisions=data;
+      this.pages=new Array(data.totalPages);}
     ,err=>{console.log(err);})
     
     this.divisionService.getDivision(this.idDivision)
@@ -41,6 +44,14 @@ export class EditDivisionComponent implements OnInit {
     this.divisionService.getDivision(id).subscribe(data => {
       this.division = data;
     });
+  }
+
+  gotoPage(i:number){
+    this.divisionService.getDivisionsParPage(i)
+    .subscribe(data=>{
+      this.pageDivisions=data;
+      this.pages=new Array(data.totalPages);}
+    ,err=>{console.log(err);})
   }
 
 }

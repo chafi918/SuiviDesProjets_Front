@@ -12,25 +12,48 @@ import { Router } from '@angular/router';
 export class DivisionComponent implements OnInit {
   division:Division=new Division();
   pageDivisions:any;
+  pages:Array<number>;
+  currentPage:number=0;
 
   constructor(public http:Http,public divisionService:DivisionService,public router:Router) { }
 
   ngOnInit() {
     this.divisionService.getDivisions()
-    .subscribe(data=>{this.pageDivisions=data;}
+    .subscribe(data=>{
+      this.pageDivisions=data;
+      this.pages=new Array(data.totalPages);}
     ,err=>{console.log(err);})
   }
 
   ajouterDivision(){
     this.divisionService.ajouterDivision(this.division)
-    .subscribe(data=>{console.log(data);}
+    .subscribe(data=>{console.log(data);
+      this.division=data;
+    }
       ,err=>{console.log(err);});
-
-    this.ngOnInit();
+    
   }
 
   onEditDivision(id:number){
     this.router.navigate(['editDivision',id]);
+  }
+
+  onDeleteDivision(division:Division){
+    this.divisionService.deleteDivision(division.idDivision)
+    .subscribe(data=>{
+      this.pageDivisions.content.splice(
+        this.pageDivisions.content.indexOf(division),1
+      );
+    }
+    ,err=>{console.log(err);})
+  }
+
+  gotoPage(i:number){
+    this.divisionService.getDivisionsParPage(i)
+    .subscribe(data=>{
+      this.pageDivisions=data;
+      this.pages=new Array(data.totalPages);}
+    ,err=>{console.log(err);})
   }
 
 }

@@ -8,10 +8,9 @@
             <table class="table table-striped">
               <tr>
                 <th>Libellé Division</th>
-                <input type="text" [(ngModel)]="division.libelleDivision"/>
+                <input class="marge" type="text" [(ngModel)]="division.libelleDivision"/>
                 <th><button class="btn btn-primary" (click)="updateDivision()">Modifier</button>
                 </th>
-              
               </tr>	
             </table>
           </div>
@@ -37,8 +36,17 @@
           <td>{{d.idDivision}}</td>
           <td>{{d.libelleDivision}}</td>
           <td><a (click)="onEditDivision(d.idDivision)"><i class="fas fa-edit editIcon"></i></a></td>
+          <td><a (click)="onDeleteDivision(d)">
+            <i class="glyphicon glyphicon-remove"></i></a></td>
         </tr>
     </table>
+    <div class="container">
+      <ul class="nav nav-pills">
+        <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages; let i=index">
+          <a (click)="gotoPage(i)">{{i}}</a>
+        </li>
+      </ul>
+    </div>
     </div>
   </div>
   </div>
