@@ -13,10 +13,15 @@ import { FooterComponentComponent } from './footer-component/footer-component.co
 import { UserComponent } from './user/user.component';
 import { UserService } from '../services/user.service';
 import { DivisionComponent } from './division/division.component';
+import { DivisionService } from '../services/division.service';
+import { EditDivisionComponent } from './edit-division/edit-division.component';
 
 const appRoutes:Routes=[
   {path:'projets', component:ProjetsComponent},
-  {path:'users', component:UserComponent}
+  {path:'users', component:UserComponent},
+  {path:'divisions', component:DivisionComponent},
+  {path:'editDivision/:id',component:EditDivisionComponent},
+  {path:'',redirectTo:'/projets',pathMatch:'full'}
 ];
 
 @NgModule({
@@ -26,12 +31,13 @@ const appRoutes:Routes=[
     HeaderComponentComponent,
     FooterComponentComponent,
     UserComponent,
-    DivisionComponent
+    DivisionComponent,
+    EditDivisionComponent
   ],
   imports: [
     BrowserModule,HttpModule,RouterModule.forRoot(appRoutes),FormsModule
   ],
-  providers: [ProjetService, UserService],
+  providers: [ProjetService, UserService,DivisionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

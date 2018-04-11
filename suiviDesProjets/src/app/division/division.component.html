@@ -1,23 +1,47 @@
-<div class="col-lg-9">
-
-	<h4>Ajouter une division</h4>
-	<div class="navbar-form">
-			<table class="table table-bordered">
-				<tr>
-					<td>Id Division</td>
-					<td>Libellé Division</td>
-				</tr>
-		
-				<tr>
-					<td><input type="submit" name="Save"></td>
-				</tr>
+<div class="container-fluid text-center spacer">
+		<div class="col-sm-6">
+			    <div class="navbar-form">
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								<h5>Ajouter une division</h5>
+							</div>
+							<table class="table table-striped">
+								<tr>
+								  <th>Libellé Division</th>
+								  <input type="text" [(ngModel)]="division.libelleDivision"/>
+								  <th><button class="btn btn-primary" (click)="ajouterDivision()">Ajouter</button>
+								  </th>
+								</tr>	
+							</table>
+						</div>
+				</div>
+		</div>
+		<div class="col-sm-6">
+	    <div class="navbar-form">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h5>Toutes les divisions</h5>
+				</div>
+				<div class="navbar-form navbar-right row" >
+						<input type="text" [(ngModel)]="motCle" placeholder="Rechercher" />
+						<button type="button" class="btn btn-default" (click)="chercher()"><i class="fas fa-search"></i></button>
+				</div>
+			<table class="table table-striped">
+					<tr>
+					  <th>ID Division</th>
+					  <th>Libellé Division</th>
+					  <th>Modification</th>
+					</tr>
+					<tr *ngFor="let d of pageDivisions?.content">
+					  <td>{{d.idDivision}}</td>
+					  <td>{{d.libelleDivision}}</td>
+						<td><a (click)="onEditDivision(d.idDivision)">
+							<i class="fas fa-edit editIcon"></i></a></td>
+						<td><a (click)="onDeleteDivision(d.idDivision)">
+							<i class="glyphicon glyphicon-remove"></i></a></td>
+					</tr>
 			</table>
-	</div>
-	<div class="navbar-form">
-		<h4>Toutes les divisions</h4>
-		<table class="table table-bordered">
-		
-			
-		</table>
-	</div>
+			</div>
+		</div>
+		</div>
 </div>

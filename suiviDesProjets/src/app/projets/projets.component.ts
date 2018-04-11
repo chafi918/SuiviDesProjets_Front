@@ -11,16 +11,28 @@ import { ProjetService } from '../../services/projets.service';
 export class ProjetsComponent implements OnInit {
    pageProjets:any;
    motCle:string="";
+   pages:Array<number>;
+   currentPage:number=0;
   constructor(public http:Http,public projetService:ProjetService) { }
 
   ngOnInit() {
    this.projetService.getProjets()
-   .subscribe(data=>{this.pageProjets=data;}
-   ,err=>{console.log(err);})
+   .subscribe(data=>{
+     this.pageProjets=data;
+     this.pages=new Array(data.totalPages);}
+    ,err=>{console.log(err);})
   }
 
   chercher(){
     
+  }
+
+  gotoPage(i:number){
+    this.projetService.getProjetsParPage(i)
+    .subscribe(data=>{
+      this.pageProjets=data;
+      this.pages=new Array(data.totalPages);}
+    ,err=>{console.log(err);})
   }
 
 }
