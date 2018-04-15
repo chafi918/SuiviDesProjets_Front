@@ -15,35 +15,74 @@ export class DivisionComponent implements OnInit {
   pages:Array<number>;
   currentPage:number=0;
   libelleDivision:string;
+  mode:number=0;
 
   constructor(public http:Http,public divisionService:DivisionService,public router:Router) { }
 
   ngOnInit() {
     this.divisionService.getDivisions()
     .subscribe(data=>{
+      console.log("on init");
+      console.log(data);
       this.pageDivisions=data;
-      this.pages=new Array(data.totalPages);}
+      this.pages=new Array(data.totalPages);
+      this.currentPage = data.number;
+    }
     ,err=>{console.log(err);})
+    console.log(this.mode);
+  }
+
+  initializeComponent(mode=0){
+    this.mode=0;
+    this.divisionService.getDivisions()
+    .subscribe(data=>{
+      console.log("on init");
+      console.log(data);
+      this.pageDivisions=data;
+      this.pages=new Array(data.totalPages);
+      this.currentPage = data.number;
+    }
+    ,err=>{console.log(err);})
+    console.log(mode);
   }
 
   chercher(){
     this.divisionService.chercherDivision(this.libelleDivision)
     .subscribe(data=>{
       this.pageDivisions=data;
+      this.pages=new Array(data.totalPages);
     },err=>{console.log(err);})
   }
 
   ajouterDivision(){
+    console.log(this.division);
     this.divisionService.ajouterDivision(this.division)
-    .subscribe(data=>{console.log(data);
-      this.division=data;
-    }
-      ,err=>{console.log(err);});
-    
+    .subscribe(data=>{
+    },err=>{console.log(err);});
+    this.mode=0;
+    this.ngOnInit();
   }
 
+
+  clickOnAjouterDivision(){
+    this.mode=0;
+    this.division=new Division();  
+  }
+
+  updateDivision(){
+    this.mode=1;
+    this.divisionService.updateDivision(this.division)
+    .subscribe(data=>{},err=>{console.log(err);});
+    this.mode=1;
+    this.division=new Division();
+    this.ngOnInit();
+  }
   onEditDivision(id:number){
-    this.router.navigate(['editDivision',id]);
+    this.mode=1;
+    this.divisionService.getDivision(id)
+    .subscribe(data=>{this.division=data; console.log(data);}
+    ,err=>{console.log(err);})
+    //this.router.navigate(['editDivision',id]);
   }
 
   onDeleteDivision(division:Division){
@@ -60,7 +99,8 @@ export class DivisionComponent implements OnInit {
     this.divisionService.getDivisionsParPage(i)
     .subscribe(data=>{
       this.pageDivisions=data;
-      this.pages=new Array(data.totalPages);}
+      this.pages=new Array(data.totalPages);
+      this.currentPage = data.number;}
     ,err=>{console.log(err);})
   }
 

@@ -9,6 +9,7 @@ export class DivisionService{
    }
    
    getDivisions(){
+       console.log("getDivision")
     return this.http.get("http://localhost:8080/division/getDivision")
     .map(resp=>resp.json());
    }
@@ -24,13 +25,11 @@ export class DivisionService{
    }
 
    ajouterDivision(division:Division){
-       console.log(division);
     return this.http.post("http://localhost:8080/division/ajout",division)
-    .map(resp=>resp.json());
+    .map(resp=>resp);
    }
 
     updateDivision(division:Division){
-        console.log(division.idDivision);
     return this.http.put("http://localhost:8080/division/"+division.idDivision,division)
     .map(resp=>resp.json());
    }

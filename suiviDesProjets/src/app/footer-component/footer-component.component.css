@@ -1,6 +1,11 @@
 /* Set black background color, white text and some padding */
-footer {
+.footer {
     background-color: #e3eddb;
     color: black;
     padding: 15px;
+    height: 30px;
+  }
+
+  .centerText{
+    margin-left: 50%
   }

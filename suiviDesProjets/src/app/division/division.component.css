@@ -1,4 +1,12 @@
 .marge{
-    margin: 10px;
+    margin: 5px;
+}
 
+.inputForm{
+    height: 24px;
+    margin: 15px;
+}
+
+row{
+    float: right
 }

@@ -14,13 +14,21 @@ import { UserComponent } from './user/user.component';
 import { UserService } from '../services/user.service';
 import { DivisionComponent } from './division/division.component';
 import { DivisionService } from '../services/division.service';
-import { EditDivisionComponent } from './edit-division/edit-division.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
+
+
 
 const appRoutes:Routes=[
   {path:'projets', component:ProjetsComponent},
   {path:'users', component:UserComponent},
   {path:'divisions', component:DivisionComponent},
-  {path:'editDivision/:id',component:EditDivisionComponent},
   {path:'',redirectTo:'/projets',pathMatch:'full'}
 ];
 
@@ -31,11 +39,12 @@ const appRoutes:Routes=[
     HeaderComponentComponent,
     FooterComponentComponent,
     UserComponent,
-    DivisionComponent,
-    EditDivisionComponent
+    DivisionComponent
   ],
   imports: [
-    BrowserModule,HttpModule,RouterModule.forRoot(appRoutes),FormsModule
+    BrowserModule,HttpModule,RouterModule.forRoot(appRoutes),FormsModule,
+    BrowserAnimationsModule, MatToolbarModule, MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
+    MatPaginatorModule, MatIconModule, MatSelectModule
   ],
   providers: [ProjetService, UserService,DivisionService],
   bootstrap: [AppComponent]

@@ -55,6 +55,7 @@ li a:hover:not(.active) {
   
   .big-icon {
     font-size: 20px;
+    float: right;
 }
 
 .dropdown {
@@ -64,3 +65,13 @@ li a:hover:not(.active) {
 .sdp {
     margin-top: 10px;
 }
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .header{
+    background-color: #e3eddb;
+    color: black;
+    height: 30px;
+  }

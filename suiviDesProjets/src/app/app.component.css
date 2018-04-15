@@ -2,7 +2,7 @@
   /* Set gray background color and 100% height */
   .sidenav {
     padding-top: 10px;
-    background-color: #e2e2de;
+    background-color: #e3eddb;
     height: 500px;
   }
   
@@ -42,7 +42,7 @@
     display: none;
 }
 
-.button4 {border-radius: 12px;}
+.button4 {border-radius: 12px; background-color: #3f51b5;}
 
 .dropdown-content {
     display: none;
@@ -72,4 +72,9 @@
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdownButton:hover .dropdownButton {
     background-color: #3e8e41;
+}
+
+.projectMenu{
+    min-height: 10em;
+    display: table-cell;
 }
