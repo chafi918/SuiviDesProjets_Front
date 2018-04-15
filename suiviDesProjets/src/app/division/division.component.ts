@@ -57,10 +57,10 @@ export class DivisionComponent implements OnInit {
   ajouterDivision(){
     console.log(this.division);
     this.divisionService.ajouterDivision(this.division)
-    .subscribe(data=>{
-    },err=>{console.log(err);});
+    .subscribe(data=>{this.ngOnInit();}
+        ,err=>{console.log(err);});
     this.mode=0;
-    this.ngOnInit();
+    
   }
 
 
@@ -72,7 +72,7 @@ export class DivisionComponent implements OnInit {
   updateDivision(){
     this.mode=1;
     this.divisionService.updateDivision(this.division)
-    .subscribe(data=>{},err=>{console.log(err);});
+    .subscribe(data=>{this.ngOnInit();},err=>{console.log(err);});
     this.mode=1;
     this.division=new Division();
     this.ngOnInit();
