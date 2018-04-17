@@ -16,6 +16,8 @@ import { Profil } from '../../model/model.profil';
 @Injectable()
 export class UserComponent implements OnInit {
 pageUsers:any;
+idDivision:number;
+idProfil:number;
 divisions:Array<Division>;
 profils:Array<Profil>;
 pages:Array<number>;
@@ -27,7 +29,6 @@ utilisateur:Utilisateur=new Utilisateur();
    }
 
    ngOnInit() {
-
     this.userService.getUsers()
     .subscribe(data=>{
       console.log('data = ', data);
@@ -51,7 +52,10 @@ utilisateur:Utilisateur=new Utilisateur();
     ,err=>{console.log(err);})
     console.log(mode);
   }
+
   ajouterUser(){
+    this.utilisateur.division = this.getDivisionById(this.divisions, this.idDivision);
+    this.utilisateur.profil = this.getProfilById(this.profils, this.idProfil);
     console.log(this.utilisateur);
     this.userService.ajouterUser(this.utilisateur)
     .subscribe(data=>{this.ngOnInit();}
@@ -60,7 +64,21 @@ utilisateur:Utilisateur=new Utilisateur();
     
   }
 
+  getProfilById(profils, idProfil){
+    for (let index = 0; index < profils.length; index++) {
+      if (profils[index].idProfil == idProfil) {
+        return profils[index];
+      }
+    }
+  }
 
+  getDivisionById(divisions, idDivision){
+    for (let index = 0; index < divisions.length; index++) {
+      if (divisions[index].idDivision == idDivision) {
+        return divisions[index];
+      }
+    }
+  }
   clickOnAjouterUser(){
     this.mode=0;
     this.utilisateur=new Utilisateur();
