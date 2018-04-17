@@ -1,5 +1,103 @@
-<div class="container spacer">
-    <div class="panel panel-primary">
+<div class="container-fluid text-center spacer">
+  <div class="col-sm-3 position" *ngIf="mode==0">
+        <div class="navbar-form">
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h5>Ajouter un utilisateur</h5>
+            </div>
+            <div class="row spacer">
+              <div class="inputForm">
+                  <mat-form-field>
+                      <input matInput placeholder="Nom" [(ngModel)]="utilisateur.nomUser" name="nom" >
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput placeholder="Prénom" [(ngModel)]="utilisateur.prenomUser" name="prenom" >
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput placeholder="Mail" [(ngModel)]="utilisateur.mailUser" name="mail" >
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput placeholder="Login" [(ngModel)]="utilisateur.loginUser" name="login" >
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput placeholder="Mot de Passe" [(ngModel)]="utilisateur.mdpUser" name="mdp" >
+                  </mat-form-field> 
+                  <mat-form-field>
+                      <input matInput placeholder="Responsabilité" [(ngModel)]="utilisateur.responsabilite" name="responsabilite" >
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-select placeholder="Division">
+                      <mat-option *ngFor="let division of divisions" [value]="division.libelleDivision">
+                          {{ division.libelleDivision }}
+                      </mat-option>
+                     </mat-select>
+                   </mat-form-field>
+                   <mat-form-field>
+                    <mat-select placeholder="Profil">
+                      <mat-option *ngFor="let profil of profils" 
+                                            [value]="profil.libelleProfil">
+                          {{ profil.libelleProfil }}
+                      </mat-option>
+                     </mat-select>
+                   </mat-form-field>
+                   <mat-checkbox  class="checkbox" [(ngModel)]="utilisateur.estActive">activé</mat-checkbox>
+              </div>
+              <button mat-raised-button color="primary" (click)="ajouterUser()" style="height:30px;margin: auto;">Ajouter</button>
+            </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-sm-3" *ngIf="mode==1">
+      <div class="navbar-form">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h5>Modifier un utilisateur</h5>
+          </div>
+          <div class="row spacer">
+              <div class="inputForm">
+                <mat-form-field>
+                  <input matInput placeholder="Nom" [(ngModel)]="utilisateur.nomUser" name="nom" >
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Prénom" [(ngModel)]="utilisateur.prenomUser" name="prenom" >
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Mail" [(ngModel)]="utilisateur.mailUser" name="mail" >
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Login" [(ngModel)]="utilisateur.loginUser" name="login" >
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Mot de Passe" [(ngModel)]="utilisateur.mdpUser" name="mdp" >
+              </mat-form-field> 
+              <mat-form-field>
+                <input matInput placeholder="Responsabilité" [(ngModel)]="utilisateur.responsabilite" name="responsabilite" >
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select placeholder="Division">
+                  <mat-option *ngFor="let division of divisions" 
+                                        [value]="division.libelleDivision">
+                      {{ division.libelleDivision }}
+                  </mat-option>
+                 </mat-select>
+               </mat-form-field>
+               <mat-form-field>
+                <mat-select placeholder="Profil">
+                  <mat-option *ngFor="let profil of profils" 
+                                        [value]="profil.libelleProfil">
+                      {{ profil.libelleProfil }}
+                  </mat-option>
+                 </mat-select>
+               </mat-form-field>
+               <mat-checkbox  class="checkbox" [(ngModel)]="utilisateur.estActive">activé</mat-checkbox>
+              </div>
+              <button mat-raised-button color="primary" (click)="updateUser()" style="height:30px;margin: auto;">Modifier</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container spacer" class="col-sm-9">
+    <div class="panel panel-success">
       <div class="panel-heading">
         <h5>Liste des utilisateurs</h5>
       </div>
@@ -22,9 +120,12 @@
             <td>E-mail</td>
             <td>Login</td>
             <td>Mot de passe</td>
+            <td>Responsabilité</td>
             <td>Division</td>
             <td>Profil</td>
+            <td>Activé</td>
             <th>Modifier</th>
+            <th>Supprimer</th>
           </tr>
           <tr *ngFor="let u of pageUsers?.content">
             <td>{{u.nomUser}}</td>
@@ -32,10 +133,14 @@
             <td>{{u.mailUser}}</td>
             <td>{{u.loginUser}}</td>
             <td>{{u.mdpUser}}</td>
+            <td>{{u.responsabilite}}</td>
             <td>{{u.division.libelleDivision}}</td>
             <td>{{u.profil.libelleProfil}}</td>
+            <td>{{u.estActive}}</td>
              
             <td><a href="/users"><i class="fas fa-edit editIcon"></i></a></td>
+            <td><a (click)="onDeleteUser(u)">
+              <i class="glyphicon glyphicon-remove cursorElement"></i></a></td>
           </tr>
         </table>
       </div>

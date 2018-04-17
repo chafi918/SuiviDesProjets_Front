@@ -2,13 +2,12 @@
   /* Set gray background color and 100% height */
   .sidenav {
     padding-top: 10px;
-    background-color: #e3eddb;
+    background-color:rgb(238, 245, 239);
     position: relative;
     bottom: 0px;
     top: 0px;
     left: 0px;
     right: 0px;
-    border-right:1px solid black
   }
   
   

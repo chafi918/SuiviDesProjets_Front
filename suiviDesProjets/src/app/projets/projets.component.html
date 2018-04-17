@@ -1,11 +1,11 @@
-<div class="nospacer">
+<div class="spacer  tableSpacer">
       <div class="container spacer">
           <div class="panel panel-success">
             <div class="panel-heading">
               <h5>Liste des projets</h5>
             </div>
             <div class="rowMenu spacer">
-                <button mat-raised-button color="primary" class="newEntity innerSpacer">Ajouter projet</button>
+                <button mat-button color="primary" class="newEntity innerSpacer">Ajouter un projet</button>
                 <div class="navbar-form navbar-right row" >
                     <mat-form-field>
                         <input matInput type="text" [(ngModel)]="motCle" (keyup)="chercher()" placeholder="Rechercher"/>

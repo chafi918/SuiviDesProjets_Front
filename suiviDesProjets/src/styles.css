@@ -14,8 +14,15 @@ body {
     background-image: url("assets/background.png");
  }
 
+ .tableSpacer{
+    margin-top: 40px;
+ }
+
  .newEntity{
    float: left;
+   font-size: small;
+   background-color: rgba(207, 228, 211, 0.829);
+   -webkit-text-fill-color: rgb(21, 100, 57)
  }
 
 .marginElement{
@@ -38,5 +45,5 @@ body {
 }
 
 .nav-pills>li.active>a{
-    background-color: #3f51b5;
+    background-color: rgb(187, 212, 236);
 }

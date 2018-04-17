@@ -1,0 +1,75 @@
+<div class="container-fluid text-center spacer">
+  <div class="col-sm-6" *ngIf="mode==0">
+        <div class="navbar-form">
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h5>Ajouter un profil</h5>
+            </div>
+            <div class="row spacer">
+              <div class="inputForm">
+                  <mat-form-field>
+                      <input matInput placeholder="Libellé Profil" [(ngModel)]="profil.libelleProfil" name="libelleProfil" >
+                  </mat-form-field>
+              </div>
+              <button mat-raised-button color="primary" (click)="ajouterProfil()" style="height:30px;margin: auto;">Ajouter</button>
+            </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-sm-6" *ngIf="mode==1">
+      <div class="navbar-form">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h5>Modifier un Profil</h5>
+          </div>
+          <div class="row spacer">
+              <div class="inputForm">
+                  <mat-form-field>
+                      <input matInput placeholder="Libellé Profil" [(ngModel)]="profil.libelleProfil" name="libelleProfil" >
+                  </mat-form-field>
+              </div>
+              <button mat-raised-button color="primary" (click)="updateProfil()" style="height:30px;margin: auto;">Modifier</button>
+            </div>
+        </div>
+    </div>
+</div>
+  <div class="col-sm-6">
+    <div class="navbar-form">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h5>Tout les profils</h5>
+      </div>
+      <div class="rowMenu spacer">
+          <button color="primary" class="newEntity innerSpacer" style="height:30px"(click)="clickOnAjouterProfil()"> Ajouter un profil</button>
+          <div class="navbar-form navbar-right row" >
+              <mat-form-field>
+                  <input matInput type="text" [(ngModel)]="libelleProfil" (keyup)="chercher()" placeholder="Rechercher"/>
+              </mat-form-field>
+              <button type="button" class="btn btn-default" (keyup)="chercher()"><i class="fas fa-search"></i></button>
+          </div>
+      </div>
+    <table class="table table-striped">
+        <tr>
+          <th>Libellé Profil</th>
+          <th>Modification</th>
+          <th>Supprimer</th>
+        </tr>
+        <tr *ngFor="let p of pageProfils?.content">
+          <td>{{p.libelleProfil}}</td>
+          <td><a (click)="onEditProfil(p.idProfil)">
+            <i class="fas fa-edit editIcon cursorElement"></i></a></td>
+          <td><a (click)="onDeleteProfil(p)">
+            <i class="glyphicon glyphicon-remove cursorElement"></i></a></td>
+        </tr>
+    </table>
+    <div class="container spacerUp">
+      <ul class="nav nav-pills">
+        <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages; let i=index">
+          <a (click)="gotoPage(i)" class="marge cursorElement">{{i}}</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+  </div>
+  </div>
+</div>

@@ -76,10 +76,9 @@ li a:hover:not(.active) {
     background-size: 100% 100%;
     background-repeat:no-repeat;
     color: black;
-    height: 150px !important;
+    height: 150px !important; /*hafin radi tbdli la hauteur aw l irtifa3 aaw tool aaw l3ard dial lheader :p*/
     position: relative;
     top: 0px;
     left: 0px;
     right: 0px;
-    border:1px solid black
   }

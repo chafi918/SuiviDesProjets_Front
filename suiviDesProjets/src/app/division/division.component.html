@@ -1,4 +1,4 @@
-<div class="container-fluid text-center spacer">
+<div class="container-fluid text-center spacer tableSpacer">
 		<div class="col-sm-6" *ngIf="mode==0">
 			    <div class="navbar-form">
 						<div class="panel panel-success">
@@ -11,7 +11,7 @@
 												<input matInput placeholder="Libellé Division" [(ngModel)]="division.libelleDivision" name="libelleDivision" >
 										</mat-form-field>
 								</div>
-								<button mat-raised-button color="primary" (click)="ajouterDivision()" style="height: 40px;margin: auto;">Ajouter</button>
+								<button mat-raised-button color="primary" (click)="ajouterDivision()" style="height:30px;margin: auto;">Ajouter</button>
 							</div>
 						</div>
 				</div>
@@ -28,7 +28,7 @@
 												<input matInput placeholder="Libellé Division" [(ngModel)]="division.libelleDivision" name="libelleDivision" >
 										</mat-form-field>
 								</div>
-								<button mat-raised-button color="primary" (click)="updateDivision()" style="height: 40px;margin: auto;">Modifier</button>
+								<button mat-raised-button color="primary" (click)="updateDivision()" style="height:30px;margin: auto;">Modifier</button>
 							</div>
 					</div>
 			</div>
@@ -40,7 +40,7 @@
 					<h5>Toutes les divisions</h5>
 				</div>
 				<div class="rowMenu spacer">
-						<button mat-raised-button color="primary" class="newEntity innerSpacer" (click)="clickOnAjouterDivision()">Ajouter division</button>
+						<button color="primary" class="newEntity innerSpacer" style="height:30px"(click)="clickOnAjouterDivision()"> Ajouter une division</button>
 						<div class="navbar-form navbar-right row" >
 								<mat-form-field>
 										<input matInput type="text" [(ngModel)]="libelleDivision" (keyup)="chercher()" placeholder="Rechercher"/>
