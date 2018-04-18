@@ -1,5 +1,5 @@
 <div class="container-fluid text-center spacer">
-  <div class="col-sm-4 position" >
+  <div class="col-sm-3 position" >
         <div class="navbar-form">
           <div class="panel panel-success">
             <div class="panel-heading" *ngIf="mode==0">
@@ -45,28 +45,25 @@
                    <mat-checkbox  class="checkbox" [(ngModel)]="utilisateur.estActive">activé</mat-checkbox>
               </div>
               <button mat-raised-button color="primary" (click)="ajouterUser()" style="height:30px;margin: auto;" *ngIf="mode==0">Ajouter</button>
-              <button mat-raised-button color="primary" (click)="ajouterUser()" style="height:30px;margin: auto;" *ngIf="mode==1">Modifier</button>
+              <button mat-raised-button color="primary" (click)="updateUser()" style="height:30px;margin: auto;" *ngIf="mode==1">Modifier</button>
             </div>
           </div>
       </div>
   </div>
-<div class="container spacer col-sm-8">
+<div class="container spacer col-sm-9">
     <div class="panel panel-success">
       <div class="panel-heading">
         <h5>Liste des utilisateurs</h5>
       </div>
-      <div class="panel-body">
-          <div class="navbar-form navbar-right row" >
-              <input type="text" [(ngModel)]="motCle" placeholder="Rechercher" />
-              <div class="selectRecherche">
-                  <select class="custom-select">
-                      <option value="chercher" selected>Chercher Par</option>
-                      <option value="motCle">Mot clé</option>
-                    </select>
-              </div>
-              <button type="button" class="btn btn-default" (click)="chercher()"><i class="fas fa-search"></i></button>
-            </div>
-        <div class="navbar-form" >
+      <div class="rowMenu spacer">
+        <button color="primary" class="newEntity innerSpacer" style="height:30px"(click)="clickOnAjouterUser()"> Ajouter un utilisateur</button>
+        <div class="navbar-form navbar-right row" >
+            <mat-form-field>
+                <input matInput type="text" [(ngModel)]="motCle" (keyup)="chercher()" placeholder="Rechercher"/>
+            </mat-form-field>
+            <button type="button" class="btn btn-default" (keyup)="chercher()"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
         <table class="table table-striped">
           <tr>
             <td>Nom</td>
@@ -92,11 +89,11 @@
             <td>{{u.profil.libelleProfil}}</td>
             <td>{{u.estActive}}</td>
              
-            <td><a href="/users"><i class="fas fa-edit editIcon"></i></a></td>
+            <td><a (click)="onEditUser(u.idUser)">
+              <i class="fas fa-edit editIcon cursorElement"></i></a></td>
             <td><a (click)="onDeleteUser(u)">
               <i class="glyphicon glyphicon-remove cursorElement"></i></a></td>
           </tr>
         </table>
-      </div>
     </div>
 </div>

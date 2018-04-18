@@ -2,7 +2,7 @@
   /* Set gray background color and 100% height */
   .sidenav {
     padding-top: 10px;
-    background-color:rgb(238, 245, 239);
+    background-color:rgb(244, 249, 242);
     position: relative;
     bottom: 0px;
     top: 0px;
@@ -46,7 +46,7 @@
     display: none;
 }
 
-.button4 {border-radius: 12px; background-color: #3f51b5;}
+.button4 {border-radius: 12px; background-color: #aa251e;}
 
 .dropdown-content {
     display: none;

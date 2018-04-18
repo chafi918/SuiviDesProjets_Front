@@ -28,4 +28,25 @@ export class UserService{
         return this.http.post("http://localhost:8080/users/ajout",utilisateur)
         .map(resp=>resp);
        }
+
+    getUser(id:number){
+        return this.http.get("http://localhost:8080/users/user/"+id)
+        .map(resp=>resp.json());
+       }
+
+    updateUser(utilisateur:Utilisateur){
+        return this.http.put("http://localhost:8080/users/"+utilisateur.idUser,utilisateur)
+        .map(resp=>resp.json());
+       }
+
+       deleteUser(id:number){
+        return this.http.delete("http://localhost:8080/users/"+id)
+        .map(resp=>resp.json());
+       }
+       
+        chercherUserParMotCle(motCle:string){
+            return this.http.get("http://localhost:8080/users/getParMotCle/"+motCle)
+            .map(resp=>resp.json());
+       
+        }
 }

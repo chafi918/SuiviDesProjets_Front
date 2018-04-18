@@ -23,6 +23,7 @@ profils:Array<Profil>;
 pages:Array<number>;
 currentPage:number=0;
 mode:number=0;
+motCle:string;
 utilisateur:Utilisateur=new Utilisateur();
   constructor(public http:Http , public userService:UserService,public router:Router) {
    
@@ -94,5 +95,38 @@ utilisateur:Utilisateur=new Utilisateur();
     this.userService.getAllProfils()
     .subscribe(data=>{this.profils=data;},
       err=>{console.log(err);})
+  }
+
+  updateUser(){
+    this.mode=1;
+    this.userService.updateUser(this.utilisateur)
+    .subscribe(data=>{this.ngOnInit();},err=>{console.log(err);});
+    this.mode=1;
+    this.utilisateur=new Utilisateur();
+    this.ngOnInit();
+  }
+  onEditUser(id:number){
+    this.mode=1;
+    this.userService.getUser(id)
+    .subscribe(data=>{this.utilisateur=data; console.log(data);}
+    ,err=>{console.log(err);})
+  }
+
+  chercher(){
+    this.userService.chercherUserParMotCle(this.motCle)
+    .subscribe(data=>{
+      this.pageUsers=data;
+      this.pages=new Array(data.totalPages);
+    },err=>{console.log(err);})
+  }
+
+  onDeleteUser(utilisateur:Utilisateur){
+    this.userService.deleteUser(utilisateur.idUser)
+    .subscribe(data=>{
+      this.pageUsers.content.splice(
+        this.pageUsers.content.indexOf(utilisateur),1
+      );
+    }
+    ,err=>{console.log(err);})
   }
 }
