@@ -37,7 +37,10 @@ utilisateur:Utilisateur=new Utilisateur();
       this.pages=new Array(data.totalPages);
       this.currentPage = data.number;
       this.getAllDivisions();
-      this.getAllProfils();}
+      this.getAllProfils();
+      this.utilisateur = new Utilisateur();
+    this.libelleDivision = this.libelleProfil = "";
+  }
     ,err=>{console.log(err);})
   }
   initializeComponent(mode=0){
@@ -85,6 +88,7 @@ utilisateur:Utilisateur=new Utilisateur();
   clickOnAjouterUser(){
     this.mode=0;
     this.utilisateur=new Utilisateur();
+    this.libelleDivision = this.libelleProfil = "";
   }
 
   getAllDivisions(){
@@ -100,12 +104,12 @@ utilisateur:Utilisateur=new Utilisateur();
   }
 
   updateUser(){
-    this.mode=1;
+    console.log(this.utilisateur);
     this.userService.updateUser(this.utilisateur)
-    .subscribe(data=>{this.ngOnInit();},err=>{console.log(err);});
-    this.mode=1;
-    this.utilisateur=new Utilisateur();
+    .subscribe(data=>{this.ngOnInit();}
+        ,err=>{console.log(err);});
     this.ngOnInit();
+    this.mode=0;
   }
   onEditUser(id:number){
     this.mode=1;
@@ -131,6 +135,7 @@ utilisateur:Utilisateur=new Utilisateur();
       this.pageUsers.content.splice(
         this.pageUsers.content.indexOf(utilisateur),1
       );
+      this.ngOnInit();
     }
     ,err=>{console.log(err);})
   }
