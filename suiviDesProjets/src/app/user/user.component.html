@@ -29,15 +29,15 @@
                       <input matInput placeholder="Responsabilité" [(ngModel)]="utilisateur.responsabilite" name="responsabilite" >
                   </mat-form-field>
                   <mat-form-field>
-                    <mat-select placeholder="Division" [(ngModel)]="idDivision" name="division">
-                      <mat-option *ngFor="let division of divisions" [(value)]="division.idDivision">
+                    <mat-select placeholder="Division" [(ngModel)]="libelleDivision" name="division">
+                      <mat-option *ngFor="let division of divisions" [(value)]="division.libelleDivision" [value]="Informatique">
                           {{ division.libelleDivision }}
                       </mat-option>
                      </mat-select>
                    </mat-form-field>
                    <mat-form-field>
-                      <mat-select placeholder="Profil" [(ngModel)]="idProfil" name="profil">
-                        <mat-option *ngFor="let profil of profils" [(value)]="profil.idProfil">
+                      <mat-select placeholder="Profil" [(ngModel)]="libelleProfil" name="profil">
+                        <mat-option *ngFor="let profil of profils" [(value)]="profil.libelleProfil">
                             {{ profil.libelleProfil }}
                         </mat-option>
                        </mat-select>

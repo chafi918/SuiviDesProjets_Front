@@ -16,8 +16,8 @@ import { Profil } from '../../model/model.profil';
 @Injectable()
 export class UserComponent implements OnInit {
 pageUsers:any;
-idDivision:number;
-idProfil:number;
+libelleDivision:string;
+libelleProfil:string;
 divisions:Array<Division>;
 profils:Array<Profil>;
 pages:Array<number>;
@@ -55,8 +55,8 @@ utilisateur:Utilisateur=new Utilisateur();
   }
 
   ajouterUser(){
-    this.utilisateur.division = this.getDivisionById(this.divisions, this.idDivision);
-    this.utilisateur.profil = this.getProfilById(this.profils, this.idProfil);
+    this.utilisateur.division = this.getDivisionByName(this.divisions, this.libelleDivision);
+    this.utilisateur.profil = this.getProfilByName(this.profils, this.libelleProfil);
     console.log(this.utilisateur);
     this.userService.ajouterUser(this.utilisateur)
     .subscribe(data=>{this.ngOnInit();}
@@ -65,21 +65,23 @@ utilisateur:Utilisateur=new Utilisateur();
     
   }
 
-  getProfilById(profils, idProfil){
+  getProfilByName(profils, idProfil){
     for (let index = 0; index < profils.length; index++) {
-      if (profils[index].idProfil == idProfil) {
+      if (profils[index].libelleProfil === idProfil) {
         return profils[index];
       }
     }
   }
 
-  getDivisionById(divisions, idDivision){
+  getDivisionByName(divisions, idDivision){
     for (let index = 0; index < divisions.length; index++) {
-      if (divisions[index].idDivision == idDivision) {
+      if (divisions[index].libelleDivision === idDivision) {
         return divisions[index];
       }
     }
   }
+
+
   clickOnAjouterUser(){
     this.mode=0;
     this.utilisateur=new Utilisateur();
@@ -108,7 +110,10 @@ utilisateur:Utilisateur=new Utilisateur();
   onEditUser(id:number){
     this.mode=1;
     this.userService.getUser(id)
-    .subscribe(data=>{this.utilisateur=data; console.log(data);}
+    .subscribe(data=>{this.utilisateur=data;
+      this.libelleDivision = this.utilisateur.division.libelleDivision;
+      this.libelleProfil = this.utilisateur.profil.libelleProfil;
+       console.log(data);}
     ,err=>{console.log(err);})
   }
 

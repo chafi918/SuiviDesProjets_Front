@@ -45,7 +45,7 @@ export class UserService{
        }
        
         chercherUserParMotCle(motCle:string){
-            return this.http.get("http://localhost:8080/users/getParMotCle/"+motCle)
+            return this.http.get("http://localhost:8080/users/getParMotCle/?motCle="+motCle)
             .map(resp=>resp.json());
        
         }
