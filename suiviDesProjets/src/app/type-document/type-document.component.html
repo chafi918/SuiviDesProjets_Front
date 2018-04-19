@@ -8,7 +8,11 @@
             <div class="row spacer">
               <div class="inputForm">
                   <mat-form-field>
-                      <input matInput placeholder="Libellé Type" [(ngModel)]="type.libelleType" name="libelleType" >
+                      <input matInput placeholder="Libellé Type" [(ngModel)]="type.libelleType" #libelleType="ngModel" name="libelleType" required>
+                      <div [hidden]="libelleType.valid || libelleType.pristine"
+                      class="alert alert-danger">
+                      Ce champ est obligatoire
+                      </div>
                   </mat-form-field>
               </div>
               <button mat-raised-button color="primary" (click)="ajouterType()" style="height:30px;margin: auto;">Ajouter</button>
@@ -25,7 +29,7 @@
           <div class="row spacer">
               <div class="inputForm">
                   <mat-form-field>
-                      <input matInput placeholder="Libellé Type" [(ngModel)]="type.libelleType" name="libelleType" >
+                      <input matInput placeholder="Libellé Type" [(ngModel)]="type.libelleType" name="libelleType" required >
                   </mat-form-field>
               </div>
               <button mat-raised-button color="primary" (click)="updateType()" style="height:30px;margin: auto;">Modifier</button>

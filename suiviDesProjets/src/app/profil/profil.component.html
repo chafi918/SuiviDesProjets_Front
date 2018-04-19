@@ -8,7 +8,11 @@
             <div class="row spacer">
               <div class="inputForm">
                   <mat-form-field>
-                      <input matInput placeholder="Libellé Profil" [(ngModel)]="profil.libelleProfil" name="libelleProfil" >
+                      <input matInput placeholder="Libellé Profil" [(ngModel)]="profil.libelleProfil" name="libelleProfil" #libelleProfil="ngModel" required >
+                      <div [hidden]="libelleProfil.valid || libelleProfil.pristine"
+                      class="alert alert-danger">
+                      Ce champ est obligatoire
+                      </div>
                   </mat-form-field>
               </div>
               <button mat-raised-button color="primary" (click)="ajouterProfil()" style="height:30px;margin: auto;">Ajouter</button>
@@ -25,7 +29,7 @@
           <div class="row spacer">
               <div class="inputForm">
                   <mat-form-field>
-                      <input matInput placeholder="Libellé Profil" [(ngModel)]="profil.libelleProfil" name="libelleProfil" >
+                      <input matInput placeholder="Libellé Profil" [(ngModel)]="profil.libelleProfil" name="libelleProfil" required>
                   </mat-form-field>
               </div>
               <button mat-raised-button color="primary" (click)="updateProfil()" style="height:30px;margin: auto;">Modifier</button>

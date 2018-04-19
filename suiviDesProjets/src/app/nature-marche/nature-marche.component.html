@@ -3,19 +3,19 @@
         <div class="navbar-form">
           <div class="panel panel-success">
             <div class="panel-heading">
-              <h5>Ajouter un secteur</h5>
+              <h5>Ajouter une nature </h5>
             </div>
             <div class="row spacer">
               <div class="inputForm">
                   <mat-form-field>
-                      <input matInput placeholder="Libellé Secteur" [(ngModel)]="secteur.libelleSecteur" name="libelleSecteur" #libelleSecteur="ngModel" required>
-                      <div [hidden]="libelleSecteur.valid || libelleSecteur.pristine"
+                      <input matInput placeholder="Libellé Nature" [(ngModel)]="nature.libelleNature" #libelleNature="ngModel" name="libelleNature" required>
+                      <div [hidden]="libelleNature.valid || libelleNature.pristine"
                       class="alert alert-danger">
                       Ce champ est obligatoire
                       </div>
                   </mat-form-field>
               </div>
-              <button mat-raised-button color="primary" (click)="ajouterSecteur()" style="height:30px;margin: auto;">Ajouter</button>
+              <button mat-raised-button color="primary" (click)="ajouterNature()" style="height:30px;margin: auto;">Ajouter</button>
             </div>
           </div>
       </div>
@@ -24,15 +24,15 @@
       <div class="navbar-form">
         <div class="panel panel-success">
           <div class="panel-heading">
-            <h5>Modifier un Secteur</h5>
+            <h5>Modifier une nature</h5>
           </div>
           <div class="row spacer">
               <div class="inputForm">
-                  <mat-form-field>
-                      <input matInput placeholder="Libellé Secteur" [(ngModel)]="secteur.libelleSecteur" name="libelleSecteur" required>
-                  </mat-form-field>
+                <mat-form-field>
+                  <input matInput placeholder="Libellé Nature" [(ngModel)]="nature.libelleNature" name="libelleNature" required>
+              </mat-form-field>
               </div>
-              <button mat-raised-button color="primary" (click)="updateSecteur()" style="height:30px;margin: auto;">Modifier</button>
+              <button mat-raised-button color="primary" (click)="updateNature()" style="height:30px;margin: auto;">Modifier</button>
             </div>
         </div>
     </div>
@@ -41,28 +41,28 @@
     <div class="navbar-form">
     <div class="panel panel-success">
       <div class="panel-heading">
-        <h5>Tout les secteurs</h5>
+        <h5>Liste des natures de Marché</h5>
       </div>
       <div class="rowMenu spacer">
-          <button color="primary" class="newEntity innerSpacer" style="height:30px"(click)="clickOnAjouterSecteur()"> Ajouter un secteur</button>
+          <button color="primary" class="newEntity innerSpacer" style="height:30px"(click)="clickOnAjouterNature()"> Nouvelle Nature</button>
           <div class="navbar-form navbar-right row" >
               <mat-form-field>
-                  <input matInput type="text" [(ngModel)]="libelleSecteur" (keyup)="chercher()" placeholder="Rechercher"/>
+                  <input matInput type="text" [(ngModel)]="libelleNature" (keyup)="chercher()" placeholder="Rechercher"/>
               </mat-form-field>
               <button type="button" class="btn btn-default" (keyup)="chercher()"><i class="fas fa-search"></i></button>
           </div>
       </div>
     <table class="table table-striped">
         <tr>
-          <th>Libellé Secteur</th>
+          <th>Libellé Nature</th>
           <th>Modification</th>
           <th>Supprimer</th>
         </tr>
-        <tr *ngFor="let s of pageSecteurs?.content">
-          <td>{{s.libelleSecteur}}</td>
-          <td><a (click)="onEditSecteur(s.idSecteur)">
+        <tr *ngFor="let n of pageNatures?.content">
+          <td>{{n.libelleNature}}</td>
+          <td><a (click)="onEditNature(n.idNature)">
             <i class="fas fa-edit editIcon cursorElement"></i></a></td>
-          <td><a (click)="onDeleteSecteur(s)">
+          <td><a (click)="onDeleteNature(n)">
             <i class="glyphicon glyphicon-remove cursorElement"></i></a></td>
         </tr>
     </table>

@@ -47,3 +47,10 @@ body {
 .nav-pills>li.active>a{
     background-color: rgb(187, 212, 236);
 }
+.ng-valid[required], .ng-valid.required  {
+    border-left: 1px solid #42A948; /* green */
+  }
+  
+  .ng-invalid:not(form)  {
+    border-left: 1px solid #a94442; /* red */
+  }

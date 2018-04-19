@@ -8,10 +8,14 @@
 							<div class="row spacer">
 								<div class="inputForm">
 										<mat-form-field>
-												<input matInput placeholder="Libellé Division" [(ngModel)]="division.libelleDivision" name="libelleDivision" >
+												<input matInput placeholder="Libellé Division" [(ngModel)]="division.libelleDivision" name="libelleDivision" #libelleDivision="ngModel" required>
+												<div [hidden]="libelleDivision.valid"
+                      								class="alert alert-danger">
+                     							 Ce champ est obligatoire
+                     							</div>
 										</mat-form-field>
 								</div>
-								<button mat-raised-button color="primary" (click)="ajouterDivision()" style="height:30px;margin: auto;">Ajouter</button>
+								<button mat-raised-button color="primary" (click)="ajouterDivision()" style="height:30px;margin: auto;">Ajouter</button> 
 							</div>
 						</div>
 				</div>
@@ -25,7 +29,7 @@
 						<div class="row spacer">
 								<div class="inputForm">
 										<mat-form-field>
-												<input matInput placeholder="Libellé Division" [(ngModel)]="division.libelleDivision" name="libelleDivision" >
+												<input matInput placeholder="Libellé Division" [(ngModel)]="division.libelleDivision" name="libelleDivision" required>
 										</mat-form-field>
 								</div>
 								<button mat-raised-button color="primary" (click)="updateDivision()" style="height:30px;margin: auto;">Modifier</button>

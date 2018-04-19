@@ -104,12 +104,15 @@ utilisateur:Utilisateur=new Utilisateur();
   }
 
   updateUser(){
+    this.mode=1;
     console.log(this.utilisateur);
     this.userService.updateUser(this.utilisateur)
     .subscribe(data=>{this.ngOnInit();}
         ,err=>{console.log(err);});
+    this.mode=1;
+    this.utilisateur=new Utilisateur();    
     this.ngOnInit();
-    this.mode=0;
+    
   }
   onEditUser(id:number){
     this.mode=1;

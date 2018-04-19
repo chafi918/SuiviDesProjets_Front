@@ -31,6 +31,13 @@ import { ProfilService } from '../services/profil.service';
 import { TypeDocumentComponent } from './type-document/type-document.component';
 import { TypeDocService } from '../services/typeDoc.service';
 import { ContactService } from '../services/contact.service';
+import { ContactComponent } from './contact/contact.component';
+import { EntrepriseComponent } from './entreprise/entreprise.component';
+import { NatureMarcheComponent } from './nature-marche/nature-marche.component';
+import { MarcheComponent } from './marche/marche.component';
+import { NatureService } from '../services/nature.service';
+import { MarcheService } from '../services/marche.service';
+import { EntrepriseService } from '../services/entreprise.service';
 
 
 
@@ -42,6 +49,9 @@ const appRoutes:Routes=[
   {path:'statuts', component:StatutComponent},
   {path:'profils',component:ProfilComponent},
   {path:'types',component:TypeDocumentComponent},
+  {path:'contacts',component:ContactComponent},
+  {path:'natures',component:NatureMarcheComponent},
+  {path:'marches',component:MarcheComponent},
   {path:'',redirectTo:'/projets',pathMatch:'full'}
 ];
 
@@ -56,14 +66,19 @@ const appRoutes:Routes=[
     SecteurComponent,
     StatutComponent,
     ProfilComponent,
-    TypeDocumentComponent
+    TypeDocumentComponent,
+    ContactComponent,
+    EntrepriseComponent,
+    NatureMarcheComponent,
+    MarcheComponent
   ],
   imports: [
     BrowserModule,HttpModule,RouterModule.forRoot(appRoutes),FormsModule,
     BrowserAnimationsModule, MatToolbarModule, MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
     MatPaginatorModule, MatIconModule, MatSelectModule
   ],
-  providers: [ProjetService, UserService,DivisionService,SecteurService,StatutService,ProfilService,TypeDocService],
+  providers: [ProjetService, UserService,DivisionService,SecteurService,StatutService,ProfilService,TypeDocService,
+    ContactService,NatureService,MarcheService,EntrepriseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

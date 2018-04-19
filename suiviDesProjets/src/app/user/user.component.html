@@ -11,38 +11,72 @@
             <div class="row spacer">
               <div class="inputForm">
                   <mat-form-field>
-                      <input matInput placeholder="Nom" [(ngModel)]="utilisateur.nomUser" name="nom" >
+                      <input matInput placeholder="Nom" [(ngModel)]="utilisateur.nomUser" name="nom" #nom="ngModel" required>
+                      <div [hidden]="nom.valid || nom.pristine"
+                        class="alert alert-danger">
+                        Nom est obligatoire
+                      </div>
                   </mat-form-field>
                   <mat-form-field>
-                    <input matInput placeholder="Prénom" [(ngModel)]="utilisateur.prenomUser" name="prenom" >
+                    <input matInput placeholder="Prénom" [(ngModel)]="utilisateur.prenomUser" name="prenom" #prenom="ngModel" required >
+                    <div [hidden]="prenom.valid || prenom.pristine"
+                        class="alert alert-danger">
+                        Prénom est obligatoire
+                      </div>
                   </mat-form-field>
                   <mat-form-field>
-                    <input matInput placeholder="Mail" [(ngModel)]="utilisateur.mailUser" name="mail" >
+                    <input matInput placeholder="Mail" [(ngModel)]="utilisateur.mailUser" name="mail" #mail="ngModel" required
+                        pattern="[^ @]*@[^ @]*">
+                      <div [hidden]="mail.valid || mail.pristine"
+                        class="alert alert-danger">
+                        Mail est obligatoire
+                      </div>
                   </mat-form-field>
                   <mat-form-field>
-                    <input matInput placeholder="Login" [(ngModel)]="utilisateur.loginUser" name="login" >
+                    <input matInput placeholder="Login" [(ngModel)]="utilisateur.loginUser" name="login" #login="ngModel" required>
+                    <div [hidden]="login.valid || login.pristine"
+                        class="alert alert-danger">
+                        Login est obligatoire
+                    </div>
                   </mat-form-field>
                   <mat-form-field>
-                    <input matInput placeholder="Mot de Passe" [(ngModel)]="utilisateur.mdpUser" name="mdp" >
+                    <input matInput type="password" placeholder="Mot de Passe" [(ngModel)]="utilisateur.mdpUser" name="mdp" #mdp="ngModel" required
+                    minlength="8">
+                    <div [hidden]="mdp.valid || mdp.pristine"
+                        class="alert alert-danger">
+                        Mot de Passe est obligatoire
+                    </div>
                   </mat-form-field> 
                   <mat-form-field>
-                      <input matInput placeholder="Responsabilité" [(ngModel)]="utilisateur.responsabilite" name="responsabilite" >
+                      <input matInput placeholder="Responsabilité" [(ngModel)]="utilisateur.responsabilite" name="responsabilite" #responsabilite="ngModel" required>
+                      <div [hidden]="responsabilite.valid || nom.pristine"
+                        class="alert alert-danger">
+                        Responsabilité est obligatoire
+                      </div>
                   </mat-form-field>
                   <mat-form-field>
-                    <mat-select placeholder="Division" [(ngModel)]="libelleDivision" name="division">
+                    <mat-select placeholder="Division" [(ngModel)]="libelleDivision" name="division" #division="ngModel" required>
                       <mat-option *ngFor="let division of divisions" [(value)]="division.libelleDivision" [value]="Informatique">
                           {{ division.libelleDivision }}
                       </mat-option>
                      </mat-select>
+                     <div [hidden]="division.valid || division.pristine"
+                        class="alert alert-danger">
+                        Division est obligatoire
+                      </div>
                    </mat-form-field>
                    <mat-form-field>
-                      <mat-select placeholder="Profil" [(ngModel)]="libelleProfil" name="profil">
+                      <mat-select placeholder="Profil" [(ngModel)]="libelleProfil" name="profil" #profil="ngModel" required>
                         <mat-option *ngFor="let profil of profils" [(value)]="profil.libelleProfil">
                             {{ profil.libelleProfil }}
                         </mat-option>
                        </mat-select>
-                     </mat-form-field>
-                   <mat-checkbox  class="checkbox" [(ngModel)]="utilisateur.estActive">activé</mat-checkbox>
+                       <div [hidden]="profil.valid || profil.pristine"
+                        class="alert alert-danger">
+                        Profil est obligatoire
+                      </div>
+                    </mat-form-field>
+                   <mat-checkbox  class="checkbox" [(ngModel)]="utilisateur.estActive" required>activé</mat-checkbox>
               </div>
               <button mat-raised-button color="primary" (click)="ajouterUser()" style="height:30px;margin: auto;" *ngIf="mode==0">Ajouter</button>
               <button mat-raised-button color="primary" (click)="updateUser()" style="height:30px;margin: auto;" *ngIf="mode==1">Modifier</button>
