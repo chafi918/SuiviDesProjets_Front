@@ -38,8 +38,9 @@ utilisateur:Utilisateur=new Utilisateur();
       this.currentPage = data.number;
       this.getAllDivisions();
       this.getAllProfils();
-      this.utilisateur = new Utilisateur();
-    this.libelleDivision = this.libelleProfil = "";
+     // this.utilisateur = new Utilisateur();
+     this.libelleDivision = this.libelleProfil = "";
+    
   }
     ,err=>{console.log(err);})
   }
@@ -68,17 +69,17 @@ utilisateur:Utilisateur=new Utilisateur();
     
   }
 
-  getProfilByName(profils, idProfil){
+  getProfilByName(profils, libelleProfil){
     for (let index = 0; index < profils.length; index++) {
-      if (profils[index].libelleProfil === idProfil) {
+      if (profils[index].libelleProfil === libelleProfil) {
         return profils[index];
       }
     }
   }
 
-  getDivisionByName(divisions, idDivision){
+  getDivisionByName(divisions, libelleDivision){
     for (let index = 0; index < divisions.length; index++) {
-      if (divisions[index].libelleDivision === idDivision) {
+      if (divisions[index].libelleDivision === libelleDivision) {
         return divisions[index];
       }
     }

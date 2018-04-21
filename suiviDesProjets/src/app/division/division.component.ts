@@ -23,7 +23,7 @@ export class DivisionComponent implements OnInit {
     this.divisionService.getDivisions()
     .subscribe(data=>{
       console.log("on init");
-      console.log(data);
+      console.log(data.content);
       this.pageDivisions=data;
       this.pages=new Array(data.totalPages);
       this.currentPage = data.number;

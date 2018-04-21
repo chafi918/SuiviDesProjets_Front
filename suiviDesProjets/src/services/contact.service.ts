@@ -10,7 +10,7 @@ export class ContactService{
    }
    
    getContacts(){
-    return this.http.get("http://localhost:8080/contact/contacts")
+    return this.http.get("http://localhost:8080/contact/getContacts")
     .map(resp=>resp.json());
    }
 
@@ -24,6 +24,11 @@ export class ContactService{
     .map(resp=>resp.json());
    }
 
+   getAllEntreprises(){
+    return this.http.get("http://localhost:8080/entreprise/entreprises")
+    .map(resp=>resp.json());
+    }
+
    ajouterContact(contact:Contact){
     return this.http.post("http://localhost:8080/contact/ajout",contact)
     .map(resp=>resp);
@@ -31,7 +36,7 @@ export class ContactService{
 
     updateContact(contact:Contact){
     return this.http.put("http://localhost:8080/contact/"+contact.idContact,contact)
-    .map(resp=>resp.json());
+    .map(resp=>resp);
    }
 
    deleteContact(id:number){

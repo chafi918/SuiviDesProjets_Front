@@ -1,42 +1,26 @@
 <div class="container-fluid text-center spacer tableSpacer">
-		<div class="col-sm-6" *ngIf="mode==0">
+		<div class="col-sm-6">
 			    <div class="navbar-form">
 						<div class="panel panel-success">
-							<div class="panel-heading">
+							<div class="panel-heading" *ngIf="mode==0">
 								<h5>Ajouter une division</h5>
+							</div>
+							<div class="panel-heading" *ngIf="mode==1">
+								<h5>Modifier une division</h5>
 							</div>
 							<div class="row spacer">
 								<div class="inputForm">
 										<mat-form-field>
-												<input matInput placeholder="Libellé Division" [(ngModel)]="division.libelleDivision" name="libelleDivision" #libelleDivision="ngModel" required>
-												<div [hidden]="libelleDivision.valid"
-                      								class="alert alert-danger">
-                     							 Ce champ est obligatoire
-                     							</div>
+												<input matInput placeholder="Libellé Division" [(ngModel)]="division.libelleDivision" required>
+												
 										</mat-form-field>
 								</div>
-								<button mat-raised-button color="primary" (click)="ajouterDivision()" style="height:30px;margin: auto;">Ajouter</button> 
+								<button mat-raised-button color="primary" (click)="ajouterDivision()" style="height:30px;margin: auto;" *ngIf="mode==0">Ajouter</button> 
+								<button mat-raised-button color="primary" (click)="updateDivision()" style="height:30px;margin: auto;" *ngIf="mode==1">Modifier</button>
 							</div>
 						</div>
 				</div>
 		</div>
-		<div class="col-sm-6" *ngIf="mode==1">
-				<div class="navbar-form">
-					<div class="panel panel-success">
-						<div class="panel-heading">
-							<h5>Modifier une division</h5>
-						</div>
-						<div class="row spacer">
-								<div class="inputForm">
-										<mat-form-field>
-												<input matInput placeholder="Libellé Division" [(ngModel)]="division.libelleDivision" name="libelleDivision" required>
-										</mat-form-field>
-								</div>
-								<button mat-raised-button color="primary" (click)="updateDivision()" style="height:30px;margin: auto;">Modifier</button>
-							</div>
-					</div>
-			</div>
-	</div>
 		<div class="col-sm-6">
 	    <div class="navbar-form">
 			<div class="panel panel-success">

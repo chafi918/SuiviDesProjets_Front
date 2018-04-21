@@ -10,7 +10,7 @@ export class EntrepriseService{
    }
    
    getEntreprises(){
-    return this.http.get("http://localhost:8080/entreprise/entreprises")
+    return this.http.get("http://localhost:8080/entreprise/getEntreprises")
     .map(resp=>resp.json());
    }
 
@@ -35,7 +35,7 @@ export class EntrepriseService{
    }
 
    deleteEntreprise(id:number){
-    return this.http.delete("http://localhost:8080/entreprise"+id)
+    return this.http.delete("http://localhost:8080/entreprise/"+id)
     .map(resp=>resp.json());
 }
 

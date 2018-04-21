@@ -31,13 +31,12 @@ import { ProfilService } from '../services/profil.service';
 import { TypeDocumentComponent } from './type-document/type-document.component';
 import { TypeDocService } from '../services/typeDoc.service';
 import { ContactService } from '../services/contact.service';
-import { ContactComponent } from './contact/contact.component';
 import { EntrepriseComponent } from './entreprise/entreprise.component';
 import { NatureMarcheComponent } from './nature-marche/nature-marche.component';
-import { MarcheComponent } from './marche/marche.component';
 import { NatureService } from '../services/nature.service';
 import { MarcheService } from '../services/marche.service';
 import { EntrepriseService } from '../services/entreprise.service';
+import { ContactComponent } from './contact/contact.component';
 
 
 
@@ -49,9 +48,9 @@ const appRoutes:Routes=[
   {path:'statuts', component:StatutComponent},
   {path:'profils',component:ProfilComponent},
   {path:'types',component:TypeDocumentComponent},
-  {path:'contacts',component:ContactComponent},
   {path:'natures',component:NatureMarcheComponent},
-  {path:'marches',component:MarcheComponent},
+  {path:'entreprises',component:EntrepriseComponent},
+  {path:'contacts',component:ContactComponent},
   {path:'',redirectTo:'/projets',pathMatch:'full'}
 ];
 
@@ -67,10 +66,9 @@ const appRoutes:Routes=[
     StatutComponent,
     ProfilComponent,
     TypeDocumentComponent,
-    ContactComponent,
     EntrepriseComponent,
     NatureMarcheComponent,
-    MarcheComponent
+    ContactComponent
   ],
   imports: [
     BrowserModule,HttpModule,RouterModule.forRoot(appRoutes),FormsModule,

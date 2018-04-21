@@ -10,7 +10,7 @@ export class NatureService{
    }
    
    getNatures(){
-    return this.http.get("http://localhost:8080/adminNature/allNatures")
+    return this.http.get("http://localhost:8080/adminNature/getAllNatures")
     .map(resp=>resp.json());
    }
 

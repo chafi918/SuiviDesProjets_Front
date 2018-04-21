@@ -10,7 +10,7 @@ export class MarcheService{
    }
    
    getMarches(){
-    return this.http.get("http://localhost:8080/marche/allMarches")
+    return this.http.get("http://localhost:8080/marche/getAllMarches")
     .map(resp=>resp.json());
    }
 

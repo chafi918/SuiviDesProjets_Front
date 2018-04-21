@@ -25,7 +25,7 @@ export class NatureMarcheComponent implements OnInit {
     this.natureService.getNatures()
     .subscribe(data=>{
       console.log("on init");
-      console.log(data);
+      console.log(data.content);
       this.pageNatures=data;
       this.pages=new Array(data.totalPages);
       this.currentPage = data.number;

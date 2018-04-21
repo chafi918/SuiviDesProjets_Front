@@ -8,12 +8,9 @@
             <div class="row spacer">
               <div class="inputForm">
                   <mat-form-field>
-                      <input matInput placeholder="Libellé Nature" [(ngModel)]="nature.libelleNature" #libelleNature="ngModel" name="libelleNature" required>
-                      <div [hidden]="libelleNature.valid || libelleNature.pristine"
-                      class="alert alert-danger">
-                      Ce champ est obligatoire
-                      </div>
+                      <input matInput placeholder="Libellé Nature" [(ngModel)]="nature.libelleNature" name="libelleNature" required> 
                   </mat-form-field>
+                
               </div>
               <button mat-raised-button color="primary" (click)="ajouterNature()" style="height:30px;margin: auto;">Ajouter</button>
             </div>

@@ -42,14 +42,13 @@
                   <mat-form-field>
                     <input matInput type="password" placeholder="Mot de Passe" [(ngModel)]="utilisateur.mdpUser" name="mdp" #mdp="ngModel" required
                     minlength="8">
-                    <div [hidden]="mdp.valid || mdp.pristine"
-                        class="alert alert-danger">
-                        Mot de Passe est obligatoire
-                    </div>
                   </mat-form-field> 
+                  <div [hidden]="mdp.valid || mdp.pristine" class="alert alert-danger">
+                   Mot de Passe est obligatoire
+                  </div>
                   <mat-form-field>
                       <input matInput placeholder="Responsabilité" [(ngModel)]="utilisateur.responsabilite" name="responsabilite" #responsabilite="ngModel" required>
-                      <div [hidden]="responsabilite.valid || nom.pristine"
+                      <div [hidden]="responsabilite.valid || responsabilite.pristine"
                         class="alert alert-danger">
                         Responsabilité est obligatoire
                       </div>
@@ -130,4 +129,5 @@
           </tr>
         </table>
     </div>
+</div>
 </div>

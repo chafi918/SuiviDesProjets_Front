@@ -36,7 +36,7 @@ export class UserService{
 
     updateUser(utilisateur:Utilisateur){
         return this.http.put("http://localhost:8080/users/"+utilisateur.idUser,utilisateur)
-        .map(resp=>resp.json());
+        .map(resp=>resp);
        }
 
        deleteUser(id:number){
