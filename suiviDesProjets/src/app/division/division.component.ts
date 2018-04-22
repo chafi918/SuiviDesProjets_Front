@@ -16,6 +16,7 @@ export class DivisionComponent implements OnInit {
   currentPage:number=0;
   libelleDivision:string;
   mode:number=0;
+  display:number=0;
 
   constructor(public http:Http,public divisionService:DivisionService,public router:Router) { }
 
@@ -59,6 +60,7 @@ export class DivisionComponent implements OnInit {
     this.divisionService.ajouterDivision(this.division)
     .subscribe(data=>{this.ngOnInit();}
         ,err=>{console.log(err);});
+    this.display=0;
     this.mode=0;
     
   }
@@ -66,23 +68,24 @@ export class DivisionComponent implements OnInit {
 
   clickOnAjouterDivision(){
     this.mode=0;
+    this.display=1;
     this.division=new Division();  
   }
 
   updateDivision(){
-    this.mode=1;
     this.divisionService.updateDivision(this.division)
     .subscribe(data=>{this.ngOnInit();},err=>{console.log(err);});
     this.mode=1;
+    this.display=0;
     this.division=new Division();
     this.ngOnInit();
   }
   onEditDivision(id:number){
     this.mode=1;
+    this.display=1;
     this.divisionService.getDivision(id)
     .subscribe(data=>{this.division=data; console.log(data);}
     ,err=>{console.log(err);})
-    //this.router.navigate(['editDivision',id]);
   }
 
   onDeleteDivision(division:Division){
@@ -91,6 +94,7 @@ export class DivisionComponent implements OnInit {
       this.pageDivisions.content.splice(
         this.pageDivisions.content.indexOf(division),1
       );
+      this.ngOnInit();
     }
     ,err=>{console.log(err);})
   }

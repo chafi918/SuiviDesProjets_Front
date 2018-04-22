@@ -18,14 +18,13 @@ export class NatureMarcheComponent implements OnInit {
   currentPage:number=0;
   libelleNature:string;
   mode:number=0;
+  display:number=0;
 
   constructor(public http:Http,public natureService:NatureService,public router:Router) { }
 
   ngOnInit() {
     this.natureService.getNatures()
     .subscribe(data=>{
-      console.log("on init");
-      console.log(data.content);
       this.pageNatures=data;
       this.pages=new Array(data.totalPages);
       this.currentPage = data.number;
@@ -47,25 +46,26 @@ export class NatureMarcheComponent implements OnInit {
     .subscribe(data=>{this.ngOnInit();}
         ,err=>{console.log(err);});
     this.mode=0;
-    
+    this.display=0;
   }
 
 
   clickOnAjouterNature(){
     this.mode=0;
+    this.display=1;
     this.nature=new Nature();
   }
 
   updateNature(){
-    this.mode=1;
     this.natureService.updateNature(this.nature)
     .subscribe(data=>{this.ngOnInit();},err=>{console.log(err);});
     this.mode=1;
+    this.display=0;
     this.nature=new Nature();
-    this.ngOnInit();
   }
   onEditNature(id:number){
     this.mode=1;
+    this.display=1;
     this.natureService.getNature(id)
     .subscribe(data=>{this.nature=data; console.log(data);}
     ,err=>{console.log(err);})
@@ -77,6 +77,7 @@ export class NatureMarcheComponent implements OnInit {
       this.pageNatures.content.splice(
         this.pageNatures.content.indexOf(nature),1
       );
+      this.ngOnInit();
     }
     ,err=>{console.log(err);})
   }

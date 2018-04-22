@@ -1,5 +1,5 @@
 <div class="container-fluid text-center spacer tableSpacer">
-  <div class="col-sm-6">
+  <div class="col-sm-6 poisition" *ngIf="display==1">
         <div class="navbar-form">
           <div class="panel panel-success">
             <div class="panel-heading" *ngIf="mode==0">
@@ -8,24 +8,22 @@
             <div class="panel-heading" *ngIf="mode==1">
               <h5>Modifier une entreprise</h5>
             </div>
-            <div class="row spacer">
-              <div class="inputForm">
+              <div class="inputForm spacer">
                   <mat-form-field>
-                      <input matInput placeholder="Nom de L'entreprise" [(ngModel)]="entreprise.nomEntreprise" required>
-                      
+                      <input matInput placeholder="Nom de L'entreprise" [(ngModel)]="entreprise.nomEntreprise" #nomEntreprise="ngModel" required>
+                      <mat-error *ngIf="nomEntreprise.invalid">Veuillez saisir le nom de l'entreprise</mat-error>
                   </mat-form-field>
                   <mat-form-field>
-                    <input matInput placeholder="Adresse de L'entreprise" [(ngModel)]="entreprise.adresseEntreprise" required>
-                    
+                    <input matInput placeholder="Adresse de L'entreprise" [(ngModel)]="entreprise.adresseEntreprise" #adresseEntreprise="ngModel" required>
+                    <mat-error *ngIf="adresseEntreprise.invalid">Veuillez saisir l'adresse de l'entreprise</mat-error>
                 </mat-form-field>
               </div>
-              <button mat-raised-button color="primary" (click)="ajouterEntreprise()" style="height:30px;margin: auto;" *ngIf="mode==0">Ajouter</button> 
-              <button mat-raised-button color="primary" (click)="updateEntreprise()" style="height:30px;margin: auto;" *ngIf="mode==1">Modifier</button>
+              <button mat-raised-button class="spacerUp" color="primary" (click)="ajouterEntreprise()" style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button> 
+              <button mat-raised-button class="spacerUp" color="primary" (click)="updateEntreprise()" style="height:30px;margin: 20px;" *ngIf="mode==1">Modifier</button>
             </div>
           </div>
-      </div>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-10" *ngIf="display==0">
     <div class="navbar-form">
     <div class="panel panel-success">
       <div class="panel-heading">
@@ -37,7 +35,6 @@
               <mat-form-field>
                   <input matInput type="text" [(ngModel)]="nomEntreprise" (keyup)="chercher()" placeholder="Rechercher"/>
               </mat-form-field>
-              <button type="button" class="btn btn-default" (keyup)="chercher()"><i class="fas fa-search"></i></button>
           </div>
       </div>
     <table class="table table-striped">

@@ -1,5 +1,5 @@
 <div class="container-fluid text-center spacer">
-  <div class="col-sm-3 position" >
+  <div class="col-sm-6 position" *ngIf="display==1" >
         <div class="navbar-form">
           <div class="panel panel-success">
             <div class="panel-heading" *ngIf="mode==0">
@@ -8,50 +8,32 @@
             <div class="panel-heading" *ngIf="mode==1">
                 <h5>Modifier un utilisateur</h5>
               </div>
-            <div class="row spacer">
-              <div class="inputForm">
+              <div class="inputForm sapcer spacerUp">
                   <mat-form-field>
                       <input matInput placeholder="Nom" [(ngModel)]="utilisateur.nomUser" name="nom" #nom="ngModel" required>
-                      <div [hidden]="nom.valid || nom.pristine"
-                        class="alert alert-danger">
-                        Nom est obligatoire
-                      </div>
+                      <mat-error *ngIf="nom.invalid">Veuillez saisir votre nom</mat-error>
                   </mat-form-field>
                   <mat-form-field>
                     <input matInput placeholder="Prénom" [(ngModel)]="utilisateur.prenomUser" name="prenom" #prenom="ngModel" required >
-                    <div [hidden]="prenom.valid || prenom.pristine"
-                        class="alert alert-danger">
-                        Prénom est obligatoire
-                      </div>
+                    <mat-error *ngIf="prenom.invalid">Veuillez saisir votre prenom</mat-error>
                   </mat-form-field>
                   <mat-form-field>
                     <input matInput placeholder="Mail" [(ngModel)]="utilisateur.mailUser" name="mail" #mail="ngModel" required
-                        pattern="[^ @]*@[^ @]*">
-                      <div [hidden]="mail.valid || mail.pristine"
-                        class="alert alert-danger">
-                        Mail est obligatoire
-                      </div>
+                        pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                        <mat-error *ngIf="mail.invalid">Veuillez saisir une adresse mail valides</mat-error>
                   </mat-form-field>
                   <mat-form-field>
                     <input matInput placeholder="Login" [(ngModel)]="utilisateur.loginUser" name="login" #login="ngModel" required>
-                    <div [hidden]="login.valid || login.pristine"
-                        class="alert alert-danger">
-                        Login est obligatoire
-                    </div>
+                    <mat-error *ngIf="login.invalid">Veuillez saisir un login</mat-error>
                   </mat-form-field>
                   <mat-form-field>
                     <input matInput type="password" placeholder="Mot de Passe" [(ngModel)]="utilisateur.mdpUser" name="mdp" #mdp="ngModel" required
                     minlength="8">
+                    <mat-error *ngIf="mdp.invalid">Veuillez saisir un mot de passe</mat-error>
                   </mat-form-field> 
-                  <div [hidden]="mdp.valid || mdp.pristine" class="alert alert-danger">
-                   Mot de Passe est obligatoire
-                  </div>
                   <mat-form-field>
                       <input matInput placeholder="Responsabilité" [(ngModel)]="utilisateur.responsabilite" name="responsabilite" #responsabilite="ngModel" required>
-                      <div [hidden]="responsabilite.valid || responsabilite.pristine"
-                        class="alert alert-danger">
-                        Responsabilité est obligatoire
-                      </div>
+                      <mat-error *ngIf="responsabilite.invalid">Veuillez saisir votre responsabilité</mat-error>
                   </mat-form-field>
                   <mat-form-field>
                     <mat-select placeholder="Division" [(ngModel)]="libelleDivision" name="division" #division="ngModel" required>
@@ -77,13 +59,13 @@
                     </mat-form-field>
                    <mat-checkbox  class="checkbox" [(ngModel)]="utilisateur.estActive" required>activé</mat-checkbox>
               </div>
-              <button mat-raised-button color="primary" (click)="ajouterUser()" style="height:30px;margin: auto;" *ngIf="mode==0">Ajouter</button>
-              <button mat-raised-button color="primary" (click)="updateUser()" style="height:30px;margin: auto;" *ngIf="mode==1">Modifier</button>
-            </div>
+              <button mat-raised-button class="spacerUp" color="primary" (click)="ajouterUser()" style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button>
+              <button mat-raised-button class="spacerUp" color="primary" (click)="updateUser()" style="height:30px;margin: 20px;" *ngIf="mode==1">Modifier</button>
+
           </div>
       </div>
   </div>
-<div class="container spacer col-sm-9">
+<div class="container spacer col-sm-10" *ngIf="display==0">
     <div class="panel panel-success">
       <div class="panel-heading">
         <h5>Liste des utilisateurs</h5>
@@ -94,7 +76,6 @@
             <mat-form-field>
                 <input matInput type="text" [(ngModel)]="motCle" (keyup)="chercher()" placeholder="Rechercher"/>
             </mat-form-field>
-            <button type="button" class="btn btn-default" (keyup)="chercher()"><i class="fas fa-search"></i></button>
         </div>
       </div>
         <table class="table table-striped">
@@ -103,7 +84,6 @@
             <td>Prénom</td>
             <td>E-mail</td>
             <td>Login</td>
-            <td>Mot de passe</td>
             <td>Responsabilité</td>
             <td>Division</td>
             <td>Profil</td>
@@ -116,7 +96,6 @@
             <td>{{u.prenomUser}}</td>
             <td>{{u.mailUser}}</td>
             <td>{{u.loginUser}}</td>
-            <td>{{u.mdpUser}}</td>
             <td>{{u.responsabilite}}</td>
             <td>{{u.division.libelleDivision}}</td>
             <td>{{u.profil.libelleProfil}}</td>
@@ -128,6 +107,13 @@
               <i class="glyphicon glyphicon-remove cursorElement"></i></a></td>
           </tr>
         </table>
+        <div class="container spacerUp">
+            <ul class="nav nav-pills">
+              <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages; let i=index">
+                <a (click)="gotoPage(i)" class="marge cursorElement">{{i}}</a>
+              </li>
+            </ul>
+          </div>
     </div>
 </div>
 </div>

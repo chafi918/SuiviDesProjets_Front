@@ -1,47 +1,29 @@
 <div class="container-fluid text-center spacer">
-  <div class="col-sm-6" *ngIf="mode==0">
+  <div class="col-sm-6 position" *ngIf="display==1">
         <div class="navbar-form">
           <div class="panel panel-success">
-            <div class="panel-heading">
+            <div class="panel-heading" *ngIf="mode==0">
               <h5>Ajouter un statut</h5>
             </div>
-            <div class="row spacer">
-              <div class="inputForm">
+            <div class="panel-heading" *ngIf="mode==1">
+                <h5>Ajouter un statut</h5>
+              </div>
+              <div class="inputForm spacer">
                   <mat-form-field>
-                      <input matInput placeholder="Libellé Statut" [(ngModel)]="statut.libelleStatut" name="libelleStatut" #libelleStatut="ngModel" required >
-                      <div [hidden]="libelleStatut.valid || libelleStatut.pristine"
-                      class="alert alert-danger">
-                      Ce champ est obligatoire
-                      </div>
+                      <input matInput placeholder="Libellé Statut" [(ngModel)]="statut.libelleStatut" name="libelleStatut" #libelleStatutT="ngModel" required>
+                      <mat-error *ngIf="libelleStatutT.invalid">Veuillez saisir un libellé</mat-error>
                   </mat-form-field>
               </div>
-              <button mat-raised-button color="primary" (click)="ajouterStatut()" style="height:30px;margin: auto;">Ajouter</button>
-            </div>
+              <button mat-raised-button class="spaceUp" color="primary" (click)="ajouterStatut()" style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button>
+              <button mat-raised-button class="spaceUp" color="primary" (click)="updateStatut()" style="height:30px;margin: 20px;" *ngIf="mode==1">Modifier</button>
           </div>
       </div>
   </div>
-  <div class="col-sm-6" *ngIf="mode==1">
-      <div class="navbar-form">
-        <div class="panel panel-success">
-          <div class="panel-heading">
-            <h5>Modifier un Statut</h5>
-          </div>
-          <div class="row spacer">
-              <div class="inputForm">
-                  <mat-form-field>
-                      <input matInput placeholder="Libellé Statut" [(ngModel)]="statut.libelleStatut" name="libelleStatut" required>
-                  </mat-form-field>
-              </div>
-              <button mat-raised-button color="primary" (click)="updateStatut()" style="height:30px;margin: auto;">Modifier</button>
-            </div>
-        </div>
-    </div>
-</div>
-  <div class="col-sm-6">
+  <div class="col-sm-10" *ngIf="display==0">
     <div class="navbar-form">
     <div class="panel panel-success">
       <div class="panel-heading">
-        <h5>Tout les statuts</h5>
+        <h5>Tous les statuts</h5>
       </div>
       <div class="rowMenu spacer">
           <button color="primary" class="newEntity innerSpacer" style="height:30px"(click)="clickOnAjouterStatut()"> Ajouter un statut</button>
@@ -49,7 +31,6 @@
               <mat-form-field>
                   <input matInput type="text" [(ngModel)]="libelleStatut" (keyup)="chercher()" placeholder="Rechercher"/>
               </mat-form-field>
-              <button type="button" class="btn btn-default" (keyup)="chercher()"><i class="fas fa-search"></i></button>
           </div>
       </div>
     <table class="table table-striped">

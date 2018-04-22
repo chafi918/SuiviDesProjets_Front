@@ -19,6 +19,7 @@ export class ContactComponent implements OnInit {
   currentPage:number=0;
   nomContact:string;
   mode:number=0;
+  display:number=0;
 
   constructor(public http:Http,public contactService:ContactService,public router:Router) { }
 
@@ -52,7 +53,8 @@ export class ContactComponent implements OnInit {
     .subscribe(data=>{this.ngOnInit();}
         ,err=>{console.log(err);});
     this.mode=0;
-    
+    this.display=0
+    this.contact = new Contact();
   }
   getAllEntreprises(){
     this.contactService.getAllEntreprises()
@@ -72,20 +74,22 @@ export class ContactComponent implements OnInit {
 
   clickOnAjouterContact(){
     this.mode=0;
+    this.display=1
     this.contact=new Contact();  
     this.nomEntreprise = "";
   }
 
   updateContact(){
-    this.mode=1;
+    this.contact.entreprise = this.getEntrepriseByName(this.entreprises, this.nomEntreprise);
     this.contactService.updateContact(this.contact)
     .subscribe(data=>{this.ngOnInit();},err=>{console.log(err);});
     this.mode=1;
+    this.display=0
     this.contact=new Contact();
-    this.ngOnInit();
   }
   onEditContact(id:number){
     this.mode=1;
+    this.display=1
     this.contactService.getContact(id)
     .subscribe(data=>{this.contact=data; console.log(data);
       this.nomEntreprise = this.contact.entreprise.nomEntreprise;}
@@ -93,16 +97,19 @@ export class ContactComponent implements OnInit {
   }
 
   onDeleteContact(contact:Contact){
+    this.display=0;
     this.contactService.deleteContact(contact.idContact)
     .subscribe(data=>{
       this.pageContacts.content.splice(
         this.pageContacts.content.indexOf(contact),1
       );
+      this.ngOnInit();
     }
     ,err=>{console.log(err);})
   }
 
   gotoPage(i:number){
+    this.display=0;
     this.contactService.getContactsParPage(i)
     .subscribe(data=>{
       this.pageContacts=data;

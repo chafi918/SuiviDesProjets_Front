@@ -42,7 +42,7 @@ deleteType(id:number){
 }
 
  chercherType(libelleType:string){
-     return this.http.get("http://localhost:8080/adminType/typeBN/"+libelleType)
+     return this.http.get("http://localhost:8080/adminType/typeBN/?name="+libelleType)
      .map(resp=>resp.json());
 
  }

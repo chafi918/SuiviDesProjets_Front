@@ -18,6 +18,7 @@ export class EntrepriseComponent implements OnInit {
   currentPage:number=0;
   nomEntreprise:string;
   mode:number=0;
+  display:number=0;
 
   constructor(public http:Http,public entrepriseService:EntrepriseService,public router:Router) { }
 
@@ -47,24 +48,25 @@ export class EntrepriseComponent implements OnInit {
     .subscribe(data=>{this.ngOnInit();}
         ,err=>{console.log(err);});
     this.mode=0;
-    
+    this.display=0;
   }
 
 
   clickOnAjouterEntreprise(){
     this.mode=0;
+    this.display=1;
     this.entreprise=new Entreprise();
   }
 
   updateEntreprise(){
-    this.mode=1;
+    this.display=0;
     this.entrepriseService.updateEntreprise(this.entreprise)
     .subscribe(data=>{this.ngOnInit();},err=>{console.log(err);});
     this.mode=1;
     this.entreprise=new Entreprise();
-    this.ngOnInit();
   }
   onEditEntreprise(id:number){
+    this.display=1;
     this.mode=1;
     this.entrepriseService.getEntreprise(id)
     .subscribe(data=>{this.entreprise=data; console.log(data);}
@@ -77,6 +79,7 @@ export class EntrepriseComponent implements OnInit {
       this.pageEntreprises.content.splice(
         this.pageEntreprises.content.indexOf(entreprise),1
       );
+      this.ngOnInit();
     }
     ,err=>{console.log(err);})
   }

@@ -35,7 +35,7 @@ export class NatureService{
    }
 
    deleteNature(id:number){
-    return this.http.delete("http://localhost:8080/adminNature"+id)
+    return this.http.delete("http://localhost:8080/adminNature/"+id)
     .map(resp=>resp.json());
 }
 

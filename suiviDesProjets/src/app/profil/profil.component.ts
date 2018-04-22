@@ -19,6 +19,7 @@ export class ProfilComponent implements OnInit {
   currentPage:number=0;
   libelleProfil:string;
   mode:number=0;
+  display:number=0;
 
   constructor(public http:Http,public profilService:ProfilService,public router:Router) { }
 
@@ -35,20 +36,6 @@ export class ProfilComponent implements OnInit {
     console.log(this.mode);
   }
 
-  initializeComponent(mode=0){
-    this.mode=0;
-    this.profilService.getProfils()
-    .subscribe(data=>{
-      console.log("on init");
-      console.log(data);
-      this.pageProfils=data;
-      this.pages=new Array(data.totalPages);
-      this.currentPage = data.number;
-    }
-    ,err=>{console.log(err);})
-    console.log(mode);
-  }
-
   chercher(){
     this.profilService.chercherProfil(this.libelleProfil)
     .subscribe(data=>{
@@ -62,25 +49,27 @@ export class ProfilComponent implements OnInit {
     .subscribe(data=>{this.ngOnInit();}
         ,err=>{console.log(err);});
     this.mode=0;
-    
+    this.display=0;
   }
 
 
   clickOnAjouterProfil(){
     this.mode=0;
+    this.display=1;
     this.profil=new Profil();  
   }
 
   updateProfil(){
-    this.mode=1;
     this.profilService.updateProfil(this.profil)
     .subscribe(data=>{this.ngOnInit();},err=>{console.log(err);});
     this.mode=1;
+    this.display=0;
     this.profil=new Profil();
-    this.ngOnInit();
   }
+
   onEditProfil(id:number){
     this.mode=1;
+    this.display=1;
     this.profilService.getProfil(id)
     .subscribe(data=>{this.profil=data; console.log(data);}
     ,err=>{console.log(err);})
@@ -92,6 +81,7 @@ export class ProfilComponent implements OnInit {
       this.pageProfils.content.splice(
         this.pageProfils.content.indexOf(profil),1
       );
+      this.ngOnInit();
     }
     ,err=>{console.log(err);})
   }

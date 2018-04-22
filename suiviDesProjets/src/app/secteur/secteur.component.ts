@@ -18,6 +18,7 @@ export class SecteurComponent implements OnInit {
   currentPage:number=0;
   libelleSecteur:string;
   mode:number=0;
+  display:number=0;
 
   constructor(public http:Http,public secteurService:SecteurService,public router:Router) { }
 
@@ -61,25 +62,27 @@ export class SecteurComponent implements OnInit {
     .subscribe(data=>{this.ngOnInit();}
         ,err=>{console.log(err);});
     this.mode=0;
-    
+    this.display=0;
   }
 
 
   clickOnAjouterSecteur(){
     this.mode=0;
+    this.display=1;
     this.secteur=new Secteur();  
   }
 
   updateSecteur(){
-    this.mode=1;
     this.secteurService.updateSecteur(this.secteur)
     .subscribe(data=>{this.ngOnInit();},err=>{console.log(err);});
     this.mode=1;
+    this.display=0;
     this.secteur=new Secteur();
-    this.ngOnInit();
   }
+
   onEditSecteur(id:number){
     this.mode=1;
+    this.display=1;
     this.secteurService.getSecteur(id)
     .subscribe(data=>{this.secteur=data; console.log(data);}
     ,err=>{console.log(err);})
@@ -91,6 +94,7 @@ export class SecteurComponent implements OnInit {
       this.pageSecteurs.content.splice(
         this.pageSecteurs.content.indexOf(secteur),1
       );
+      this.ngOnInit();
     }
     ,err=>{console.log(err);})
   }

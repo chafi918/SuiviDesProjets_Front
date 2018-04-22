@@ -5,7 +5,6 @@ import { StatutService } from '../../services/statut.service';
 import {Http} from '@angular/http';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-statut',
   templateUrl: './statut.component.html',
@@ -19,6 +18,7 @@ export class StatutComponent implements OnInit {
   currentPage:number=0;
   libelleStatut:string;
   mode:number=0;
+  display:number=0;
 
   constructor(public http:Http,public statutService:StatutService,public router:Router) { }
 
@@ -26,7 +26,7 @@ export class StatutComponent implements OnInit {
     this.statutService.getStatuts()
     .subscribe(data=>{
       console.log("on init");
-      console.log(data);
+      console.log(data);  
       this.pageStatuts=data;
       this.pages=new Array(data.totalPages);
       this.currentPage = data.number;
@@ -62,25 +62,26 @@ export class StatutComponent implements OnInit {
     .subscribe(data=>{this.ngOnInit();}
         ,err=>{console.log(err);});
     this.mode=0;
-    
+    this.display=0;
   }
 
 
   clickOnAjouterStatut(){
     this.mode=0;
+    this.display=1;
     this.statut=new Statut();  
   }
 
   updateStatut(){
-    this.mode=1;
     this.statutService.updateStatut(this.statut)
     .subscribe(data=>{this.ngOnInit();},err=>{console.log(err);});
-    this.mode=1;
+    this.mode=0;
+    this.display=0;
     this.statut=new Statut();
-    this.ngOnInit();
   }
   onEditStatut(id:number){
     this.mode=1;
+    this.display=1;
     this.statutService.getStatut(id)
     .subscribe(data=>{this.statut=data; console.log(data);}
     ,err=>{console.log(err);})
@@ -92,6 +93,7 @@ export class StatutComponent implements OnInit {
       this.pageStatuts.content.splice(
         this.pageStatuts.content.indexOf(statut),1
       );
+      this.ngOnInit();
     }
     ,err=>{console.log(err);})
   }

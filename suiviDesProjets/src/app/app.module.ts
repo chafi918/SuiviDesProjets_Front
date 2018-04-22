@@ -7,7 +7,7 @@ import { ProjetsComponent } from './projets/projets.component';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 import { ProjetService } from '../services/projets.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { HeaderComponentComponent } from './header-component/header-component.component';
 import { FooterComponentComponent } from './footer-component/footer-component.component';
 import { UserComponent } from './user/user.component';
@@ -37,7 +37,6 @@ import { NatureService } from '../services/nature.service';
 import { MarcheService } from '../services/marche.service';
 import { EntrepriseService } from '../services/entreprise.service';
 import { ContactComponent } from './contact/contact.component';
-
 
 
 const appRoutes:Routes=[
@@ -73,7 +72,7 @@ const appRoutes:Routes=[
   imports: [
     BrowserModule,HttpModule,RouterModule.forRoot(appRoutes),FormsModule,
     BrowserAnimationsModule, MatToolbarModule, MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
-    MatPaginatorModule, MatIconModule, MatSelectModule
+    MatPaginatorModule, MatIconModule, MatSelectModule, ReactiveFormsModule
   ],
   providers: [ProjetService, UserService,DivisionService,SecteurService,StatutService,ProfilService,TypeDocService,
     ContactService,NatureService,MarcheService,EntrepriseService],

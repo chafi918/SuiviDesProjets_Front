@@ -23,6 +23,7 @@ profils:Array<Profil>;
 pages:Array<number>;
 currentPage:number=0;
 mode:number=0;
+display:number=0;
 motCle:string;
 utilisateur:Utilisateur=new Utilisateur();
   constructor(public http:Http , public userService:UserService,public router:Router) {
@@ -66,6 +67,7 @@ utilisateur:Utilisateur=new Utilisateur();
     .subscribe(data=>{this.ngOnInit();}
         ,err=>{console.log(err);});
     this.mode=0;
+    this.display=0;
     
   }
 
@@ -88,6 +90,7 @@ utilisateur:Utilisateur=new Utilisateur();
 
   clickOnAjouterUser(){
     this.mode=0;
+    this.display=1;
     this.utilisateur=new Utilisateur();
     this.libelleDivision = this.libelleProfil = "";
   }
@@ -105,18 +108,18 @@ utilisateur:Utilisateur=new Utilisateur();
   }
 
   updateUser(){
-    this.mode=1;
     console.log(this.utilisateur);
     this.userService.updateUser(this.utilisateur)
     .subscribe(data=>{this.ngOnInit();}
         ,err=>{console.log(err);});
     this.mode=1;
+    this.display=0;
     this.utilisateur=new Utilisateur();    
-    this.ngOnInit();
     
   }
   onEditUser(id:number){
     this.mode=1;
+    this.display=1;
     this.userService.getUser(id)
     .subscribe(data=>{this.utilisateur=data;
       this.libelleDivision = this.utilisateur.division.libelleDivision;
