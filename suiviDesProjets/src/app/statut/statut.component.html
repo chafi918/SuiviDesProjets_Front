@@ -8,14 +8,14 @@
             <div class="panel-heading" *ngIf="mode==1">
                 <h5>Ajouter un statut</h5>
               </div>
-              <div class="inputForm spacer">
+              <div class="inputForm spacer" (keyup)="isValidForm()">
                   <mat-form-field>
                       <input matInput placeholder="Libellé Statut" [(ngModel)]="statut.libelleStatut" name="libelleStatut" #libelleStatutT="ngModel" required>
                       <mat-error *ngIf="libelleStatutT.invalid">Veuillez saisir un libellé</mat-error>
                   </mat-form-field>
               </div>
-              <button mat-raised-button class="spaceUp" color="primary" (click)="ajouterStatut()" style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button>
-              <button mat-raised-button class="spaceUp" color="primary" (click)="updateStatut()" style="height:30px;margin: 20px;" *ngIf="mode==1">Modifier</button>
+              <button mat-raised-button class="spaceUp" color="primary" [disabled]="!isValidForm()" (click)="ajouterStatut()" style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button>
+              <button mat-raised-button class="spaceUp" color="primary" [disabled]="!isValidForm()" (click)="updateStatut()" style="height:30px;margin: 20px;" *ngIf="mode==1">Modifier</button>
           </div>
       </div>
   </div>

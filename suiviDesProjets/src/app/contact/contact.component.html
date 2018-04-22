@@ -8,7 +8,7 @@
             <div class="panel-heading" *ngIf="mode==1">
                 <h5>Modifier un contact</h5>
               </div>
-              <div class="inputForm spacer">
+              <div class="inputForm spacer" (keyup)="isValidForm()">
                   <mat-form-field>
                       <input matInput placeholder="Nom" [(ngModel)]="contact.nomContact" name="nomContact"  #nomContactT="ngModel" required>
                       <mat-error *ngIf="nomContactT.invalid">Veuillez saisir le nom et le prénom</mat-error>
@@ -35,8 +35,8 @@
                       </mat-select>
                       <mat-error *ngIf="entrepriseT.invalid">Veuillez choisir une entreprise</mat-error>
                      </mat-form-field>
-                     <button mat-raised-button class="spacerUp" color="primary" (click)="ajouterContact()" style="height:30px;margin: auto;margin-top:20px;" *ngIf="mode==0">Ajouter</button>
-                     <button mat-raised-button class="spacerUp" color="primary" (click)="updateContact()" style="height:30px;margin: auto;margin-top:20px;" *ngIf="mode==1">Modifier</button>
+                     <button mat-raised-button class="spacerUp" color="primary"  [disabled]="!isValidForm()" (click)="ajouterContact()" style="height:30px;margin: auto;margin-top:20px;" *ngIf="mode==0">Ajouter</button>
+                     <button mat-raised-button class="spacerUp" color="primary"  [disabled]="!isValidForm()" (click)="updateContact()" style="height:30px;margin: auto;margin-top:20px;" *ngIf="mode==1">Modifier</button>
               </div>
           </div>
       </div>

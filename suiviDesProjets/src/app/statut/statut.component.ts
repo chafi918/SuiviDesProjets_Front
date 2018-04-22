@@ -27,6 +27,7 @@ export class StatutComponent implements OnInit {
     .subscribe(data=>{
       console.log("on init");
       console.log(data);  
+      this.statut.libelleStatut="";
       this.pageStatuts=data;
       this.pages=new Array(data.totalPages);
       this.currentPage = data.number;
@@ -70,6 +71,7 @@ export class StatutComponent implements OnInit {
     this.mode=0;
     this.display=1;
     this.statut=new Statut();  
+    this.statut.libelleStatut="";
   }
 
   updateStatut(){
@@ -107,5 +109,7 @@ export class StatutComponent implements OnInit {
     ,err=>{console.log(err);})
   }
 
-
+  isValidForm(){
+    return this.statut.libelleStatut.trim().length != 0;
+  }
 }

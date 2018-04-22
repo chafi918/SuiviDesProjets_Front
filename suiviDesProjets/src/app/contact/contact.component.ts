@@ -118,4 +118,12 @@ export class ContactComponent implements OnInit {
     ,err=>{console.log(err);})
   }
 
+  isValidForm(){
+    this.contact.entreprise = this.getEntrepriseByName(this.entreprises, this.nomEntreprise);
+    return this.contact.nomContact && this.contact.nomContact.length != 0 
+          && this.contact.entreprise
+          && this.contact.mailContact.match("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
+          && this.contact.telephone.match("^0[0-9]{9}$")
+          && this.contact.responsabilite.length != 0;
+  }
 }

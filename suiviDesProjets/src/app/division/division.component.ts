@@ -108,4 +108,8 @@ export class DivisionComponent implements OnInit {
     ,err=>{console.log(err);})
   }
 
+
+  isValidForm(){
+    return this.division.libelleDivision && this.division.libelleDivision.length != 0;
+  }
 }

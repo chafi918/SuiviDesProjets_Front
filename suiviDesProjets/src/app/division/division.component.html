@@ -8,14 +8,14 @@
 							<div class="panel-heading" *ngIf="mode==1">
 								<h5>Modifier une division</h5>
 							</div>
-								<div class="inputForm spacer spacerUp">
+								<div class="inputForm spacer spacerUp" (keyup)="isValidForm()">
 										<mat-form-field>
 												<input matInput placeholder="Libellé Division" [(ngModel)]="division.libelleDivision" #libelleDivision="ngModel" required>
 												<mat-error *ngIf="libelleDivision.invalid">Veuillez saisir un libelle pour la division</mat-error>
 										</mat-form-field>
 								</div>
-								<button mat-raised-button class="spacerUp" color="primary" (click)="ajouterDivision()" style="height:30px;margin:20px;" *ngIf="mode==0">Ajouter</button> 
-								<button mat-raised-button class="spacerUp" color="primary" (click)="updateDivision()" style="height:30px;margin:20px;" *ngIf="mode==1">Modifier</button>
+								<button mat-raised-button class="spacerUp" [disabled]="!isValidForm()" color="primary" (click)="ajouterDivision()" style="height:30px;margin:20px;" *ngIf="mode==0">Ajouter</button> 
+								<button mat-raised-button class="spacerUp" [disabled]="!isValidForm()" color="primary" (click)="updateDivision()" style="height:30px;margin:20px;" *ngIf="mode==1">Modifier</button>
 							</div>
 				</div>
 		</div>

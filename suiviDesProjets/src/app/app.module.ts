@@ -37,6 +37,8 @@ import { NatureService } from '../services/nature.service';
 import { MarcheService } from '../services/marche.service';
 import { EntrepriseService } from '../services/entreprise.service';
 import { ContactComponent } from './contact/contact.component';
+import { DocumentComponent } from './document/document.component';
+import { DocumentService } from '../services/document.service';
 
 
 const appRoutes:Routes=[
@@ -50,6 +52,7 @@ const appRoutes:Routes=[
   {path:'natures',component:NatureMarcheComponent},
   {path:'entreprises',component:EntrepriseComponent},
   {path:'contacts',component:ContactComponent},
+  {path:'documents',component:DocumentComponent},
   {path:'',redirectTo:'/projets',pathMatch:'full'}
 ];
 
@@ -67,7 +70,8 @@ const appRoutes:Routes=[
     TypeDocumentComponent,
     EntrepriseComponent,
     NatureMarcheComponent,
-    ContactComponent
+    ContactComponent,
+    DocumentComponent
   ],
   imports: [
     BrowserModule,HttpModule,RouterModule.forRoot(appRoutes),FormsModule,
@@ -75,7 +79,7 @@ const appRoutes:Routes=[
     MatPaginatorModule, MatIconModule, MatSelectModule, ReactiveFormsModule
   ],
   providers: [ProjetService, UserService,DivisionService,SecteurService,StatutService,ProfilService,TypeDocService,
-    ContactService,NatureService,MarcheService,EntrepriseService],
+    ContactService,NatureService,MarcheService,EntrepriseService, DocumentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
