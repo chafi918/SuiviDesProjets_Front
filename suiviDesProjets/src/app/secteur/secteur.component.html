@@ -8,14 +8,14 @@
             <div class="panel-heading" *ngIf="mode==1">
                 <h5>Modifier un secteur</h5>
               </div>
-              <div class="inputForm spacer">
+              <div class="inputForm spacer" (keyup)="isValidForm()">
                   <mat-form-field>
                       <input matInput placeholder="Libellé Secteur" [(ngModel)]="secteur.libelleSecteur" name="libelleSecteur" #libelleSecteur="ngModel" required>
                       <mat-error *ngIf="libelleSecteur.invalid">Veuillez saisir un libellé</mat-error>
                   </mat-form-field>
               </div>
-              <button mat-raised-button class="spacerUp" color="primary" (click)="ajouterSecteur()" style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button>
-              <button mat-raised-button class="spacerUp" color="primary" (click)="updateSecteur()" style="height:30px;margin: 20px;" *ngIf="mode==1">Modifier</button>
+              <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="ajouterSecteur()" style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button>
+              <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="updateSecteur()" style="height:30px;margin: 20px;" *ngIf="mode==1">Modifier</button>
           </div>
       </div>
   </div>

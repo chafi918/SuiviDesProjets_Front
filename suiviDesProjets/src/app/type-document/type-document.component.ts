@@ -107,4 +107,8 @@ export class TypeDocumentComponent implements OnInit {
     ,err=>{console.log(err);})
   }
 
+  isValidForm(){
+    return this.type.libelleType && this.type.libelleType.length != 0;
+  }
+
 }

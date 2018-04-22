@@ -94,4 +94,8 @@ export class ProfilComponent implements OnInit {
       this.currentPage = data.number;}
     ,err=>{console.log(err);})
   }
+
+  isValidForm(){
+    return this.profil.libelleProfil && this.profil.libelleProfil.length != 0
+  }
 }

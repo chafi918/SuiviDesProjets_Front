@@ -8,14 +8,14 @@
             <div class="panel-heading" *ngIf="mode==1">
                 <h5>Modifier un profil</h5>
               </div>
-              <div class="inputForm">
+              <div class="inputForm" (keyup)="isValidForm()">
                   <mat-form-field>
                       <input matInput placeholder="Libellé Profil" [(ngModel)]="profil.libelleProfil" name="libelleProfil" #libelleProfil="ngModel" required >
                       <mat-error *ngIf="libelleProfil.invalid">Veuillez saisir le libellé du profil</mat-error>
                   </mat-form-field>
               </div>
-              <button mat-raised-button class="spacerUp" color="primary" (click)="ajouterProfil()" style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button>
-              <button mat-raised-button class="spacerUp" color="primary" (click)="updateProfil()" style="height:30px;margin: 20px;" *ngIf="mode==1">Modifier</button>
+              <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="ajouterProfil()" style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button>
+              <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="updateProfil()" style="height:30px;margin: 20px;" *ngIf="mode==1">Modifier</button>
           </div>
       </div>
   </div>

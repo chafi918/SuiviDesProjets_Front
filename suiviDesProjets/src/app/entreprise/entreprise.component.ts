@@ -93,5 +93,11 @@ export class EntrepriseComponent implements OnInit {
     ,err=>{console.log(err);})
   }
 
+  isValidForm(){
+    return this.entreprise.nomEntreprise && this.entreprise.adresseEntreprise
+    && this.entreprise.nomEntreprise.length !=0
+    && this.entreprise.adresseEntreprise.length !=0;
+  }
+
 
 }

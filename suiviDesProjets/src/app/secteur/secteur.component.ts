@@ -108,4 +108,8 @@ export class SecteurComponent implements OnInit {
     ,err=>{console.log(err);})
   }
 
+  isValidForm(){
+    return this.secteur.libelleSecteur && this.secteur.libelleSecteur.length != 0
+  }
+
 }

@@ -8,14 +8,14 @@
             <div class="panel-heading" *ngIf="mode==1">
                 <h5>Modifier un type</h5>
               </div>
-              <div class="inputForm">
+              <div class="inputForm" (keyup)="isValidForm()">
                   <mat-form-field>
                       <input matInput placeholder="Libellé Type" [(ngModel)]="type.libelleType" #libelleType="ngModel" name="libelleType" required>
                       <mat-error *ngIf="libelleType.invalid">Veuillez saisir un libellé</mat-error>
                   </mat-form-field>
               </div>
-              <button mat-raised-button class="spacerUp" color="primary" (click)="ajouterType()" style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button>
-              <button mat-raised-button class="spacerUp" color="primary" (click)="updateType()" style="height:30px;margin: auto;" *ngIf="mode==1">Modifier</button>
+              <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="ajouterType()" style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button>
+              <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="updateType()" style="height:30px;margin: auto;" *ngIf="mode==1">Modifier</button>
             </div>
       </div>
   </div>

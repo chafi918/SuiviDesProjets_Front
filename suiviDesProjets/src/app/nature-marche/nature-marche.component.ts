@@ -91,4 +91,8 @@ export class NatureMarcheComponent implements OnInit {
     ,err=>{console.log(err);})
   }
 
+  isValidForm(){
+    return this.nature.libelleNature && this.nature.libelleNature.length != 0
+  }
+
 }
