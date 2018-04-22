@@ -146,4 +146,16 @@ utilisateur:Utilisateur=new Utilisateur();
     }
     ,err=>{console.log(err);})
   }
+
+  isValidForm(){
+    this.utilisateur.division = this.getDivisionByName(this.divisions, this.libelleDivision);
+    this.utilisateur.profil = this.getProfilByName(this.profils, this.libelleProfil);
+    return this.utilisateur.nomUser && this.utilisateur.nomUser.length  != 0
+            && this.utilisateur.prenomUser && this.utilisateur.prenomUser.length != 0
+            && this.utilisateur.loginUser && this.utilisateur.loginUser.length != 0
+            && this.utilisateur.division && this.utilisateur.profil
+            && this.utilisateur.responsabilite && this.utilisateur.responsabilite.length != 0
+            && this.utilisateur.mdpUser && this.utilisateur.mdpUser.length > 8
+            && this.utilisateur.mailUser && this.utilisateur.mailUser.match("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$");
+  }
 }

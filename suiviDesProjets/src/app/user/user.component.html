@@ -8,7 +8,7 @@
             <div class="panel-heading" *ngIf="mode==1">
                 <h5>Modifier un utilisateur</h5>
               </div>
-              <div class="inputForm sapcer spacerUp">
+              <div class="inputForm sapcer spacerUp" (keyup)="isValidForm()">
                   <mat-form-field>
                       <input matInput placeholder="Nom" [(ngModel)]="utilisateur.nomUser" name="nom" #nom="ngModel" required>
                       <mat-error *ngIf="nom.invalid">Veuillez saisir votre nom</mat-error>
@@ -41,10 +41,7 @@
                           {{ division.libelleDivision }}
                       </mat-option>
                      </mat-select>
-                     <div [hidden]="division.valid || division.pristine"
-                        class="alert alert-danger">
-                        Division est obligatoire
-                      </div>
+                     <mat-error *ngIf="division.invalid">Veuillez choisir une division pour l'utilisateur</mat-error>
                    </mat-form-field>
                    <mat-form-field>
                       <mat-select placeholder="Profil" [(ngModel)]="libelleProfil" name="profil" #profil="ngModel" required>
@@ -52,15 +49,12 @@
                             {{ profil.libelleProfil }}
                         </mat-option>
                        </mat-select>
-                       <div [hidden]="profil.valid || profil.pristine"
-                        class="alert alert-danger">
-                        Profil est obligatoire
-                      </div>
+                       <mat-error *ngIf="profil.invalid">Veuillez choisir un profil pour l'utilisateur</mat-error>
                     </mat-form-field>
                    <mat-checkbox  class="checkbox" [(ngModel)]="utilisateur.estActive" required>activé</mat-checkbox>
               </div>
-              <button mat-raised-button class="spacerUp" color="primary" (click)="ajouterUser()" style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button>
-              <button mat-raised-button class="spacerUp" color="primary" (click)="updateUser()" style="height:30px;margin: 20px;" *ngIf="mode==1">Modifier</button>
+              <button mat-raised-button class="spacerUp" [disabled]="!isValidForm()" color="primary" (click)="ajouterUser()" style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button>
+              <button mat-raised-button class="spacerUp" [disabled]="!isValidForm()" color="primary" (click)="updateUser()" style="height:30px;margin: 20px;" *ngIf="mode==1">Modifier</button>
 
           </div>
       </div>

@@ -110,6 +110,6 @@ export class StatutComponent implements OnInit {
   }
 
   isValidForm(){
-    return this.statut.libelleStatut.trim().length != 0;
+    return this.statut.libelleStatut && this.statut.libelleStatut.length != 0;
   }
 }
