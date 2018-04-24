@@ -1,0 +1,68 @@
+<div class="container-fluid text-center spacer">
+  <div class="col-sm-6 position" *ngIf="display==1">
+        <div class="navbar-form">
+          <div class="panel panel-success">
+            <div class="panel-heading" *ngIf="mode==0">
+              <h5>Ajouter une observation</h5>
+            </div>
+            <div class="panel-heading" *ngIf="mode==1">
+                <h5>Modifier une observation </h5>
+              </div>
+              <div class="inputForm spacer" (keyup)="isValidForm()">
+                  <mat-form-field>
+                      <input matInput placeholder="Observation" [(ngModel)]="observation.observation" name="observation" #observationV="ngModel" required> 
+                      <mat-error *ngIf="observationV.invalid">Veuillez saisir une observation</mat-error>
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput type="date" placeholder="Date" [(ngModel)]="observation.dateObservation" name="date" #dateV="ngModel" required> 
+                    
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput placeholder="Utilisateur" [(ngModel)]="observation.nomObservant" name="nomObservant" #nomObservantV="ngModel" required> 
+                  <mat-error *ngIf="nomObservantV.invalid">Veuillez saisir un nom</mat-error>
+              </mat-form-field>
+              </div>
+              <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="ajouterObservation()" style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button>
+              <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="updateObservation()" style="height:30px;margin: 20px;" *ngIf="mode==1">Modifier</button>
+          </div>
+      </div>
+  </div>
+  <div class="col-sm-10" *ngIf="display==0">
+    <div class="navbar-form">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h5>Liste des observations</h5>
+      </div>
+      <div class="rowMenu spacer">
+          <button color="primary" class="newEntity innerSpacer" style="height:30px"(click)="clickOnAjouterObservation()"> Nouvelle Observation</button>
+      
+      </div>
+    <table class="table table-striped">
+        <tr>
+          <th>Observation</th>
+          <th>Date d'Observation</th>
+          <th>Utilisateur</th>
+          <th>Modification</th>
+          <th>Supprimer</th>
+        </tr>
+        <tr *ngFor="let o of pageObservations?.content">
+          <td>{{o.observation}}</td>
+          <td>{{o.dateObservation}}</td>
+          <td>{{o.nomObservant}}</td>
+          <td><a (click)="onEditObservation(o.idObservation)">
+            <i class="fas fa-edit editIcon cursorElement"></i></a></td>
+          <td><a (click)="onDeleteObservation(o)">
+            <i class="glyphicon glyphicon-remove cursorElement"></i></a></td>
+        </tr>
+    </table>
+    <div class="container spacerUp">
+      <ul class="nav nav-pills">
+        <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages; let i=index">
+          <a (click)="gotoPage(i)" class="marge cursorElement">{{i}}</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+  </div>
+  </div>
+</div>

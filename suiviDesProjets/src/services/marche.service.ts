@@ -35,17 +35,22 @@ export class MarcheService{
    }
 
    deleteMarche(id:number){
-    return this.http.delete("http://localhost:8080/marche"+id)
+    return this.http.delete("http://localhost:8080/marche/"+id)
     .map(resp=>resp.json());
 }
 
     chercherMarche(numeroMarche:string){
-        return this.http.get("http://localhost:8080/marche/numero/name?name="+numeroMarche)
+        return this.http.get("http://localhost:8080/marche/numero?name="+numeroMarche)
         .map(resp=>resp.json());
 
     }
     getNatures(){
         return this.http.get("http://localhost:8080/adminNature/allNatures")
         .map(resp=>resp.json());
-       }
+    }
+    
+    getEntreprises(){
+        return this.http.get("http://localhost:8080/entreprise/entreprises")
+        .map(resp=>resp.json());
+    }
 }

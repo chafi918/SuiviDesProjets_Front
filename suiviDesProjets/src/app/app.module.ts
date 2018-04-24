@@ -39,6 +39,9 @@ import { EntrepriseService } from '../services/entreprise.service';
 import { ContactComponent } from './contact/contact.component';
 import { DocumentComponent } from './document/document.component';
 import { DocumentService } from '../services/document.service';
+import { MarcheComponent } from './marche/marche.component';
+import { ObservationComponent } from './observation/observation.component';
+import { ObservationService } from '../services/observation.service';
 
 
 const appRoutes:Routes=[
@@ -53,6 +56,8 @@ const appRoutes:Routes=[
   {path:'entreprises',component:EntrepriseComponent},
   {path:'contacts',component:ContactComponent},
   {path:'documents',component:DocumentComponent},
+  {path:'marches',component:MarcheComponent},
+  {path:'observations',component:ObservationComponent},
   {path:'',redirectTo:'/projets',pathMatch:'full'}
 ];
 
@@ -71,7 +76,9 @@ const appRoutes:Routes=[
     EntrepriseComponent,
     NatureMarcheComponent,
     ContactComponent,
-    DocumentComponent
+    DocumentComponent,
+    MarcheComponent,
+    ObservationComponent
   ],
   imports: [
     BrowserModule,HttpModule,RouterModule.forRoot(appRoutes),FormsModule,
@@ -79,7 +86,7 @@ const appRoutes:Routes=[
     MatPaginatorModule, MatIconModule, MatSelectModule, ReactiveFormsModule
   ],
   providers: [ProjetService, UserService,DivisionService,SecteurService,StatutService,ProfilService,TypeDocService,
-    ContactService,NatureService,MarcheService,EntrepriseService, DocumentService],
+    ContactService,NatureService,MarcheService,EntrepriseService, DocumentService,ObservationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
