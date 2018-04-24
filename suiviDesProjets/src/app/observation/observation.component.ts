@@ -36,6 +36,8 @@ export class ObservationComponent implements OnInit {
     this.observationService.ajouterObservation(this.observation)
     .subscribe(data=>{this.ngOnInit();}
         ,err=>{console.log(err);});
+    this.mode=0;
+	  this.display=0;
     this.observation=new Observation();
   }
 
@@ -48,7 +50,7 @@ export class ObservationComponent implements OnInit {
   updateObservation(){
     this.observationService.updateObservation(this.observation)
     .subscribe(data=>{this.ngOnInit();},err=>{console.log(err);});
-    this.mode=1;
+    this.mode=0;
 	  this.display=0;
     this.observation=new Observation();
   }
