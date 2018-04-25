@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
+import { Projet } from "../model/model.projet";
 
 @Injectable()
 export class ProjetService{
@@ -16,4 +17,19 @@ export class ProjetService{
     return this.http.get("http://localhost:8080/projet/getProjets?page="+page)
     .map(resp=>resp.json());
    }
+
+   ajouterProjet(projet:Projet){
+    return this.http.post("http://localhost:8080/projet/ajout",projet)
+    .map(resp=>resp);
+   }
+
+   getAllStatuts(){
+    return this.http.get("http://localhost:8080/admin/statuts")
+    .map(resp=>resp.json());
+    }
+
+    getAllSecteurs(){
+        return this.http.get("http://localhost:8080/admin/secteurs")
+        .map(resp=>resp.json());
+        }
 }
