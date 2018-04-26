@@ -42,6 +42,7 @@ import { DocumentService } from '../services/document.service';
 import { MarcheComponent } from './marche/marche.component';
 import { ObservationComponent } from './observation/observation.component';
 import { ObservationService } from '../services/observation.service';
+import { DetailsProjetComponent } from './details-projet/details-projet.component';
 
 
 const appRoutes:Routes=[
@@ -58,6 +59,7 @@ const appRoutes:Routes=[
   {path:'documents',component:DocumentComponent},
   {path:'marches',component:MarcheComponent},
   {path:'observations',component:ObservationComponent},
+  {path:'detailsProjet',component:DetailsProjetComponent},
   {path:'',redirectTo:'/projets',pathMatch:'full'}
 ];
 
@@ -78,7 +80,8 @@ const appRoutes:Routes=[
     ContactComponent,
     DocumentComponent,
     MarcheComponent,
-    ObservationComponent
+    ObservationComponent,
+    DetailsProjetComponent
   ],
   imports: [
     BrowserModule,HttpModule,RouterModule.forRoot(appRoutes),FormsModule,

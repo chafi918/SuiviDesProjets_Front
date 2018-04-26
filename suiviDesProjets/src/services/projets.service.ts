@@ -1,13 +1,16 @@
-import { Injectable } from "@angular/core";
+import { Injectable, EventEmitter } from "@angular/core";
 import { Http } from "@angular/http";
 import { Projet } from "../model/model.projet";
+import { Observable } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class ProjetService{
    constructor(public http:Http){
 
    }
-   
+    public idProjetEvent = new EventEmitter<any>();
+    
    getProjets(){
     return this.http.get("http://localhost:8080/projet/getProjets")
     .map(resp=>resp.json());

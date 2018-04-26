@@ -8,6 +8,8 @@ import { Secteur } from '../../model/model.secteur';
 import { Statut } from '../../model/model.statut';
 import { ObservationService } from '../../services/observation.service';
 import { Observation } from '../../model/model.observation';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-projets',
   templateUrl: './projets.component.html',
@@ -26,7 +28,7 @@ export class ProjetsComponent implements OnInit {
    secteurs:Array<Secteur>;
    statuts:Array<Statut>;
    observation:Observation=new Observation();
-  constructor(public http:Http,public projetService:ProjetService,public observationService:ObservationService) { }
+  constructor(public http:Http,public router:Router,public projetService:ProjetService,public observationService:ObservationService) { }
 
   ngOnInit() {
    this.projetService.getProjets()
@@ -110,14 +112,9 @@ export class ProjetsComponent implements OnInit {
   }
 
   onDetailsProjet(idProjet:number){
-    this.display=2;
-    alert(idProjet);
-    this.projetService.getProjet(idProjet)
-    .subscribe(data=>{
-      console.log(data);
-      this.projet=data;
-      }
-    ,err=>{console.log(err);}) 
+    console.log(idProjet);
+    this.projetService.idProjetEvent.emit(idProjet);
+    this.router.navigate(['/detailsProjet']);
   }
   
   isValidForm(){
@@ -128,7 +125,7 @@ export class ProjetsComponent implements OnInit {
             && this.projet.chargeDuProjet && this.projet.chargeDuProjet.length != 0
             && this.projet.secteur && this.projet.statut
             && this.projet.dateAO && this.projet.dateCommTravaux
-            && this.projet.dateOP && this.projet.montantProgramme !=0  && this.projet.montantProgramme;
+            && this.projet.dateOP && this.projet.montantProgramme && this.projet.montantProgramme !=0  ;
            
   }
 
