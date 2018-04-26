@@ -53,4 +53,9 @@ export class MarcheService{
         return this.http.get("http://localhost:8080/entreprise/entreprises")
         .map(resp=>resp.json());
     }
+
+    getMarchesParProjet(id:number){
+        return this.http.get("http://localhost:8080/marche/projet/"+id)
+        .map(resp=>resp.json());
+    }
 }

@@ -109,6 +109,16 @@ export class ProjetsComponent implements OnInit {
     ,err=>{console.log(err);})
   }
 
+  onDetailsProjet(idProjet:number){
+    this.display=2;
+    alert(idProjet);
+    this.projetService.getProjet(idProjet)
+    .subscribe(data=>{
+      console.log(data);
+      this.projet=data;
+      }
+    ,err=>{console.log(err);}) 
+  }
   
   isValidForm(){
     this.projet.secteur = this.getSecteurByName(this.secteurs, this.libelleSecteur);

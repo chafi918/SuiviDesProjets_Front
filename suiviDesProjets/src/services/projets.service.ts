@@ -13,6 +13,12 @@ export class ProjetService{
     .map(resp=>resp.json());
    }
 
+     
+   getProjet(id:number){
+    return this.http.get("http://localhost:8080/projet/"+id)
+    .map(resp=>resp.json());
+   }
+
    getProjetsParPage(page:number){
     return this.http.get("http://localhost:8080/projet/getProjets?page="+page)
     .map(resp=>resp.json());

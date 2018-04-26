@@ -100,8 +100,9 @@
                   <th>Modifier</th>
                   <th>Supprimer</th>
                 </tr>
-                <tr *ngFor="let p of pageProjets?.content">
-                  <td>{{p.intitule}}</td>
+                <tr *ngFor="let p of pageProjets?.content"> 
+                  <td><a (click)="onDetailsProjet(p.idProjet)" class="cursorElement">
+                      {{p.intitule}}</a></td>
                   <td>{{p.commune}}</td>
                   <td>{{p.montantProgramme}}</td>
                   <td>{{p.secteur.libelleSecteur}}</td>
@@ -120,5 +121,28 @@
               </div>
             </div>
           </div>
-        </div>      
+        </div> 
+        <div class="container spacer" *ngIf="display==2">
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h5>Details du projet</h5>
+            </div>
+            <div class="panel-body">
+              <table class="table table-striped">
+                <tr>
+                  <th>Intitulé</th>
+                  <th>Commune</th>
+                  <th>Montant Programmé</th>
+                  <th>Secteur</th>
+                </tr>
+                <tr>
+                  <td>{{projet.intitule}}</td>
+                  <td>{{projet.commune}}</td>
+                  <td>{{projet.montantProgramme}}</td>
+                  <td>{{projet.secteur.libelleSecteur}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>           
 </div>
