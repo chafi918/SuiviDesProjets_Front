@@ -24,55 +24,54 @@
           <div class="panel-heading">
             <h5>Liste des marchés</h5>
           </div>
-            <table class="table table-striped">
-              <tr>
-                <th>Numéro Marché</th>
-                <th>Montant du Marché</th>
-                <th>Montant des Travaux Réalisés</th>
-                <th>Délai d'execution</th>
-                <th>Taux d'avancement</th>
-                <th>Nature</th>
-                <th>Entreprise</th>
-              </tr>
-              <tr *ngFor="let m of projet.marches">
-                <td>{{m.numeroMarche}}</td>
-                <td>{{m.montantMarche}}</td>
-                <td>{{m.montantTravauxRealises}}</td>
-                <td>{{m.delaiExecution}}</td>
-                <td>{{m.tauxAvancement}}</td>
-                <td>{{m.nature.libelleNature}}</td>
-                <td>{{m.entreprise.nomEntreprise}}</td>
-              </tr>
-            </table>
+          <div class="panel-body">
+              <table class="table table-striped">
+                  <tr>
+                    <th>Numéro Marché</th>
+                    <th>Montant du Marché</th>
+                    <th>Montant des Travaux Réalisés</th>
+                    <th>Délai d'execution</th>
+                    <th>Taux d'avancement</th>
+                    <th>Nature</th>
+                    <th>Entreprise</th>
+                  </tr>
+                  <tr *ngFor="let m of projet.marches">
+                    <td>{{m.numeroMarche}}</td>
+                    <td>{{m.montantMarche}}</td>
+                    <td>{{m.montantTravauxRealises}}</td>
+                    <td>{{m.delaiExecution}}</td>
+                    <td>{{m.tauxAvancement}}</td>
+                    <td>{{m.nature.libelleNature}}</td>
+                    <td>{{m.entreprise.nomEntreprise}}</td>
+                  </tr>
+                </table>
+          </div>
     </div>
         <div class="panel panel-success">
           <div class="panel-heading">
             <h5>Liste des observations</h5>
           </div>
-        <table class="table table-striped">
-            <tr>
-              <th>Observation</th>
-              <th>Date d'Observation</th>
-              <th>Utilisateur</th>
-            </tr>
-            <tr *ngFor="let o of projet?.observations">
-              <td>{{o.observation}}</td>
-              <td>{{o.dateObservation}}</td>
-              <td>{{o.nomObservant}}</td>
-            </tr>
-        </table>
-        <div class="container spacerUp">
-          <ul class="nav nav-pills">
-            <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages; let i=index">
-              <a (click)="gotoPage(i)" class="marge cursorElement">{{i}}</a>
-            </li>
-          </ul>
-        </div>
+          <div class="panel-body">
+              <table class="table table-striped">
+                  <tr>
+                    <th>Observation</th>
+                    <th>Date d'Observation</th>
+                    <th>Utilisateur</th>
+                  </tr>
+                  <tr *ngFor="let o of projet?.observations">
+                    <td>{{o.observation}}</td>
+                    <td>{{o.dateObservation}}</td>
+                    <td>{{o.nomObservant}}</td>
+                  </tr>
+              </table>
+          </div>
         </div>
         <div class="panel panel-success">
             <div class="panel-heading">
               <h5>Liste des documents</h5>
             </div>
-            TODO
+            <div class="panel-body">
+              STILL TODO
+            </div>
           </div>
   </div> 
