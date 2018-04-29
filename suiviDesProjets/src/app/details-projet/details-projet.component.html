@@ -20,80 +20,59 @@
         </table>
       </div>
     </div>
-    <div class="panel panel-success">
-        <div class="panel-heading">
-          <h5>Liste des marchés</h5>
-        </div>
-        <div>
-            <button color="primary" class="newEntity innerSpacer" style="height:30px"> Ajouter un marché</button>
-        </div>
-        <div class="panel-body">
-          <table class="table table-striped">
-            <tr>
-              <th>Numero Marche</th>
-              <th>Montant progmrammé</th>
-              <th>Montant des travaux réalisés</th>
-              <th>Délai d'execution</th>
-              <th>Taux d'avancement</th>
-              <th>Nature du marché</th>
-              <th>Entreprise</th>
-            </tr>
-            <tr *ngFor="let marche of pageMarches?.content">
-              <td>{{marche.numeroMarche}}</td>
-              <td>{{marche.montantMarche}}</td>
-              <td>{{marche.montantTravauxRealises}}</td>
-              <td>{{marche.delaiExecution}}</td>
-              <td>{{marche.tauxAvancement}}</td>
-              <td>{{marche.nature?.libelleNature}}</td>
-              <td>{{marche.entreprise?.nomEntreprise}}</td>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <div class="panel panel-success">
+        <div class="panel panel-success">
           <div class="panel-heading">
-            <h5>Liste des documents</h5>
+            <h5>Liste des marchés</h5>
           </div>
-          <div>
-              <button color="primary" class="newEntity innerSpacer" style="height:30px"> Ajouter un document</button>
-          </div>
-          <div class="panel-body">
             <table class="table table-striped">
               <tr>
-                <th>Titre document</th>
-                <th>Date de l'ajout</th>
-                <th>Chargeur du document</th>
-                <th>Type du document</th>
+                <th>Numéro Marché</th>
+                <th>Montant du Marché</th>
+                <th>Montant des Travaux Réalisés</th>
+                <th>Délai d'execution</th>
+                <th>Taux d'avancement</th>
+                <th>Nature</th>
+                <th>Entreprise</th>
               </tr>
-              <tr *ngFor="let document of pageDocuments?.content">
-                <td>{{document.nomDocument}}</td>
-                <td>{{document.dateAjout}}</td>
-                <td>{{document.chargeurDocument}}</td>
-                <td>{{document.type?.libelleType}}</td>
+              <tr *ngFor="let m of projet.marches">
+                <td>{{m.numeroMarche}}</td>
+                <td>{{m.montantMarche}}</td>
+                <td>{{m.montantTravauxRealises}}</td>
+                <td>{{m.delaiExecution}}</td>
+                <td>{{m.tauxAvancement}}</td>
+                <td>{{m.nature.libelleNature}}</td>
+                <td>{{m.entreprise.nomEntreprise}}</td>
               </tr>
             </table>
+    </div>
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h5>Liste des observations</h5>
           </div>
+        <table class="table table-striped">
+            <tr>
+              <th>Observation</th>
+              <th>Date d'Observation</th>
+              <th>Utilisateur</th>
+            </tr>
+            <tr *ngFor="let o of projet?.observations">
+              <td>{{o.observation}}</td>
+              <td>{{o.dateObservation}}</td>
+              <td>{{o.nomObservant}}</td>
+            </tr>
+        </table>
+        <div class="container spacerUp">
+          <ul class="nav nav-pills">
+            <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages; let i=index">
+              <a (click)="gotoPage(i)" class="marge cursorElement">{{i}}</a>
+            </li>
+          </ul>
+        </div>
         </div>
         <div class="panel panel-success">
             <div class="panel-heading">
-              <h5>Observations</h5>
+              <h5>Liste des documents</h5>
             </div>
-            <div>
-                <button color="primary" class="newEntity innerSpacer" style="height:30px"> Ajouter une observation</button>
-            </div>
-            <div class="panel-body">
-              <table class="table table-striped">
-                <tr>
-                  <th>Observation</th>
-                  <th>Date</th>
-                  <th>Utilisateur</th>
-                </tr>
-                <tr *ngFor="let observation of pageObservations?.content">
-                  <td>{{observation.observation}}</td>
-                  <td>{{observation.dateObservation}}</td>
-                  <td>{{observation.nomObservant}}</td>
-                </tr>
-              </table>
-            </div>
+            TODO
           </div>
   </div> 

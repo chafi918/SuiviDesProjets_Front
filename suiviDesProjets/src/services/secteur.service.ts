@@ -43,5 +43,8 @@ deleteSecteur(id:number){
      .map(resp=>resp.json());
 
  }
-
+ chercherSecteurByProjet(idProjet:number){
+    return this.http.get("http://localhost:8080/admin/secteur/?idProjet="+idProjet)
+    .map(resp=>resp.json());
+ }
 }

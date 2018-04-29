@@ -9,7 +9,7 @@ export class ProjetService{
    constructor(public http:Http){
 
    }
-    public idProjetEvent = new EventEmitter<any>();
+    public idProjetSubject = new Subject<number>();
     
    getProjets(){
     return this.http.get("http://localhost:8080/projet/getProjets")
@@ -18,7 +18,8 @@ export class ProjetService{
 
      
    getProjet(id:number){
-    return this.http.get("http://localhost:8080/projet/"+id)
+       console.log("fromService idProjet = " + id);
+    return this.http.get("http://localhost:8080/projet/?id="+id)
     .map(resp=>resp.json());
    }
 

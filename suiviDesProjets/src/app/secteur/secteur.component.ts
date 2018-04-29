@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Secteur } from '../../model/model.secteur';
 import {Http} from '@angular/http';
 import { Router } from '@angular/router';
@@ -19,10 +19,22 @@ export class SecteurComponent implements OnInit {
   libelleSecteur:string;
   mode:number=0;
   display:number=0;
+  @Input() idProjet: number ;
 
   constructor(public http:Http,public secteurService:SecteurService,public router:Router) { }
 
   ngOnInit() {
+    if (this.idProjet) {
+      this.display = 2;
+      this.secteurService.chercherSecteurByProjet(this.idProjet).subscribe(
+        data=>{
+          console.log("on init");
+          console.log(data);
+          this.secteur=data;
+        }
+        ,err=>{console.log(err);})
+      return;
+    }
     this.secteurService.getSecteurs()
     .subscribe(data=>{
       console.log("on init");

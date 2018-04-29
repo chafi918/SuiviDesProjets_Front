@@ -59,7 +59,7 @@ const appRoutes:Routes=[
   {path:'documents',component:DocumentComponent},
   {path:'marches',component:MarcheComponent},
   {path:'observations',component:ObservationComponent},
-  {path:'detailsProjet',component:DetailsProjetComponent},
+  {path:'detailsProjet/:id',component:DetailsProjetComponent},
   {path:'',redirectTo:'/projets',pathMatch:'full'}
 ];
 

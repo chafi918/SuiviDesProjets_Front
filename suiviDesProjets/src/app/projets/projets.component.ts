@@ -33,6 +33,7 @@ export class ProjetsComponent implements OnInit {
   ngOnInit() {
    this.projetService.getProjets()
    .subscribe(data=>{
+     console.log(data);
      this.pageProjets=data;
      this.pages=new Array(data.totalPages);
      this.currentPage = data.number;
@@ -112,9 +113,8 @@ export class ProjetsComponent implements OnInit {
   }
 
   onDetailsProjet(idProjet:number){
-    console.log(idProjet);
-    this.projetService.idProjetEvent.emit(idProjet);
-    this.router.navigate(['/detailsProjet']);
+    console.log(idProjet)
+    this.router.navigate(['/detailsProjet/'+idProjet]);
   }
   
   isValidForm(){

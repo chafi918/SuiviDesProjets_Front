@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Marche } from '../../model/model.marche';
 import { MarcheService } from '../../services/marche.service';
 import {Http} from '@angular/http';
@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Injectable } from "@angular/core";
 import { Nature } from '../../model/model.nature';
 import { Entreprise } from '../../model/model.entreprise';
+import { ProjetService } from '../../services/projets.service';
 
 @Component({
   selector: 'app-marche',
@@ -24,21 +25,45 @@ export class MarcheComponent implements OnInit {
   display:number=0;
   nomEntreprise:string;
   entreprises:Array<Entreprise>;
-  constructor(public http:Http,public marcheService:MarcheService,public router:Router) { }
+  @Input() idProjet:string;
+
+  constructor(public http:Http,public marcheService:MarcheService,
+    public projetService:ProjetService ,public router:Router) { }
 
   ngOnInit() {
-    this.marcheService.getMarches()
+    console.log(this.idProjet);
+    if(this.idProjet != undefined){
+      this.initFromParent();
+    }else{
+      this.initComposant();
+    }
+    this.getAllNatures();
+    this.getAllEntreprises();
+  }
+
+  initFromParent(){
+    this.marcheService.getMarchesByProjetId(Number(this.idProjet))
+    .subscribe(
+      data => {
+        console.log(data);
+        this.pageMarches=data;
+        this.pages=new Array(data.totalPages);
+        this.currentPage = data.number;
+      } ,err=>{console.log(err);}
+    )
+  }
+
+  initComposant(){
+      this.marcheService.getMarches()
     .subscribe(data=>{
       console.log("on init");
       console.log(data);
       this.pageMarches=data;
       this.pages=new Array(data.totalPages);
       this.currentPage = data.number;
-      this.getAllNatures();
-      this.getAllEntreprises();
     }
     ,err=>{console.log(err);})
-    console.log(this.mode);
+    
   }
   getAllNatures(){
     this.marcheService.getNatures()
@@ -101,7 +126,6 @@ export class MarcheComponent implements OnInit {
     this.mode=1;
 	  this.display=0;
     this.marche=new Marche();
-    //this.ngOnInit();
   }
   onEditMarche(id:number){
     this.mode=1;

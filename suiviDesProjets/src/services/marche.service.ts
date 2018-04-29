@@ -14,6 +14,11 @@ export class MarcheService{
     .map(resp=>resp.json());
    }
 
+   getMarchesByProjetId(idProjet:number){
+    return this.http.get("http://localhost:8080/marche/projet?idProjet="+idProjet)
+    .map(resp=>resp.json());
+   }
+
    getMarchesParPage(page:number){
     return this.http.get("http://localhost:8080/marche/getAllMarches?page="+page)
     .map(resp=>resp.json());

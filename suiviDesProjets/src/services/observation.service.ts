@@ -13,6 +13,11 @@ export class ObservationService{
     .map(resp=>resp.json());
    }
 
+   getObservationsByProjet(idProjet:any){
+    return this.http.get("http://localhost:8080/observation/projet?idProjet="+idProjet)
+    .map(resp=>resp.json());
+   }
+
    getObservationsParPage(page:number){
     return this.http.get("http://localhost:8080/observation/getObservations?page="+page)
     .map(resp=>resp.json());

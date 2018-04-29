@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {Http} from '@angular/http';
 import { Router } from '@angular/router';
 import { ObservationService } from '../../services/observation.service';
@@ -16,10 +16,31 @@ export class ObservationComponent implements OnInit {
   pageObservations:any;
   pages:Array<number>;
   currentPage:number=0;
+  @Input() idProjet:string;
 
   constructor(public http:Http,public observationService:ObservationService,public router:Router) { }
 
   ngOnInit() {
+    console.log(this.idProjet);
+    if (this.idProjet != undefined) {
+      this.initFromParent();
+    }else{
+      this.initComponent();
+    }
+  }
+
+  initFromParent(){
+    this.observationService.getObservationsByProjet(this.idProjet)
+    .subscribe(
+      data=>{
+        this.pageObservations=data;
+      this.pages=new Array(data.totalPages);
+      this.currentPage = data.number;
+      } ,err=>{console.log(err);}
+    )
+  }
+  
+  initComponent(){
     this.observationService.getObservations()
     .subscribe(data=>{
       console.log("on init");
@@ -31,7 +52,6 @@ export class ObservationComponent implements OnInit {
     ,err=>{console.log(err);})
     console.log(this.mode);
   }
-
   ajouterObservation(){
     this.observationService.ajouterObservation(this.observation)
     .subscribe(data=>{this.ngOnInit();}
