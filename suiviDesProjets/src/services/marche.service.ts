@@ -44,8 +44,8 @@ export class MarcheService{
     .map(resp=>resp.json());
 }
 
-    chercherMarche(numeroMarche:string){
-        return this.http.get("http://localhost:8080/marche/numero?name="+numeroMarche)
+    chercherMarche(numeroMarche:string,idProjet:number){
+        return this.http.get("http://localhost:8080/marche/numero?name="+numeroMarche+"&idProjet="+idProjet)
         .map(resp=>resp.json());
 
     }

@@ -10,43 +10,19 @@
             <th>Commune</th>
             <th>Montant Programmé</th>
             <th>Secteur</th>
+            <th>Statut</th>
           </tr>
           <tr>
             <td>{{projet.intitule}}</td>
             <td>{{projet.commune}}</td>
             <td>{{projet.montantProgramme}}</td>
             <td>{{projet.secteur?.libelleSecteur}}</td>
+            <td>{{projet.statut?.libelleStatut}}</td>
           </tr>
         </table>
       </div>
     </div>
-        <div class="panel panel-success">
-          <div class="panel-heading">
-            <h5>Liste des marchés</h5>
-          </div>
-          <div class="panel-body">
-              <table class="table table-striped">
-                  <tr>
-                    <th>Numéro Marché</th>
-                    <th>Montant du Marché</th>
-                    <th>Montant des Travaux Réalisés</th>
-                    <th>Délai d'execution</th>
-                    <th>Taux d'avancement</th>
-                    <th>Nature</th>
-                    <th>Entreprise</th>
-                  </tr>
-                  <tr *ngFor="let m of projet.marches">
-                    <td>{{m.numeroMarche}}</td>
-                    <td>{{m.montantMarche}}</td>
-                    <td>{{m.montantTravauxRealises}}</td>
-                    <td>{{m.delaiExecution}}</td>
-                    <td>{{m.tauxAvancement}}</td>
-                    <td>{{m.nature.libelleNature}}</td>
-                    <td>{{m.entreprise.nomEntreprise}}</td>
-                  </tr>
-                </table>
-          </div>
-    </div>
+    <app-marche></app-marche>
         <div class="panel panel-success">
           <div class="panel-heading">
             <h5>Liste des observations</h5>

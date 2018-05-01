@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Marche } from '../../model/model.marche';
 import { MarcheService } from '../../services/marche.service';
 import {Http} from '@angular/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Injectable } from "@angular/core";
 import { Nature } from '../../model/model.nature';
 import { Entreprise } from '../../model/model.entreprise';
@@ -25,13 +25,14 @@ export class MarcheComponent implements OnInit {
   display:number=0;
   nomEntreprise:string;
   entreprises:Array<Entreprise>;
-  @Input() idProjet:string;
+  idProjet:number;
 
   constructor(public http:Http,public marcheService:MarcheService,
-    public projetService:ProjetService ,public router:Router) { }
+    public projetService:ProjetService ,public router:Router, private route:ActivatedRoute) { }
 
   ngOnInit() {
-    console.log(this.idProjet);
+    this.idProjet = Number(this.route.snapshot.paramMap.get('id'));
+    console.log("in marche component: " + this.idProjet + " type: " + typeof(this.idProjet));
     if(this.idProjet != undefined){
       this.initFromParent();
     }else{
@@ -42,7 +43,7 @@ export class MarcheComponent implements OnInit {
   }
 
   initFromParent(){
-    this.marcheService.getMarchesByProjetId(Number(this.idProjet))
+    this.marcheService.getMarchesByProjetId(this.idProjet)
     .subscribe(
       data => {
         console.log(data);
@@ -93,7 +94,8 @@ export class MarcheComponent implements OnInit {
   }
 
   chercher(){
-    this.marcheService.chercherMarche(this.numeroMarche)
+    console.log("dans chercher " + this.idProjet)
+    this.marcheService.chercherMarche(this.numeroMarche, this.idProjet)
     .subscribe(data=>{
       this.pageMarches=data;
       this.pages=new Array(data.totalPages);
@@ -103,16 +105,26 @@ export class MarcheComponent implements OnInit {
   ajouterMarche(){
     this.marche.nature = this.getNatureByName(this.natures, this.libelleNature);
     this.marche.entreprise = this.getEntrepriseByName(this.entreprises, this.nomEntreprise);
+    this.getProjetById(this.idProjet); 
+    console.log(this.marche.projet);
     this.marcheService.ajouterMarche(this.marche)
     .subscribe(data=>{this.ngOnInit();}
         ,err=>{console.log(err);});
+    
     this.mode=0;
     this.display=0;
     this.marche=new Marche();
     
   }
 
-
+  getProjetById(id:number){
+    this.projetService.getProjet(id).subscribe(
+      data => {
+        console.log("projet in marche " + JSON.stringify(data));
+        this.marche.projet = data;
+      },err=>{console.log(err);}
+    )
+  }
   clickOnAjouterMarche(){
     this.mode=0;
 	  this.display=1;
