@@ -90,15 +90,6 @@ export class ProjetsComponent implements OnInit {
 	  this.display=1;
     this.observation=new Observation();
   }
-  ajouterObservation(){
-    this.observationService.ajouterObservation(this.observation)
-    .subscribe(data=>{this.ngOnInit();}
-        ,err=>{console.log(err);});
-    this.mode=0;
-	  this.display=0;
-    this.observation=new Observation();
-
-  }
 
   chercher(){
     

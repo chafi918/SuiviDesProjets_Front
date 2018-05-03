@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
 import { Observation } from "../model/model.observation";
+import { InputObservation } from "../model/model.inputObservation";
  
 
 
@@ -13,8 +14,8 @@ export class ObservationService{
     .map(resp=>resp.json());
    }
 
-   getObservationsByProjet(idProjet:any){
-    return this.http.get("http://localhost:8080/observation/projet?idProjet="+idProjet)
+   getObservationsByProjet(idProjet:number, page:number){
+    return this.http.get("http://localhost:8080/observation/projet?idProjet="+idProjet+"&page="+page)
     .map(resp=>resp.json());
    }
 
@@ -28,7 +29,8 @@ export class ObservationService{
     .map(resp=>resp.json());
    }
 
-   ajouterObservation(observation:Observation){
+   ajouterObservation(observation:InputObservation){
+       console.log(observation);
     return this.http.post("http://localhost:8080/observation/ajout",observation)
     .map(resp=>resp);
    }

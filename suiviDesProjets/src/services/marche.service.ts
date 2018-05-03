@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
 import { Marche } from "../model/model.marche";
+import { InputMarche } from "../model/model.inputMarche";
 
 
 @Injectable()
@@ -14,8 +15,8 @@ export class MarcheService{
     .map(resp=>resp.json());
    }
 
-   getMarchesByProjetId(idProjet:number){
-    return this.http.get("http://localhost:8080/marche/projet?idProjet="+idProjet)
+   getMarchesByProjetId(idProjet:number, page:number){
+    return this.http.get("http://localhost:8080/marche/projet?idProjet="+idProjet+"&page="+page)
     .map(resp=>resp.json());
    }
 
@@ -29,7 +30,8 @@ export class MarcheService{
     .map(resp=>resp.json());
    }
 
-   ajouterMarche(marche:Marche){
+   ajouterMarche(marche:InputMarche){
+       console.log(marche);
     return this.http.post("http://localhost:8080/marche/ajout",marche)
     .map(resp=>resp);
    }

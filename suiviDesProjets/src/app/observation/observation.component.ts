@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {Http} from '@angular/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ObservationService } from '../../services/observation.service';
 import { Observation } from '../../model/model.observation';
+import { InputObservation } from '../../model/model.inputObservation';
 
 @Component({
   selector: 'app-observation',
@@ -16,26 +17,24 @@ export class ObservationComponent implements OnInit {
   pageObservations:any;
   pages:Array<number>;
   currentPage:number=0;
-  @Input() idProjet:string;
+  idProjet:number;
 
-  constructor(public http:Http,public observationService:ObservationService,public router:Router) { }
+  constructor(public http:Http,public observationService:ObservationService,
+    public router:Router, private route:ActivatedRoute) { }
 
   ngOnInit() {
+    this.idProjet = Number(this.route.snapshot.paramMap.get('id'));
     console.log(this.idProjet);
-    if (this.idProjet != undefined) {
-      this.initFromParent();
-    }else{
-      this.initComponent();
-    }
+    this.initFromParent();
   }
 
   initFromParent(){
-    this.observationService.getObservationsByProjet(this.idProjet)
+    this.observationService.getObservationsByProjet(this.idProjet, this.currentPage)
     .subscribe(
       data=>{
         this.pageObservations=data;
-      this.pages=new Array(data.totalPages);
-      this.currentPage = data.number;
+        this.pages=new Array(data.totalPages);
+        this.currentPage = data.number;
       } ,err=>{console.log(err);}
     )
   }
@@ -52,8 +51,12 @@ export class ObservationComponent implements OnInit {
     ,err=>{console.log(err);})
     console.log(this.mode);
   }
+
   ajouterObservation(){
-    this.observationService.ajouterObservation(this.observation)
+    let input:InputObservation = new InputObservation();
+    input.idProjet = this.idProjet;
+    input.observation = this.observation;
+    this.observationService.ajouterObservation(input)
     .subscribe(data=>{this.ngOnInit();}
         ,err=>{console.log(err);});
     this.mode=0;
@@ -86,15 +89,16 @@ export class ObservationComponent implements OnInit {
 
   onDeleteObservation(observation:Observation){
     this.observationService.deleteObservation(observation.idObservation)
-    .subscribe(data=>{  this.pageObservations.content.splice(
-      this.pageObservations.content.indexOf(observation),1
-    );
+    .subscribe(data=>{  
+      this.pageObservations.content.splice(
+      this.pageObservations.content.indexOf(observation),1);
+      this.ngOnInit();
   }
     ,err=>{console.log(err);})
   }
 
   gotoPage(i:number){
-    this.observationService.getObservationsParPage(i)
+    this.observationService.getObservationsByProjet(this.idProjet, i)
     .subscribe(data=>{
       this.pageObservations=data;
       this.pages=new Array(data.totalPages);

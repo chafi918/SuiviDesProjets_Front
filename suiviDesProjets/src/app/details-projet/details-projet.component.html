@@ -1,5 +1,5 @@
 <div class="container spacer">
-    <div class="panel panel-success">
+    <div class="panel panel-success position">
       <div class="panel-heading">
         <h5>Details du projet</h5>
       </div>
@@ -22,32 +22,7 @@
         </table>
       </div>
     </div>
-    <app-marche></app-marche>
-        <div class="panel panel-success">
-          <div class="panel-heading">
-            <h5>Liste des observations</h5>
-          </div>
-          <div class="panel-body">
-              <table class="table table-striped">
-                  <tr>
-                    <th>Observation</th>
-                    <th>Date d'Observation</th>
-                    <th>Utilisateur</th>
-                  </tr>
-                  <tr *ngFor="let o of projet?.observations">
-                    <td>{{o.observation}}</td>
-                    <td>{{o.dateObservation}}</td>
-                    <td>{{o.nomObservant}}</td>
-                  </tr>
-              </table>
-          </div>
-        </div>
-        <div class="panel panel-success">
-            <div class="panel-heading">
-              <h5>Liste des documents</h5>
-            </div>
-            <div class="panel-body">
-              STILL TODO
-            </div>
-          </div>
+    <app-marche class="container spacer"></app-marche>
+    <app-observation></app-observation>
+    <app-document></app-document>
   </div> 

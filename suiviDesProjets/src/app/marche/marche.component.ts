@@ -7,6 +7,7 @@ import { Injectable } from "@angular/core";
 import { Nature } from '../../model/model.nature';
 import { Entreprise } from '../../model/model.entreprise';
 import { ProjetService } from '../../services/projets.service';
+import { InputMarche } from '../../model/model.inputMarche';
 
 @Component({
   selector: 'app-marche',
@@ -33,17 +34,13 @@ export class MarcheComponent implements OnInit {
   ngOnInit() {
     this.idProjet = Number(this.route.snapshot.paramMap.get('id'));
     console.log("in marche component: " + this.idProjet + " type: " + typeof(this.idProjet));
-    if(this.idProjet != undefined){
-      this.initFromParent();
-    }else{
-      this.initComposant();
-    }
+    this.initFromParent();
     this.getAllNatures();
     this.getAllEntreprises();
   }
 
   initFromParent(){
-    this.marcheService.getMarchesByProjetId(this.idProjet)
+    this.marcheService.getMarchesByProjetId(this.idProjet,this.currentPage)
     .subscribe(
       data => {
         console.log(data);
@@ -105,12 +102,13 @@ export class MarcheComponent implements OnInit {
   ajouterMarche(){
     this.marche.nature = this.getNatureByName(this.natures, this.libelleNature);
     this.marche.entreprise = this.getEntrepriseByName(this.entreprises, this.nomEntreprise);
-    this.getProjetById(this.idProjet); 
-    console.log(this.marche.projet);
-    this.marcheService.ajouterMarche(this.marche)
+    let inputMarche:InputMarche = new InputMarche();
+    inputMarche.marche = this.marche;
+    inputMarche.idProjet = this.idProjet;
+    console.log("inputMarché : --- : " + inputMarche);
+    this.marcheService.ajouterMarche(inputMarche)
     .subscribe(data=>{this.ngOnInit();}
         ,err=>{console.log(err);});
-    
     this.mode=0;
     this.display=0;
     this.marche=new Marche();
@@ -124,6 +122,7 @@ export class MarcheComponent implements OnInit {
         this.marche.projet = data;
       },err=>{console.log(err);}
     )
+    return this.marche.projet;
   }
   clickOnAjouterMarche(){
     this.mode=0;
@@ -155,12 +154,13 @@ export class MarcheComponent implements OnInit {
       this.pageMarches.content.splice(
         this.pageMarches.content.indexOf(marche),1
       );
+      this.ngOnInit();
     }
     ,err=>{console.log(err);})
   }
 
   gotoPage(i:number){
-    this.marcheService.getMarchesParPage(i)
+    this.marcheService.getMarchesByProjetId(this.idProjet,i)
     .subscribe(data=>{
       this.pageMarches=data;
       this.pages=new Array(data.totalPages);

@@ -19,7 +19,7 @@ export class ProjetService{
      
    getProjet(id:number){
        console.log("fromService idProjet = " + id);
-    return this.http.get("http://localhost:8080/projet/?id="+id)
+    return this.http.get("http://localhost:8080/projet/"+id)
     .map(resp=>resp.json());
    }
 
