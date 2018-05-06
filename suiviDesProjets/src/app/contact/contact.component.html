@@ -1,4 +1,4 @@
-<div class="container-fluid text-center spacer tableSpacer">
+
   <div class="col-sm-6 position" *ngIf="display==1">
         <div class="navbar-form">
           <div class="panel panel-success">
@@ -27,14 +27,6 @@
                         pattern="^0[0-9]{9}$">
                         <mat-error *ngIf="telephoneT.invalid">Veuillez saisir un numéro de téléphone valide</mat-error>
                     </mat-form-field>
-                    <mat-form-field>
-                      <mat-select placeholder="Entreprise" [(ngModel)]="nomEntreprise" name="entreprise" #entrepriseT="ngModel" required>
-                        <mat-option *ngFor="let entreprise of entreprises" [(value)]="entreprise.nomEntreprise" >
-                            {{ entreprise.nomEntreprise }}
-                        </mat-option>
-                      </mat-select>
-                      <mat-error *ngIf="entrepriseT.invalid">Veuillez choisir une entreprise</mat-error>
-                     </mat-form-field>
                      <button mat-raised-button class="spacerUp" color="primary"  [disabled]="!isValidForm()" (click)="ajouterContact()" style="height:30px;margin: auto;margin-top:20px;" *ngIf="mode==0">Ajouter</button>
                      <button mat-raised-button class="spacerUp" color="primary"  [disabled]="!isValidForm()" (click)="updateContact()" style="height:30px;margin: auto;margin-top:20px;" *ngIf="mode==1">Modifier</button>
               </div>
@@ -42,11 +34,11 @@
       </div>
   </div>
   <div class="col-sm-10" *ngIf="display==0">
-    <div class="navbar-form">
     <div class="panel panel-success">
       <div class="panel-heading">
-        <h5>La liste Des Contacts</h5>
+        <h5>Contacts de l'entreprise</h5>
       </div>
+      <div class="panel-body">
       <div class="rowMenu spacer">
           <button color="primary" class="newEntity innerSpacer" style="height:30px"(click)="clickOnAjouterContact()"> Nouveau Contact</button>
           <div class="navbar-form navbar-right row" >
@@ -61,7 +53,6 @@
           <th>Responsabilité</th>
           <th>Mail</th>
           <th>Téléphone</th>
-          <th>Entreprise</th>
           <th>Modifier</th>
           <th>Supprimer</th>
         </tr>
@@ -70,7 +61,6 @@
           <td>{{c.responsabilite}}</td>
           <td>{{c.mailContact}}</td>
           <td>{{c.telephone}}</td>
-          <td>{{c.entreprise.nomEntreprise}}</td>
           <td><a (click)="onEditContact(c.idContact)">
             <i class="fas fa-edit editIcon cursorElement"></i></a></td>
           <td><a (click)="onDeleteContact(c)">
@@ -78,7 +68,7 @@
         </tr>
     </table>
     <div class="container spacerUp">
-      <ul class="nav nav-pills">
+      <ul class="nav nav-tabs">
         <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages; let i=index">
           <a (click)="gotoPage(i)" class="marge cursorElement">{{i}}</a>
         </li>
@@ -86,4 +76,4 @@
     </div>
     </div>
   </div>
-</div>
+

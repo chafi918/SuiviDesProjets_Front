@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Contact } from '../../model/model.contact';
 import {Http} from '@angular/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ContactService } from '../../services/contact.service';
 import { Entreprise } from '../../model/model.entreprise';
+import { EntrepriseService } from '../../services/entreprise.service';
 
 @Component({
   selector: 'app-contact',
@@ -20,22 +21,37 @@ export class ContactComponent implements OnInit {
   nomContact:string;
   mode:number=0;
   display:number=0;
+  idMarche:any;
+  entreprise:Entreprise;
 
-  constructor(public http:Http,public contactService:ContactService,public router:Router) { }
+  constructor(public http:Http,
+    public contactService:ContactService,
+    public entrepriseService:EntrepriseService,
+    public router:Router,
+    private route:ActivatedRoute) { }
 
   ngOnInit() {
-    this.contactService.getContacts()
+    this.idMarche = Number(this.route.snapshot.paramMap.get('id'));
+    this.getEntrepriseByMarche();
+    this.getContactByMarche();
+    this.getAllEntreprises();
+  }
+
+  getEntrepriseByMarche(){
+    this.entrepriseService.getEntrepriseParMarche(this.idMarche)
     .subscribe(data=>{
-      console.log("on init");
-      console.log(data);
+      console.log("getEntrepriseParMarche: " + data);
+      this.entreprise = data;
+    }, err=>{console.log(err);})
+  }
+
+  getContactByMarche(){
+    this.contactService.getContactByMarcheId(this.idMarche)
+    .subscribe(data=>{
       this.pageContacts=data;
       this.pages=new Array(data.totalPages);
       this.currentPage = data.number;
-      this.getAllEntreprises();
-      this.nomEntreprise = "";
-    }
-    ,err=>{console.log(err);})
-    console.log(this.mode);
+    });
   }
 
   chercher(){
@@ -47,7 +63,7 @@ export class ContactComponent implements OnInit {
   }
 
   ajouterContact(){
-    this.contact.entreprise = this.getEntrepriseByName(this.entreprises, this.nomEntreprise);
+    this.contact.entreprise = this.entreprise;
     console.log(this.contact);
     this.contactService.ajouterContact(this.contact)
     .subscribe(data=>{this.ngOnInit();}
@@ -119,11 +135,10 @@ export class ContactComponent implements OnInit {
   }
 
   isValidForm(){
-    this.contact.entreprise = this.getEntrepriseByName(this.entreprises, this.nomEntreprise);
-    return this.contact.nomContact && this.contact.nomContact.length != 0 
-          && this.contact.entreprise
-          && this.contact.mailContact.match("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
-          && this.contact.telephone.match("^0[0-9]{9}$")
+    return this.contact.nomContact 
+          && this.contact.nomContact.length != 0 
+          && this.contact.mailContact && this.contact.mailContact.match("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
+          && this.contact.telephone && this.contact.telephone.match("^0[0-9]{9}$")
           && this.contact.responsabilite.length != 0;
   }
 }

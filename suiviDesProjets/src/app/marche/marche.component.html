@@ -1,4 +1,4 @@
-<div class="container-fluid text-center spacer">
+
   <div class="position" *ngIf="display==1">
         <div class="navbar-form">
           <div class="panel panel-success">
@@ -13,7 +13,6 @@
                   <mat-form-field>
                       <input matInput placeholder="Numero Marché" [(ngModel)]="marche.numeroMarche" name="numeroMarche" #numeroMarcheV="ngModel" required>
                       <mat-error *ngIf="numeroMarcheV.invalid">Veuillez saisir un numero du marché</mat-error>
-                 
                   </mat-form-field>
                   <mat-form-field>
                     <input matInput placeholder="Montant du Marché" [(ngModel)]="marche.montantMarche" name="montantMarche" #montantMarcheV="ngModel" required >
@@ -47,6 +46,7 @@
                        </mat-select>
                        <mat-error *ngIf="entrepriseV.invalid">Veuillez saisir une entreprise</mat-error>
                     </mat-form-field>
+                   
               </div>
               <button mat-raised-button color="primary" [disabled]="!isValidForm()" (click)="ajouterMarche()" style="height:30px;margin: auto;" *ngIf="mode==0">Ajouter</button>
               <button mat-raised-button color="primary" [disabled]="!isValidForm()" (click)="updateMarche()" style="height:30px;margin: auto;" *ngIf="mode==1">Modifier</button>
@@ -55,6 +55,7 @@
       </div>
   </div>
 <div class="container spacer" *ngIf="display==0">
+    <div class="col-sm-10">
     <div class="panel panel-success">
       <div class="panel-heading">
         <h5>Liste des marchés</h5>
@@ -92,6 +93,9 @@
               <i class="fas fa-edit editIcon cursorElement"></i></a></td>
             <td><a (click)="onDeleteMarche(m)">
               <i class="glyphicon glyphicon-remove cursorElement"></i></a></td>
+              <td>
+                <button type="button" class="btn btn-primary"(click)="onDetailsMarche(m.idMarche)" class="cursorElement">détails</button>
+              </td>
           </tr>
         </table>
         <div class="container spacerUp">
@@ -102,5 +106,5 @@
             </ul>
           </div>
     </div>
-</div>
+    </div>
 </div>

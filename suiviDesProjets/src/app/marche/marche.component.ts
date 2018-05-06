@@ -167,7 +167,10 @@ export class MarcheComponent implements OnInit {
       this.currentPage = data.number;}
     ,err=>{console.log(err);})
   }
-  
+
+  onDetailsMarche(idMarche:number){
+    this.router.navigate(['/detailsMarche/'+idMarche]);
+  }
     isValidForm(){
     this.marche.nature = this.getNatureByName(this.natures, this.libelleNature);
     this.marche.entreprise = this.getEntrepriseByName(this.entreprises, this.nomEntreprise);

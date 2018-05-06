@@ -1,0 +1,61 @@
+<div class="container spacer">
+  <div class="col-sm-10">
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <h5>Details du marché</h5>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-sm-3">Numéro Marché:</label>
+            <div class="col-sm-8">
+              <p class="form-control-static">{{marche.numeroMarche}}</p>
+            </div>
+            <label class="control-label col-sm-3" >Montant du Marché:</label>
+            <div class="col-sm-8">
+              <p class="form-control-static">{{marche.montantMarche}}</p>
+            </div>
+          <label class="control-label col-sm-3" >Montant des Travaux Réalisés:</label>
+          <div class="col-sm-8">
+            <p class="form-control-static">{{marche.montantTravauxRealises}}</p>
+          </div>
+          <label class="control-label col-sm-3" >Délai d'execution:</label>
+          <div class="col-sm-8">
+            <p class="form-control-static">{{marche.delaiExecution}}</p>
+          </div>
+          <label class="control-label col-sm-3" >Taux d'avancement en %:</label>
+          <div class="col-sm-8">
+            <p class="form-control-static">{{marche.tauxAvancement}}</p>
+          </div>
+          <label class="control-label col-sm-3" >Nature:</label>
+          <div class="col-sm-8">
+            <p class="form-control-static">{{marche.nature?.libelleNature}}</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+  <div class="col-sm-10">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h5>Informations sur l'entreprise</h5>
+          </div>
+          <div class="panel-body">
+          <form class="form-horizontal">
+              <div class="form-group">
+                <label class="control-label col-sm-3">Nom de l'entreprise:</label>
+                <div class="col-sm-8">
+                  <p class="form-control-static">{{marche.entreprise?.nomEntreprise}}</p>
+                </div>
+                <label class="control-label col-sm-3">Adresse de l'entreprise:</label>
+                <div class="col-sm-8">
+                  <p class="form-control-static">{{marche.entreprise?.adresseEntreprise}}</p>
+                </div>
+              </div>
+            </form> 
+          </div>
+      </div>
+    </div>
+    <app-contact></app-contact>
+</div> 

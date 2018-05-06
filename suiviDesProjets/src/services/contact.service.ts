@@ -9,6 +9,10 @@ export class ContactService{
 
    }
    
+   getContactByMarcheId(idMarche:any){
+    return this.http.get("http://localhost:8080/contact/marche?idMarche="+idMarche)
+    .map(resp=>resp.json())
+   }
    getContacts(){
     return this.http.get("http://localhost:8080/contact/getContacts")
     .map(resp=>resp.json());
@@ -21,6 +25,11 @@ export class ContactService{
 
    getContact(id:number){
     return this.http.get("http://localhost:8080/contact/"+id)
+    .map(resp=>resp.json());
+   }
+
+   getContactByEntrepriseId(idEntreprise:number){
+    return this.http.get("http://localhost:8080/contact/entreprise?idEntreprise="+idEntreprise)
     .map(resp=>resp.json());
    }
 

@@ -4,6 +4,7 @@ import { EntrepriseService } from '../../services/entreprise.service';
 import {Http} from '@angular/http';
 import { Router } from '@angular/router';
 import { Injectable } from "@angular/core";
+import { InputEntreprise } from '../../model/model.inputEntreprise';
 
 @Injectable()
 @Component({
@@ -19,7 +20,7 @@ export class EntrepriseComponent implements OnInit {
   nomEntreprise:string;
   mode:number=0;
   display:number=0;
-
+  idMarche:any;
   constructor(public http:Http,public entrepriseService:EntrepriseService,public router:Router) { }
 
   ngOnInit() {
@@ -44,11 +45,16 @@ export class EntrepriseComponent implements OnInit {
   }
 
   ajouterEntreprise(){
-    this.entrepriseService.ajouterEntreprise(this.entreprise)
+    let inputEntreprise:InputEntreprise = new InputEntreprise();
+    inputEntreprise.entreprise = this.entreprise;
+    inputEntreprise.idMarche = this.idMarche;
+    console.log("inputMarché : --- : " + inputEntreprise);
+    this.entrepriseService.ajouterEntreprise(inputEntreprise)
     .subscribe(data=>{this.ngOnInit();}
         ,err=>{console.log(err);});
     this.mode=0;
     this.display=0;
+    this.entreprise=new Entreprise();
   }
 
 

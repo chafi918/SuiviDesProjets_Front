@@ -43,6 +43,7 @@ import { MarcheComponent } from './marche/marche.component';
 import { ObservationComponent } from './observation/observation.component';
 import { ObservationService } from '../services/observation.service';
 import { DetailsProjetComponent } from './details-projet/details-projet.component';
+import { DetailsMarcheComponent } from './details-marche/details-marche.component';
 
 
 const appRoutes:Routes=[
@@ -60,6 +61,7 @@ const appRoutes:Routes=[
   {path:'marches',component:MarcheComponent},
   {path:'observations',component:ObservationComponent},
   {path:'detailsProjet/:id',component:DetailsProjetComponent},
+  {path:'detailsMarche/:id',component:DetailsMarcheComponent},
   {path:'',redirectTo:'/projets',pathMatch:'full'}
 ];
 
@@ -81,7 +83,8 @@ const appRoutes:Routes=[
     DocumentComponent,
     MarcheComponent,
     ObservationComponent,
-    DetailsProjetComponent
+    DetailsProjetComponent,
+    DetailsMarcheComponent
   ],
   imports: [
     BrowserModule,HttpModule,RouterModule.forRoot(appRoutes),FormsModule,

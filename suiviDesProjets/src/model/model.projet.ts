@@ -6,6 +6,8 @@ export class Projet{
     intitule:string;
     montantProgramme:number;
     commune:string;
+    province:string;
+    tauxAvancement:number;
     dateOP:Date;
     chargeDuProjet:string;
     estProjetRoyal:boolean;

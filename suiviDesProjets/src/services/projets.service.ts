@@ -41,5 +41,15 @@ export class ProjetService{
     getAllSecteurs(){
         return this.http.get("http://localhost:8080/admin/secteurs")
         .map(resp=>resp.json());
-        }
+    }
+
+    updateProjet(projet:Projet){
+        return this.http.put("http://localhost:8080/projet/"+projet.idProjet,projet)
+        .map(resp=>resp.json());
+    }
+
+    deleteProjet(id:number){
+        return this.http.delete("http://localhost:8080/projet/"+id)
+        .map(resp=>resp.json());
+       }
 }

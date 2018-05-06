@@ -1,27 +1,63 @@
 <div class="container spacer">
-    <div class="panel panel-success position">
+    <div class="col-sm-10">
+    <div class="panel panel-success">
       <div class="panel-heading">
         <h5>Details du projet</h5>
       </div>
       <div class="panel-body">
-        <table class="table table-striped">
-          <tr>
-            <th>Intitulé</th>
-            <th>Commune</th>
-            <th>Montant Programmé</th>
-            <th>Secteur</th>
-            <th>Statut</th>
-          </tr>
-          <tr>
-            <td>{{projet.intitule}}</td>
-            <td>{{projet.commune}}</td>
-            <td>{{projet.montantProgramme}}</td>
-            <td>{{projet.secteur?.libelleSecteur}}</td>
-            <td>{{projet.statut?.libelleStatut}}</td>
-          </tr>
-        </table>
+          <form class="form-horizontal">
+              <div class="form-group">
+                <label class="control-label col-sm-3">Intitulé:</label>
+                <div class="col-sm-8">
+                  <p class="form-control-static">{{projet.intitule}}</p>
+                </div>
+                <label class="control-label col-sm-3">Commune:</label>
+                <div class="col-sm-8">
+                  <p class="form-control-static">{{projet.commune}}</p>
+                </div>
+                <label class="control-label col-sm-3">Province:</label>
+                <div class="col-sm-8">
+                  <p class="form-control-static">{{projet.province}}</p>
+                </div>
+                <label class="control-label col-sm-3">Taux d'Avancement:</label>
+                <div class="progress col-sm-7">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" 
+                    [style.width]="projet.tauxAvancement + '%'">
+                        {{projet.tauxAvancement}}%</div>
+                  </div>
+                <label class="control-label col-sm-3">Montant Programmé</label>
+                <div class="col-sm-8">
+                  <p class="form-control-static">{{projet.montantProgramme}}</p>
+                </div>
+                <label class="control-label col-sm-3">Secteur</label>
+                <div class="col-sm-8">
+                  <p class="form-control-static">{{projet.secteur?.libelleSecteur}}</p>
+                </div>
+                <label class="control-label col-sm-3">Statut</label>
+                <div class="col-sm-8">
+                  <p class="form-control-static">{{projet.statut?.libelleStatut}}</p>
+                </div>
+                <label class="control-label col-sm-3">Date d'ouverture des plis</label>
+                <div class="col-sm-8">
+                  <p class="form-control-static">{{projet.dateOP}}</p>
+                </div>
+                <label class="control-label col-sm-3">Chargé du projet</label>
+                <div class="col-sm-8">
+                  <p class="form-control-static">{{projet.chargeDuProjet}}</p>
+                </div>
+                <label class="control-label col-sm-3">Date d'Appel d'offre</label>
+                <div class="col-sm-8">
+                  <p class="form-control-static">{{projet.dateAO}}</p>
+                </div>
+                <label class="control-label col-sm-3">Date commencement des travaux</label>
+                <div class="col-sm-8">
+                  <p class="form-control-static">{{projet.dateCommTravaux}}</p>
+                </div>
+            </div>
+          </form>
       </div>
     </div>
+  </div>
     <app-marche class="container spacer"></app-marche>
     <app-observation></app-observation>
     <app-document></app-document>

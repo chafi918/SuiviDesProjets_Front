@@ -91,6 +91,35 @@ export class ProjetsComponent implements OnInit {
     this.observation=new Observation();
   }
 
+  
+  updateProjet(){
+    this.projetService.updateProjet(this.projet)
+    .subscribe(data=>{this.ngOnInit();},err=>{console.log(err);});
+    this.mode=1;
+	  this.display=0;
+    this.projet=new Projet();
+  }
+  onEditProjet(id:number){
+    this.mode=1;
+	  this.display=1;
+    this.projetService.getProjet(id)
+    .subscribe(data=>{this.projet=data; 
+      this.libelleStatut = this.projet.statut.libelleStatut;
+      this.libelleSecteur = this.projet.secteur.libelleSecteur;console.log(data);}
+    ,err=>{console.log(err);})
+  }
+
+  onDeleteProjet(projet:Projet){
+    this.projetService.deleteProjet(projet.idProjet)
+    .subscribe(data=>{
+      this.pageProjets.content.splice(
+        this.pageProjets.content.indexOf(projet),1
+      );
+      this.ngOnInit();
+    }
+    ,err=>{console.log(err);})
+  }
+
   chercher(){
     
   }
