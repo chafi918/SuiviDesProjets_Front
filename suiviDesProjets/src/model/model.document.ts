@@ -1,10 +1,12 @@
 import { Type } from "./model.type";
+import { Projet } from "./model.projet";
 
 export class Document{
-    idDocument:number;
+    idDocument?:number;
     nomDocument:string;
     dateAjout:Date;
-    contenu:File;
+    contenu:Blob;
     chargeurDocument:string;
     type:Type;
+    projet:Projet;
 }
