@@ -7,21 +7,21 @@ import { ProjetsComponent } from './projets/projets.component';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 import { ProjetService } from '../services/projets.service';
-import { FormsModule , ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponentComponent } from './header-component/header-component.component';
 import { FooterComponentComponent } from './footer-component/footer-component.component';
 import { UserComponent } from './user/user.component';
 import { UserService } from '../services/user.service';
 import { DivisionComponent } from './division/division.component';
 import { DivisionService } from '../services/division.service';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatIconModule} from '@angular/material/icon';
-import {MatSelectModule} from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatCheckboxModule } from '@angular/material';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { SecteurComponent } from './secteur/secteur.component';
 import { SecteurService } from '../services/secteur.service';
 import { StatutComponent } from './statut/statut.component';
@@ -44,7 +44,7 @@ import { ObservationComponent } from './observation/observation.component';
 import { ObservationService } from '../services/observation.service';
 import { DetailsProjetComponent } from './details-projet/details-projet.component';
 import { DetailsMarcheComponent } from './details-marche/details-marche.component';
-
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes:Routes=[
   {path:'projets', component:ProjetsComponent},
@@ -87,12 +87,12 @@ const appRoutes:Routes=[
     DetailsMarcheComponent
   ],
   imports: [
-    BrowserModule,HttpModule,RouterModule.forRoot(appRoutes),FormsModule,
+    BrowserModule, HttpModule, RouterModule.forRoot(appRoutes), FormsModule,
     BrowserAnimationsModule, MatToolbarModule, MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
-    MatPaginatorModule, MatIconModule, MatSelectModule, ReactiveFormsModule
+    MatPaginatorModule, MatIconModule, MatSelectModule, ReactiveFormsModule, HttpClientModule
   ],
-  providers: [ProjetService, UserService,DivisionService,SecteurService,StatutService,ProfilService,TypeDocService,
-    ContactService,NatureService,MarcheService,EntrepriseService, DocumentService,ObservationService],
+  providers: [ProjetService, UserService, DivisionService, SecteurService, StatutService, ProfilService, TypeDocService,
+    ContactService, NatureService, MarcheService, EntrepriseService, DocumentService, ObservationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ObservationService } from '../../services/observation.service';
 import { Observation } from '../../model/model.observation';
 import { InputObservation } from '../../model/model.inputObservation';
+import { ProjetService } from '../../services/projets.service';
 
 @Component({
   selector: 'app-observation',
@@ -11,7 +12,7 @@ import { InputObservation } from '../../model/model.inputObservation';
   styleUrls: ['./observation.component.css']
 })
 export class ObservationComponent implements OnInit {
-  observation:Observation;
+  observation:Observation = new Observation();
   mode:number=0;
   display:number=0;
   pageObservations:any;
@@ -20,7 +21,7 @@ export class ObservationComponent implements OnInit {
   idProjet:number;
 
   constructor(public http:Http,public observationService:ObservationService,
-    public router:Router, private route:ActivatedRoute) { }
+    public router:Router, private route:ActivatedRoute, public projetService:ProjetService) { }
 
   ngOnInit() {
     this.idProjet = Number(this.route.snapshot.paramMap.get('id'));
@@ -64,6 +65,14 @@ export class ObservationComponent implements OnInit {
     this.observation=new Observation();
   }
 
+  associerProjet(){
+    this.projetService.getProjet(this.idProjet)
+    .subscribe(data=>{
+      console.log(data);
+      this.observation.projet = data;
+    }, err=>{console.log(err);})
+  }
+  
   clickOnAjouterObservation(){
     this.mode=0;
 	  this.display=1;

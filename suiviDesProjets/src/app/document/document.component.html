@@ -1,10 +1,76 @@
-<div class="container spacer">
-    <div class="panel panel-success position">
-      <div class="panel-heading">
-        <h5>Details du projet</h5>
+<div class="container-fluid text-center spacer">
+    <div class="position" *ngIf="display==1">
+          <div class="navbar-form">
+            <div class="panel panel-success">
+              <div class="panel-heading" *ngIf="mode==0">
+                <h5>Ajouter un document</h5>
+              </div>
+              <div class="panel-heading" *ngIf="mode==1">
+                  <h5>Modifier un document </h5>
+                </div>
+                <div class="inputForm spacer" (keyup)="isValidForm()">
+                    <mat-form-field>
+                        <input matInput placeholder="Titre du document" [(ngModel)]="document.nomDocument" name="name" #nameV="ngModel"> 
+                    </mat-form-field>
+                    <input type="file" (change)="onFileSelected($event)" required>
+                  <mat-form-field>
+                    <input matInput placeholder="Utilisateur" [(ngModel)]="document.chargeurDocument" name="chargeurDocument" #chargeurDocumentV="ngModel" required> 
+                    <mat-error *ngIf="chargeurDocumentV.invalid">Veuillez saisir un nom</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-select placeholder="Type Documnet" [(ngModel)]="libelleType" name="type" #type="ngModel" required>
+                      <mat-option *ngFor="let type of types" [(value)]="type.libelleType" >
+                          {{ type.libelleType }}
+                      </mat-option>
+                     </mat-select>
+                     <mat-error *ngIf="type.invalid">Veuillez choisir un type pour le document</mat-error>
+                   </mat-form-field>
+                </div>
+                <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="uploadDocument()" style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button>
+                <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="updateDocument()" style="height:30px;margin: 20px;" *ngIf="mode==1">Modifier</button>
+            </div>
+        </div>
+    </div>
+    <div class="position" *ngIf="display==0">
+      <div class="navbar-form">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <h5>Liste des documents</h5>
+        </div>
+        <div class="rowMenu spacer">
+            <button color="primary" class="newEntity innerSpacer" style="height:30px"(click)="clickOnAjouterDocument()"> Nouveau document</button>
+        </div>
+      <table class="table table-striped">
+          <tr>
+            <th>Titre document</th>
+            <th>Chargeur du document</th>
+            <th>Date d'ajout</th>
+            <th>Type du document</th>
+            <th>Télécharger</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+          </tr>
+          <tr *ngFor="let d of documentPage?.content">
+            <td>{{d.nomDocument}}</td>
+            <td>{{d.chargeurDocument}}</td>
+            <td>{{d.dateAjout}}</td>
+            <td>{{d.type.libelleType}}</td>
+            <td><a (click)="onFileDownload($event, d)">
+                <i class="fas fa-download cursorElement"></i></a></td>
+            <td><a (click)="onEditDocument(d.idDocument)">
+              <i class="fas fa-edit editIcon cursorElement"></i></a></td>
+            <td><a (click)="onDeleteDocument(d)">
+              <i class="glyphicon glyphicon-remove cursorElement"></i></a></td>
+          </tr>
+      </table>
+      <div class="container spacerUp">
+        <ul class="nav nav-pills">
+          <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages; let i=index">
+            <a (click)="gotoPage(i)" class="marge cursorElement">{{i}}</a>
+          </li>
+        </ul>
       </div>
-      <div class="panel-body">
-        TODO!
       </div>
+    </div>
+    </div>
   </div>
-</div>

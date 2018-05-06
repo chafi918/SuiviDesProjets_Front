@@ -34,21 +34,7 @@ export class TypeDocumentComponent implements OnInit {
     ,err=>{console.log(err);})
     console.log(this.mode);
   }
-
-  initializeComponent(mode=0){
-    this.mode=0;
-    this.typeDocService.getTypes()
-    .subscribe(data=>{
-      console.log("on init");
-      console.log(data);
-      this.pageTypes=data;
-      this.pages=new Array(data.totalPages);
-      this.currentPage = data.number;
-    }
-    ,err=>{console.log(err);})
-    console.log(mode);
-  }
-
+  
   chercher(){
     this.typeDocService.chercherType(this.libelleType)
     .subscribe(data=>{
