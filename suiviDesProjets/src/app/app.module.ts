@@ -45,6 +45,8 @@ import { ObservationService } from '../services/observation.service';
 import { DetailsProjetComponent } from './details-projet/details-projet.component';
 import { DetailsMarcheComponent } from './details-marche/details-marche.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ReferentielDocumentComponent } from './referentiel-document/referentiel-document.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 const appRoutes:Routes=[
   {path:'projets', component:ProjetsComponent},
@@ -62,6 +64,7 @@ const appRoutes:Routes=[
   {path:'observations',component:ObservationComponent},
   {path:'detailsProjet/:id',component:DetailsProjetComponent},
   {path:'detailsMarche/:id',component:DetailsMarcheComponent},
+  {path:'referentielDocument', component:ReferentielDocumentComponent},
   {path:'',redirectTo:'/projets',pathMatch:'full'}
 ];
 
@@ -84,12 +87,13 @@ const appRoutes:Routes=[
     MarcheComponent,
     ObservationComponent,
     DetailsProjetComponent,
-    DetailsMarcheComponent
+    DetailsMarcheComponent,
+    ReferentielDocumentComponent
   ],
   imports: [
     BrowserModule, HttpModule, RouterModule.forRoot(appRoutes), FormsModule,
     BrowserAnimationsModule, MatToolbarModule, MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
-    MatPaginatorModule, MatIconModule, MatSelectModule, ReactiveFormsModule, HttpClientModule
+    MatPaginatorModule, MatIconModule, MatSelectModule, ReactiveFormsModule, HttpClientModule, MatExpansionModule
   ],
   providers: [ProjetService, UserService, DivisionService, SecteurService, StatutService, ProfilService, TypeDocService,
     ContactService, NatureService, MarcheService, EntrepriseService, DocumentService, ObservationService],

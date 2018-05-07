@@ -1,0 +1,34 @@
+<div class="container-fluid text-center spacer" style="margin-top:50px;">
+    <mat-accordion multi="true">
+        <mat-expansion-panel *ngFor="let p of projects"
+        (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{p}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-accordion multi="true">
+              <mat-expansion-panel *ngFor="let t of types">
+                <mat-expansion-panel-header *ngIf="documentDeProjetEtType(p,t)!=undefined && documentDeProjetEtType(p,t).length!=0">
+                  {{t}}
+                </mat-expansion-panel-header>
+                <table class="table table-striped">
+                    <tr>
+                      <th>Nom document</th>
+                      <th>Chargeur document</th>
+                      <th>Date</th>
+                      <th>Telecharger</th>
+                    </tr>
+                    <tr *ngFor="let document of documentDeProjetEtType(p,t)">
+                        <td>{{document.nomDocument}}</td>
+                        <td>{{document.chargeurDocument}}</td>
+                        <td>{{document.dateAjout}}</td>
+                        <td><a (click)="onFileDownload($event, document)">
+                            <i class="fas fa-download cursorElement"></i></a></td>
+                      </tr>
+                </table>
+              </mat-expansion-panel>
+            </mat-accordion>
+        </mat-expansion-panel>
+      </mat-accordion>
+</div>

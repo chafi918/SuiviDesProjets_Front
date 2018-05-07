@@ -10,7 +10,10 @@ export class DocumentService{
     constructor(public http:Http){
 
     }
-
+    getDocumentsMap(){
+        return this.http.get("http://localhost:8080/document/documentsMap")
+        .map(res=>res.json());
+    }
     deleteDocument(id:number){
         return this.http.delete("http://localhost:8080/document/"+id)
     .map(resp=>resp.json());

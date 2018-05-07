@@ -8,6 +8,7 @@ import { TypeDocService } from '../../services/typeDoc.service';
 import { ActivatedRoute } from '@angular/router';
 import { saveAs as importedSaveAs } from "file-saver";
 import 'rxjs/Rx';
+import { Buffer } from 'buffer';
 
 
 @Component({
@@ -36,8 +37,8 @@ export class DocumentComponent implements OnInit {
     this.idProjet = Number(this.route.snapshot.paramMap.get('id'));
     this.getAllTypes();
     this.initComponentFromProjectDetails();
-
   }
+
   initComponentFromProjectDetails() {
     this.documentService.getDocumentsParProjet(this.idProjet, this.currentPage)
       .subscribe(
@@ -107,14 +108,17 @@ export class DocumentComponent implements OnInit {
 	  this.display=0;
     this.document=new Document();
   }
+  
   onFileDownload(event, document) {
     console.log(event);
-    console.log(document.contenu);
-    var blob = new Blob([document.contenu]);
-    console.log("blob: " + blob);
-    var url = window.URL.createObjectURL(blob);
-    //window.open(url);
-    importedSaveAs(blob, document.nomDocument);
+    //console.log(document.contenu);
+    var buffer = new Buffer( document.contenu );
+    var bufferBase64 = buffer.toString('base64');
+    console.log("bufferBase64: " + bufferBase64)
+    var url = "data:application/octet-stream;charset=utf-8;base64,bW9uIGNvZXVyIGVzdCBlbiBwYXlzIGRlcyBtZXJ2ZWlsbGVzIC4uLg=="
+    //"data:image/png;base64,"+document.contenu;
+    window.open(url);
+    //importedSaveAs(blob, document.nomDocument);
   }
 
   onDeleteDocument(document: Document) {
