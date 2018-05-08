@@ -41,6 +41,10 @@ export class ContactComponent implements OnInit {
     }
     this.getAllEntreprises();
   }
+  retourAuComposant(){
+    this.mode=0;
+    this.display=0;
+  }
 
   defaultInit() {
     this.contactService.getContacts()
@@ -174,7 +178,7 @@ export class ContactComponent implements OnInit {
     return this.contact.nomContact
       && this.contact.nomContact.length != 0
       && this.contact.mailContact && this.contact.mailContact.match("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
-      && this.contact.telephone
+      && this.contact.telephone  && this.contact.telephone.match("^0{1}[0-9]{9}$")
       && this.contact.responsabilite.length != 0;
   }
 }

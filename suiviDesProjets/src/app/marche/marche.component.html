@@ -57,9 +57,9 @@
             </a>
         </div>
       </div>
-      <button mat-raised-button color="primary" [disabled]="!isValidForm()" (click)="ajouterMarche()" style="height:30px;margin: auto;"
+      <button mat-raised-button color="primary" [disabled]="!isValidForm()" (click)="ajouterMarche()" style="height:30px;width:30px;margin: auto;"
         *ngIf="mode==0">Ajouter</button>
-      <button mat-raised-button color="primary" [disabled]="!isValidForm()" (click)="updateMarche()" style="height:30px;margin: auto;"
+      <button mat-raised-button color="primary" [disabled]="!isValidForm()" (click)="updateMarche()" style="height:30px;width:30px;margin: auto;"
         *ngIf="mode==1">Modifier</button>
     </div>
   </div>

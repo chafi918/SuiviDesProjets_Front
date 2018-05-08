@@ -31,11 +31,11 @@
         </mat-select>
         <mat-error *ngIf="entrepriseT.invalid">Veuillez choisir une entreprise</mat-error>
       </mat-form-field>
-      <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="ajouterContact()" style="height:30px;margin: auto;margin-top:20px;"
+      <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="ajouterContact()" style="height:30px;width:30px;margin: auto;margin-top:20px;"
         *ngIf="mode==0">Ajouter</button>
-      <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="updateContact()" style="height:30px;margin: auto;margin-top:20px;"
+      <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="updateContact()" style="height:30px;width:30px;margin: auto;margin-top:20px;"
         *ngIf="mode==1">Modifier</button>
-      <button mat-raised-button class="spacerUp" color="primary" (click)="retourAuComposant()" style="height:40px;margin: 20px;">Retourner</button>
+      <button mat-raised-button class="spacerUp" color="primary" (click)="retourAuComposant()" style="height:40px;width:30px;margin: 20px;">Retourner</button>
     </div>
   </div>
 </div>
