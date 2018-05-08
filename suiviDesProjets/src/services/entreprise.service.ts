@@ -33,6 +33,10 @@ export class EntrepriseService{
     return this.http.post("http://localhost:8080/entreprise/ajout",entreprise)
     .map(resp=>resp);
    }
+   ajoutEntreprise(entreprise:Entreprise){
+    return this.http.post("http://localhost:8080/entreprise/ajout",entreprise)
+    .map(resp=>resp);
+   }
 
     updateEntreprise(entreprise:Entreprise){
     return this.http.put("http://localhost:8080/entreprise/"+entreprise.idEntreprise,entreprise)

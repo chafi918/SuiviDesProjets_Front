@@ -30,7 +30,7 @@ export class DocumentService{
     uploadDocument(document:InputDocument){
         console.log(document);
         return this.http.post("http://localhost:8080/document/ajout",document)
-        .map(resp=>resp.json());
+        .map(resp=>resp);
     }
 
     updateDocument(document:Document){

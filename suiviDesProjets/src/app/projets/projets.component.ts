@@ -28,6 +28,7 @@ export class ProjetsComponent implements OnInit {
    secteurs:Array<Secteur>;
    statuts:Array<Statut>;
    observation:Observation=new Observation();
+   critere:string= "intitule";
   constructor(public http:Http,public router:Router,public projetService:ProjetService,public observationService:ObservationService) { }
 
   ngOnInit() {
@@ -121,6 +122,15 @@ export class ProjetsComponent implements OnInit {
   }
 
   chercher(){
+    console.log("critére de recherche: " + this.critere);
+    console.log("mc de recherche: " + this.motCle);
+    this.projetService.chercherProjet(this.critere,this.motCle)
+    .subscribe(data=>{
+      console.log(data)
+      this.pageProjets=data;
+      this.pages=new Array(data.totalPages);
+      this.currentPage = data.number;
+    },err=>{console.log(err);})
     
   }
 

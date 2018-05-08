@@ -8,6 +8,7 @@ import { Nature } from '../../model/model.nature';
 import { Entreprise } from '../../model/model.entreprise';
 import { ProjetService } from '../../services/projets.service';
 import { InputMarche } from '../../model/model.inputMarche';
+import { EntrepriseService } from '../../services/entreprise.service';
 
 @Component({
   selector: 'app-marche',
@@ -27,9 +28,12 @@ export class MarcheComponent implements OnInit {
   nomEntreprise:string;
   entreprises:Array<Entreprise>;
   idProjet:number;
+  entreprise:Entreprise=new Entreprise();
 
   constructor(public http:Http,public marcheService:MarcheService,
-    public projetService:ProjetService ,public router:Router, private route:ActivatedRoute) { }
+    public projetService:ProjetService ,
+    public entrepriseService:EntrepriseService,
+    public router:Router, private route:ActivatedRoute) { }
 
   ngOnInit() {
     this.idProjet = Number(this.route.snapshot.paramMap.get('id'));
@@ -183,5 +187,24 @@ export class MarcheComponent implements OnInit {
             && this.marche.entreprise;
   }
 
+  ajouterEntreprise(){
+    this.entrepriseService.ajoutEntreprise(this.entreprise)
+    .subscribe(data=>{this.ngOnInit();}
+        ,err=>{console.log(err);});
+    this.mode=0;
+    this.display=1;
+  }
 
+  
+  clickOnAjouterEntreprise(){
+    this.mode=0;
+    this.display=3;
+    this.entreprise=new Entreprise();
+  }
+
+  isValidFormEntreprise(){
+    return this.entreprise.nomEntreprise && this.entreprise.adresseEntreprise
+    && this.entreprise.nomEntreprise.length !=0
+    && this.entreprise.adresseEntreprise.length !=0;
+  }
 }

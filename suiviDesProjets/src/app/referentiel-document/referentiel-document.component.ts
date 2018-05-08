@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ProjetService } from '../../services/projets.service';
 import { DocumentService } from '../../services/document.service';
 import { Document } from '../../model/model.document';
-
+import {Buffer} from 'buffer';
 @Component({
   selector: 'app-referentiel-document',
   templateUrl: './referentiel-document.component.html',

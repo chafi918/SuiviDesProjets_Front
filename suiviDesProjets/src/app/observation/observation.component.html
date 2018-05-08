@@ -1,6 +1,4 @@
-<div class="container-fluid text-center spacer">
-  <div class="position" *ngIf="display==1">
-        <div class="navbar-form">
+ <div class="col-sm-10" *ngIf="display==1">
           <div class="panel panel-success">
             <div class="panel-heading" *ngIf="mode==0">
               <h5>Ajouter une observation</h5>
@@ -25,10 +23,8 @@
               <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="ajouterObservation()" style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button>
               <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="updateObservation()" style="height:30px;margin: 20px;" *ngIf="mode==1">Modifier</button>
           </div>
-      </div>
   </div>
-  <div class="position" *ngIf="display==0">
-    <div class="navbar-form">
+  <div class="col-sm-10" *ngIf="display==0">
     <div class="panel panel-success">
       <div class="panel-heading">
         <h5>Liste des observations</h5>
@@ -56,7 +52,7 @@
         </tr>
     </table>
     <div class="container spacerUp">
-      <ul class="nav nav-pills">
+      <ul class="nav nav-tabs">
         <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages; let i=index">
           <a (click)="gotoPage(i)" class="marge cursorElement">{{i}}</a>
         </li>
@@ -64,5 +60,3 @@
     </div>
     </div>
   </div>
-  </div>
-</div>

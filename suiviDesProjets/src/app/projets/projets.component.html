@@ -8,7 +8,7 @@
             <div class="panel-heading" *ngIf="mode==1">
                 <h5>Modifier un projet</h5>
               </div>
-              <div class="inputForm sapcer spacerUp" (keyup)="isValidForm()">
+              <div class="inputForm spacer spacerUp" (keyup)="isValidForm()">
                   <mat-form-field>
                       <input matInput placeholder="Intitulé" [(ngModel)]="projet.intitule" name="nom" #nom="ngModel" required>
                       <mat-error *ngIf="nom.invalid">Veuillez saisir l'intitulé du projet</mat-error>
@@ -85,7 +85,7 @@
                     <div></div>
                   <div class="selectRecherche">
                       <mat-form-field>
-                          <mat-select placeholder="Critére de recherche">
+                          <mat-select placeholder="Critére de recherche" [(ngModel)]="critere" >
                             <mat-option value="intitule">Intitulé</mat-option>
                             <mat-option value="statut">Statut</mat-option>
                             <mat-option value="secteur">Secteur</mat-option>

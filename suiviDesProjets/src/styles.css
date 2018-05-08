@@ -29,8 +29,8 @@ body {
  .newEntity{
    float: left;
    font-size: small;
-   background-color: rgb(71, 117, 188, 0.92);
-   -webkit-text-fill-color: rgb(245, 241, 239)
+   background-color: rgb(223, 240, 216);
+   -webkit-text-fill-color: rgb(53, 101, 49);
  }
 
 .marginElement{

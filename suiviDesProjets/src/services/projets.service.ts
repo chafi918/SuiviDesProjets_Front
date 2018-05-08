@@ -51,5 +51,11 @@ export class ProjetService{
     deleteProjet(id:number){
         return this.http.delete("http://localhost:8080/projet/"+id)
         .map(resp=>resp.json());
-       }
+    }
+
+    chercherProjet(critere:string,motCle:string){
+        return this.http.get("http://localhost:8080/projet/recherche?critere="+critere+"&mc="+motCle)
+        .map(resp=>resp.json());
+
+    }
 }
