@@ -44,12 +44,13 @@ export class EntrepriseComponent implements OnInit {
     },err=>{console.log(err);})
   }
 
+  retourAuComposant(){
+    this.mode=0;
+    this.display=0;
+  }
+  
   ajouterEntreprise(){
-    let inputEntreprise:InputEntreprise = new InputEntreprise();
-    inputEntreprise.entreprise = this.entreprise;
-    inputEntreprise.idMarche = this.idMarche;
-    console.log("inputMarché : --- : " + inputEntreprise);
-    this.entrepriseService.ajouterEntreprise(inputEntreprise)
+    this.entrepriseService.ajoutEntreprise(this.entreprise)
     .subscribe(data=>{this.ngOnInit();}
         ,err=>{console.log(err);});
     this.mode=0;

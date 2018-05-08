@@ -100,6 +100,11 @@ export class SecteurComponent implements OnInit {
     ,err=>{console.log(err);})
   }
 
+  retourAuComposant(){
+    this.mode=0;
+    this.display=0;
+  }
+  
   onDeleteSecteur(secteur:Secteur){
     this.secteurService.deleteSecteur(secteur.idSecteur)
     .subscribe(data=>{

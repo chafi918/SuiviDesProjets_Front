@@ -50,7 +50,10 @@ export class TypeDocumentComponent implements OnInit {
     this.mode=0;
     this.display=0;
   }
-
+  retourAuComposant(){
+    this.mode=0;
+    this.display=0;
+  }
 
   clickOnAjouterType(){
     this.mode=0;

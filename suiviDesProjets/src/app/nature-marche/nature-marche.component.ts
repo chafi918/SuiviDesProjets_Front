@@ -56,6 +56,11 @@ export class NatureMarcheComponent implements OnInit {
     this.nature=new Nature();
   }
 
+  retourAuComposant(){
+    this.mode=0;
+    this.display=0;
+  }
+  
   updateNature(){
     this.natureService.updateNature(this.nature)
     .subscribe(data=>{this.ngOnInit();},err=>{console.log(err);});

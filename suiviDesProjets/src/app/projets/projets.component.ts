@@ -133,7 +133,10 @@ export class ProjetsComponent implements OnInit {
     },err=>{console.log(err);})
     
   }
-
+  retourAuComposant(){
+    this.mode=0;
+    this.display=0;
+  }
   gotoPage(i:number){
     this.projetService.getProjetsParPage(i)
     .subscribe(data=>{

@@ -29,6 +29,11 @@ export class ObservationComponent implements OnInit {
     this.initFromParent();
   }
 
+  retourAuComposant(){
+    this.mode=0;
+    this.display=0;
+  }
+  
   initFromParent(){
     this.observationService.getObservationsByProjet(this.idProjet, this.currentPage)
     .subscribe(

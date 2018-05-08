@@ -108,7 +108,11 @@ export class StatutComponent implements OnInit {
       this.currentPage = data.number;}
     ,err=>{console.log(err);})
   }
-
+  retourAuComposant(){
+    this.mode=0;
+    this.display=0;
+  }
+  
   isValidForm(){
     return this.statut.libelleStatut && this.statut.libelleStatut.length != 0;
   }

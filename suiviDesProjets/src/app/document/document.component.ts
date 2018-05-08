@@ -131,6 +131,11 @@ export class DocumentComponent implements OnInit {
         , err => { console.log(err); })
   }
 
+  retourAuComposant(){
+    this.mode=0;
+    this.display=0;
+  }
+  
   onEditDocument(id: number) {
     this.mode = 1;
     this.display = 1;

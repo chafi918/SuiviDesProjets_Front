@@ -152,6 +152,10 @@ export class MarcheComponent implements OnInit {
     ,err=>{console.log(err);})
   }
 
+  retourAuComposant(){
+    this.mode=0;
+    this.display=0;
+  }
   onDeleteMarche(marche:Marche){
     this.marcheService.deleteMarche(marche.idMarche)
     .subscribe(data=>{

@@ -65,7 +65,11 @@ export class DivisionComponent implements OnInit {
     
   }
 
-
+  retourAuComposant(){
+    this.mode=0;
+    this.display=0;
+  }
+  
   clickOnAjouterDivision(){
     this.mode=0;
     this.display=1;

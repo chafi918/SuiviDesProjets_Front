@@ -79,6 +79,11 @@ utilisateur:Utilisateur=new Utilisateur();
     }
   }
 
+  retourAuComposant(){
+    this.mode=0;
+    this.display=0;
+  }
+  
   getDivisionByName(divisions, libelleDivision){
     for (let index = 0; index < divisions.length; index++) {
       if (divisions[index].libelleDivision === libelleDivision) {

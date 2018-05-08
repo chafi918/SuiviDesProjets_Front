@@ -16,6 +16,7 @@
               </div>
               <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="ajouterProfil()" style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button>
               <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="updateProfil()" style="height:30px;margin: 20px;" *ngIf="mode==1">Modifier</button>
+              <button mat-raised-button class="spacerUp" color="primary" (click)="retourAuComposant()" style="height:40px;margin: 20px;">Retourner</button>
           </div>
       </div>
   </div>

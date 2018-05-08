@@ -86,6 +86,11 @@ export class ProfilComponent implements OnInit {
     ,err=>{console.log(err);})
   }
 
+  retourAuComposant(){
+    this.mode=0;
+    this.display=0;
+  }
+  
   gotoPage(i:number){
     this.profilService.getProfilsParPage(i)
     .subscribe(data=>{

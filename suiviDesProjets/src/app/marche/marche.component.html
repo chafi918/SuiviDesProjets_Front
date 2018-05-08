@@ -1,125 +1,144 @@
- <div class="col-sm-10" *ngIf="display==1">
-          <div class="panel panel-success">
-            <div class="panel-heading" *ngIf="mode==0">
-              <h5>Ajouter un marché</h5>
-            </div>
-            <div class="panel-heading" *ngIf="mode==1">
-                <h5>Modifier un marché</h5>
-              </div>
-            <div class="row spacer">
-              <div class="inputForm" (keyup)="isValidForm()">
-                  <mat-form-field>
-                      <input matInput placeholder="Numero Marché" [(ngModel)]="marche.numeroMarche" name="numeroMarche" #numeroMarcheV="ngModel" required>
-                      <mat-error *ngIf="numeroMarcheV.invalid">Veuillez saisir un numero du marché</mat-error>
-                  </mat-form-field>
-                  <mat-form-field>
-                    <input matInput placeholder="Montant du Marché" [(ngModel)]="marche.montantMarche" name="montantMarche" #montantMarcheV="ngModel" required >
-                    <mat-error *ngIf="montantMarcheV.invalid">Veuillez saisir un montant</mat-error>
-                  </mat-form-field>
-                  <mat-form-field>
-                    <input matInput placeholder="Montant des Travaux Realisés" [(ngModel)]="marche.montantTravauxRealises" name="montantTravauxRealises" #montantTravauxRealisesV="ngModel" required >
-                    <mat-error *ngIf="montantTravauxRealisesV.invalid">Veuillez saisir un montant</mat-error>
-                  </mat-form-field>
-                  <mat-form-field>
-                    <input matInput placeholder="Délai d'éxecution" [(ngModel)]="marche.delaiExecution" name="delaiExecution" #delaiExecutionV="ngModel" required>
-                    <mat-error *ngIf="delaiExecutionV.invalid">Veuillez saisir un délai d'execution</mat-error>
-                  </mat-form-field>
-                  <mat-form-field>
-                    <input matInput placeholder="Taux d'avancement" [(ngModel)]="marche.tauxAvancement" name="tauxAvancement" #tauxAvancementV="ngModel" required>
-                    <mat-error *ngIf="tauxAvancementV.invalid">Veuillez saisir un taux</mat-error>
-                   </mat-form-field>
-                   <mat-form-field>
-                      <mat-select placeholder="Nature" [(ngModel)]="libelleNature" name="nature" #natureV="ngModel" required>
-                        <mat-option *ngFor="let nature of natures" [(value)]="nature.libelleNature">
-                            {{ nature.libelleNature }}
-                        </mat-option>
-                       </mat-select>
-                   <mat-error *ngIf="natureV.invalid">Veuillez saisir une nature</mat-error>
-                    </mat-form-field>
-                    <mat-form-field>
-                      <mat-select placeholder="Entreprise" [(ngModel)]="nomEntreprise" name="entreprise" #entrepriseV="ngModel" required>
-                        <mat-option *ngFor="let entreprise of entreprises" [(value)]="entreprise.nomEntreprise">
-                            {{ entreprise.nomEntreprise }}
-                        </mat-option>
-                       </mat-select>
-                       <mat-error *ngIf="entrepriseV.invalid">Veuillez saisir une entreprise</mat-error>
-                    </mat-form-field>
-                    <div>
-                    <button mat-raised-button color="primary" (click)="clickOnAjouterEntreprise()" style="height:30px;margin: auto;" *ngIf="mode==0">Nouvelle Entreprise</button>
-                    </div>
-                  </div>
-              <button mat-raised-button color="primary" [disabled]="!isValidForm()" (click)="ajouterMarche()" style="height:30px;margin: auto;" *ngIf="mode==0">Ajouter</button>
-              <button mat-raised-button color="primary" [disabled]="!isValidForm()" (click)="updateMarche()" style="height:30px;margin: auto;" *ngIf="mode==1">Modifier</button>
-            </div>
-          </div>
-  </div>
-  <div class="col-sm-10" *ngIf="display==3">
-        <div class="panel panel-success">
-          <div class="panel-heading" *ngIf="mode==0">
-            <h5>Ajouter une entreprise</h5>
-          </div>
-            <div class="inputForm spacer" (keyup)="isValidFormEntreprise()">
-                <mat-form-field>
-                    <input matInput placeholder="Nom de L'entreprise" [(ngModel)]="entreprise.nomEntreprise" #nomEntreprise="ngModel" required>
-                    <mat-error *ngIf="nomEntreprise.invalid">Veuillez saisir le nom de l'entreprise</mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                  <input matInput placeholder="Adresse de L'entreprise" [(ngModel)]="entreprise.adresseEntreprise" #adresseEntreprise="ngModel" required>
-                  <mat-error *ngIf="adresseEntreprise.invalid">Veuillez saisir l'adresse de l'entreprise</mat-error>
-              </mat-form-field>
-            </div>
-            <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidFormEntreprise()" (click)="ajouterEntreprise()" style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button> 
-          </div>
-</div>
-<div class="col-sm-10" *ngIf="display==0">
-    <div class="panel panel-success">
-      <div class="panel-heading">
-        <h5>Liste des marchés</h5>
-      </div>
-      <div class="rowMenu spacer">
-        <button color="primary" class="newEntity innerSpacer" style="height:30px"(click)="clickOnAjouterMarche()"> Nouveau Marché</button>
-        <div class="navbar-form navbar-right row" >
-            <mat-form-field>
-                <input matInput type="text" [(ngModel)]="numeroMarche" (keyup)="chercher()" placeholder="Rechercher"/>
-            </mat-form-field>
+<div class="col-sm-10" *ngIf="display==1">
+  <div class="panel panel-success">
+    <div class="panel-heading" style="display: flex;">
+        <a (click)="retourAuComposant()">
+            <i class="fas fa-chevron-circle-left cursorElement" style="font-size:2em;margin-right:10px;"></i>
+          </a>
+      <h5 *ngIf="mode==0">  Ajouter un marché</h5>
+      <h5 *ngIf="mode==1">  Modifier un marché</h5>
+    </div>
+
+    <div class="row spacer">
+      <div class="inputForm" (keyup)="isValidForm()">
+        <mat-form-field>
+          <input matInput placeholder="Numero Marché" [(ngModel)]="marche.numeroMarche" name="numeroMarche" #numeroMarcheV="ngModel"
+            required>
+          <mat-error *ngIf="numeroMarcheV.invalid">Veuillez saisir un numero du marché</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Montant du Marché" [(ngModel)]="marche.montantMarche" name="montantMarche" #montantMarcheV="ngModel"
+            required>
+          <mat-error *ngIf="montantMarcheV.invalid">Veuillez saisir un montant</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Montant des Travaux Realisés" [(ngModel)]="marche.montantTravauxRealises" name="montantTravauxRealises"
+            #montantTravauxRealisesV="ngModel" required>
+          <mat-error *ngIf="montantTravauxRealisesV.invalid">Veuillez saisir un montant</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Délai d'éxecution" [(ngModel)]="marche.delaiExecution" name="delaiExecution" #delaiExecutionV="ngModel"
+            required>
+          <mat-error *ngIf="delaiExecutionV.invalid">Veuillez saisir un délai d'execution</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Taux d'avancement" [(ngModel)]="marche.tauxAvancement" name="tauxAvancement" #tauxAvancementV="ngModel"
+            required>
+          <mat-error *ngIf="tauxAvancementV.invalid">Veuillez saisir un taux</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Nature" [(ngModel)]="libelleNature" name="nature" #natureV="ngModel" required>
+            <mat-option *ngFor="let nature of natures" [(value)]="nature.libelleNature">
+              {{ nature.libelleNature }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="natureV.invalid">Veuillez saisir une nature</mat-error>
+        </mat-form-field>
+        <div style="display: flex;">
+          <mat-form-field>
+            <mat-select placeholder="Entreprise" [(ngModel)]="nomEntreprise" name="entreprise" #entrepriseV="ngModel" required>
+              <mat-option *ngFor="let entreprise of entreprises" [(value)]="entreprise.nomEntreprise">
+                {{ entreprise.nomEntreprise }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="entrepriseV.invalid">Veuillez saisir une entreprise</mat-error>
+          </mat-form-field>
+          <a (click)="clickOnAjouterEntreprise()">
+              <i class="fas fa-plus-circle cursorElement" style="font-size:2em;"></i>
+            </a>
         </div>
       </div>
-        <table class="table table-striped">
-          <tr>
-            <td>Numéro Marché</td>
-            <td>Montant du Marché</td>
-            <td>Montant des Travaux Réalisés</td>
-            <td>Délai d'execution</td>
-            <td>Taux d'avancement</td>
-            <td>Nature</td>
-            <td>Entreprise</td>
-            <th>Modifier</th>
-            <th>Supprimer</th>
-          </tr>
-          <tr *ngFor="let m of pageMarches?.content">
-            <td>{{m.numeroMarche}}</td>
-            <td>{{m.montantMarche}}</td>
-            <td>{{m.montantTravauxRealises}}</td>
-            <td>{{m.delaiExecution}}</td>
-            <td>{{m.tauxAvancement}}</td>
-            <td>{{m.nature.libelleNature}}</td>
-            <td>{{m.entreprise.nomEntreprise}}</td>
-             
-            <td><a (click)="onEditMarche(m.idMarche)">
-              <i class="fas fa-edit editIcon cursorElement"></i></a></td>
-            <td><a (click)="onDeleteMarche(m)">
-              <i class="glyphicon glyphicon-remove cursorElement"></i></a></td>
-              <td>
-                <button type="button" class="btn btn-primary"(click)="onDetailsMarche(m.idMarche)" class="cursorElement">détails</button>
-              </td>
-          </tr>
-        </table>
-        <div class="container spacerUp">
-            <ul class="nav nav-tabs">
-              <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages; let i=index">
-                <a (click)="gotoPage(i)" class="marge cursorElement">{{i}}</a>
-              </li>
-            </ul>
-          </div>
+      <button mat-raised-button color="primary" [disabled]="!isValidForm()" (click)="ajouterMarche()" style="height:30px;margin: auto;"
+        *ngIf="mode==0">Ajouter</button>
+      <button mat-raised-button color="primary" [disabled]="!isValidForm()" (click)="updateMarche()" style="height:30px;margin: auto;"
+        *ngIf="mode==1">Modifier</button>
     </div>
+  </div>
+</div>
+<div class="col-sm-10" *ngIf="display==3">
+  <div class="panel panel-success">
+    <div class="panel-heading" *ngIf="mode==0">
+      <h5>Ajouter une entreprise</h5>
+    </div>
+    <div class="inputForm spacer" (keyup)="isValidFormEntreprise()">
+      <mat-form-field>
+        <input matInput placeholder="Nom de L'entreprise" [(ngModel)]="entreprise.nomEntreprise" #nomEntreprise="ngModel" required>
+        <mat-error *ngIf="nomEntreprise.invalid">Veuillez saisir le nom de l'entreprise</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Adresse de L'entreprise" [(ngModel)]="entreprise.adresseEntreprise" #adresseEntreprise="ngModel"
+          required>
+        <mat-error *ngIf="adresseEntreprise.invalid">Veuillez saisir l'adresse de l'entreprise</mat-error>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidFormEntreprise()" (click)="ajouterEntreprise()"
+      style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button>
+  </div>
+</div>
+<div class="col-sm-10" *ngIf="display==0">
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <h5>Liste des marchés</h5>
+    </div>
+    <div class="rowMenu spacer">
+      <button color="primary" class="newEntity innerSpacer" style="height:30px" (click)="clickOnAjouterMarche()"> Nouveau Marché</button>
+      <div class="navbar-form navbar-right row">
+        <mat-form-field>
+          <input matInput type="text" [(ngModel)]="numeroMarche" (keyup)="chercher()" placeholder="Rechercher" />
+        </mat-form-field>
+      </div>
+    </div>
+    <table class="table table-striped">
+      <tr>
+        <td>Numéro Marché</td>
+        <td>Montant du Marché</td>
+        <td>Montant des Travaux Réalisés</td>
+        <td>Délai d'execution</td>
+        <td>Taux d'avancement</td>
+        <td>Nature</td>
+        <td>Entreprise</td>
+        <th>Modifier</th>
+        <th>Supprimer</th>
+      </tr>
+      <tr *ngFor="let m of pageMarches?.content">
+        <td>{{m.numeroMarche}}</td>
+        <td>{{m.montantMarche}}</td>
+        <td>{{m.montantTravauxRealises}}</td>
+        <td>{{m.delaiExecution}}</td>
+        <td>{{m.tauxAvancement}}</td>
+        <td>{{m.nature.libelleNature}}</td>
+        <td>{{m.entreprise.nomEntreprise}}</td>
+
+        <td>
+          <a (click)="onEditMarche(m.idMarche)">
+            <i class="fas fa-edit editIcon cursorElement"></i>
+          </a>
+        </td>
+        <td>
+          <a (click)="onDeleteMarche(m)">
+            <i class="glyphicon glyphicon-remove cursorElement"></i>
+          </a>
+        </td>
+        <td>
+          <button type="button" class="btn btn-primary" (click)="onDetailsMarche(m.idMarche)" class="cursorElement">détails</button>
+        </td>
+      </tr>
+    </table>
+    <div class="container spacerUp">
+      <ul class="nav nav-tabs">
+        <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages; let i=index">
+          <a (click)="gotoPage(i)" class="marge cursorElement">{{i}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
