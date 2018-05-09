@@ -47,7 +47,8 @@ import { DetailsMarcheComponent } from './details-marche/details-marche.componen
 import { HttpClientModule } from '@angular/common/http';
 import { ReferentielDocumentComponent } from './referentiel-document/referentiel-document.component';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { ParamètresComponent } from './param\u00E8tres/param\u00E8tres.component';
+import { ParametresComponent } from './parametres/parametres.component';
+
 
 const appRoutes:Routes=[
   {path:'projets', component:ProjetsComponent},
@@ -66,7 +67,7 @@ const appRoutes:Routes=[
   {path:'detailsProjet/:id',component:DetailsProjetComponent},
   {path:'detailsMarche/:id',component:DetailsMarcheComponent},
   {path:'referentielDocument', component:ReferentielDocumentComponent},
-  {path:'parametres',component:ParamètresComponent},
+  {path:'parametres',component:ParametresComponent},
   {path:'',redirectTo:'/projets',pathMatch:'full'}
 ];
 
@@ -91,7 +92,7 @@ const appRoutes:Routes=[
     DetailsProjetComponent,
     DetailsMarcheComponent,
     ReferentielDocumentComponent,
-    ParamètresComponent
+    ParametresComponent
   ],
   imports: [
     BrowserModule, HttpModule, RouterModule.forRoot(appRoutes), FormsModule,
