@@ -2,12 +2,13 @@
     <div class="col-sm-6 position" *ngIf="display==1" >
         <div class="navbar-form">
           <div class="panel panel-success">
-            <div class="panel-heading" *ngIf="mode==0">
-              <h5>Ajouter un projet</h5>
+            <div class="panel-heading" style="display: flex;">
+                <a (click)="retourAuComposant()">
+                    <i class="fas fa-chevron-circle-left cursorElement" style="font-size:2em;margin-right:10px;"></i>
+                  </a>
+              <h5 *ngIf="mode==0">Ajouter un projet</h5>
+              <h5 *ngIf="mode==1">Modifier un projet</h5>
             </div>
-            <div class="panel-heading" *ngIf="mode==1">
-                <h5>Modifier un projet</h5>
-              </div>
               <div class="inputForm spacer spacerUp" (keyup)="isValidForm()">
                   <mat-form-field>
                       <input matInput placeholder="Intitulé" [(ngModel)]="projet.intitule" name="nom" #nom="ngModel" required>
@@ -26,20 +27,17 @@
                       <mat-error *ngIf="tauxAvancementV.invalid">Veuillez saisir un taux</mat-error>
                   </mat-form-field>
                   <mat-form-field>
-                    <input matInput placeholder="Date Ouverture des Plis" type="date" [(ngModel)]="projet.dateOP" name="dateOP" #dateOP="ngModel" required>
-                        <mat-error *ngIf="dateOP.invalid">Veuillez saisir une date</mat-error>
+                    <input matInput placeholder="Date Ouverture des Plis" type="date" [(ngModel)]="projet.dateOP">
                   </mat-form-field>
                   <mat-form-field>
-                    <input matInput placeholder="Chargé du projet" [(ngModel)]="projet.chargeDuProjet" name="chargeDuProjetV" #chargeDuProjetV="ngModel" required>
-                    <mat-error *ngIf="chargeDuProjetV.invalid">Veuillez saisir un nom</mat-error>
+                    <input matInput placeholder="Chargé du projet" [(ngModel)]="projet.chargeDuProjet">
                   </mat-form-field>
                   <mat-form-field>
                       <input matInput placeholder="Montant Programmé" type="number" [(ngModel)]="projet.montantProgramme" name="montantProgramme" #montantProgramme="ngModel" required>
                       <mat-error *ngIf="montantProgramme.invalid">Veuillez saisir un montant</mat-error>
                    </mat-form-field>
                   <mat-form-field>
-                      <input matInput placeholder="Date de commencement des Travaux" type="date" [(ngModel)]="projet.dateCommTravaux" name="dateCommTravaux" #dateCommTravaux="ngModel" required>
-                          <mat-error *ngIf="dateCommTravaux.invalid">Veuillez saisir une date</mat-error>
+                      <input matInput placeholder="Date de commencement des Travaux" type="date" [(ngModel)]="projet.dateCommTravaux">
                   </mat-form-field>
                   <mat-form-field>
                       <input matInput placeholder="Date d'Appel d'Offre" type="date" [(ngModel)]="projet.dateAO" name="dateAO" #dateAO="ngModel" required>
@@ -67,7 +65,6 @@
               </div>
               <button mat-raised-button class="spacerUp"  [disabled]="!isValidForm()" color="primary" (click)="ajouterProjet()" style="height:40px;margin: 20px;" *ngIf="mode==0">Ajouter</button>
               <button mat-raised-button class="spacerUp" [disabled]="!isValidForm()" color="primary" (click)="updateProjet()" style="height:40px;margin: 20px;" *ngIf="mode==1">Modifier</button>
-              <button mat-raised-button class="spacerUp" color="primary" (click)="retourAuComposant()" style="height:40px;margin: 20px;">Retourner</button>
           </div>
       </div>
   </div>

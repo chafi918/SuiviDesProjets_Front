@@ -153,12 +153,12 @@ export class ProjetsComponent implements OnInit {
   isValidForm(){
     this.projet.secteur = this.getSecteurByName(this.secteurs, this.libelleSecteur);
     this.projet.statut = this.getStatutByName(this.statuts, this.libelleStatut);
-    return this.projet.intitule&& this.projet.intitule.length  != 0
+    return this.projet.intitule && this.projet.intitule.length  != 0
             && this.projet.commune && this.projet.commune.length != 0
-            && this.projet.chargeDuProjet && this.projet.chargeDuProjet.length != 0
+            && this.projet.province && this.projet.province.length != 0
             && this.projet.secteur && this.projet.statut
-            && this.projet.dateAO && this.projet.dateCommTravaux
-            && this.projet.dateOP && this.projet.montantProgramme && this.projet.montantProgramme !=0  ;
+            && this.projet.dateAO 
+            && this.projet.montantProgramme && this.projet.montantProgramme !=0  ;
            
   }
 

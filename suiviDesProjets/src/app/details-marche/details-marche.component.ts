@@ -23,7 +23,8 @@ export class DetailsMarcheComponent implements OnInit {
   pageEntreprises:any;
 
   constructor(public http:Http,public marcheService:MarcheService,
-    public entrepriseService:EntrepriseService, private route:ActivatedRoute) {
+    public entrepriseService:EntrepriseService, 
+    public router:Router,private route:ActivatedRoute) {
    }
 
   ngOnInit() {
@@ -35,6 +36,10 @@ export class DetailsMarcheComponent implements OnInit {
       this.marche = data;
     }
     ,err=>{console.log(err);})
+  }
+
+  retourAuComposant(){
+    this.router.navigate(['/detailsProjet/'+this.marche.projet.idProjet]);
   }
   
   clickOnAjouterEntreprise(){

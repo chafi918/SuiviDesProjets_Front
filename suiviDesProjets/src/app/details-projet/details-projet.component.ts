@@ -17,7 +17,8 @@ export class DetailsProjetComponent implements OnInit {
   public id:any;
 
   constructor(public http:Http,public projetService:ProjetService,
-    public observationService:ObservationService, private route:ActivatedRoute) {
+    public observationService:ObservationService,
+    public router:Router, private route:ActivatedRoute) {
    }
 
   ngOnInit() {
@@ -29,6 +30,10 @@ export class DetailsProjetComponent implements OnInit {
       this.projet = data;
     }
     ,err=>{console.log(err);})
+  }
+
+  retourAuComposant(){
+    this.router.navigate(['/projets']);
   }
 
 }
