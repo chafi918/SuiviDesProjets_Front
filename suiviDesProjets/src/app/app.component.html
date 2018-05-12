@@ -2,44 +2,61 @@
 <div>
     <div class="container-fluid text-center">
         <div class="row content">
-            <div class="col-sm-1 sidenav">
+            <div class="col-sm-1 sidenav" *ngIf="isLoged()">
                 <div class="projectMenu">
-                    <br><br><br>
-                        <div class="home-button-container">
-                                <button class="button button4" routerLink="/projets"><i class="fas fa-list-ul" aria-hidden="true"></i></button>
-                                <div>Liste des projets</div>
-                            </div>  
-                          <div class="home-button-container">
-                                <button class="button button4" routerLink="/referentielDocument"><i class="fas fa-paperclip" aria-hidden="true"></i></button>
-                                <div>Documents</div>
-                            </div>  
-                            <div class="home-button-container">
-                                <button class="button button4"><i class="fas fa-chart-bar" aria-hidden="true"></i></button>
-                                <div>Statistiques</div>
-                            </div>  
-                          <div class="home-button-container dropdownButton">
-                                <button class="button button4" routerLink="/parametres"><i class="fas fa-cogs" aria-hidden="true"></i></button>
-                                <div>Paramètres</div>
-                                <div class="dropdown-content">
-                                    <a href="/statuts">Statuts</a>
-                                    <a href="/secteurs">Secteurs</a>
-                                    <a href="/profils">Profils</a>
-                                    <a href="/divisions">Divisions</a>
-                                    <a href="/users">Utilisateurs</a>
-                                    <a href="/types">Types de document</a>
-                                    <a href="/contacts">Contacts</a>
-                                    <a href="/natures">Natures</a>
-                                    <a href="/entreprises">Entreprises</a>
-                                  </div>
-                            </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="home-button-container">
+                            <button class="button button4" (click)="logout()">
+                                <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                            </button>
+                            <div>Logout</div>
+                        </div>
+                    <div class="home-button-container">
+                        <button class="button button4" routerLink="/projets">
+                            <i class="fas fa-list-ul" aria-hidden="true"></i>
+                        </button>
+                        <div>Liste des projets</div>
+                    </div>
+                    <div class="home-button-container">
+                        <button class="button button4" routerLink="/referentielDocument">
+                            <i class="fas fa-paperclip" aria-hidden="true"></i>
+                        </button>
+                        <div>Documents</div>
+                    </div>
+                    <div class="home-button-container">
+                        <button class="button button4">
+                            <i class="fas fa-chart-bar" aria-hidden="true"></i>
+                        </button>
+                        <div>Statistiques</div>
+                    </div>
+                    <div class="home-button-container dropdownButton" *ngIf="isAnAdmin()">
+                        <button class="button button4" routerLink="/parametres">
+                            <i class="fas fa-cogs" aria-hidden="true"></i>
+                        </button>
+                        <div>Paramètres</div>
+                        <div class="dropdown-content">
+                            <a href="/statuts">Statuts</a>
+                            <a href="/secteurs">Secteurs</a>
+                            <a href="/profils">Profils</a>
+                            <a href="/divisions">Divisions</a>
+                            <a href="/users">Utilisateurs</a>
+                            <a href="/types">Types de document</a>
+                            <a href="/contacts">Contacts</a>
+                            <a href="/natures">Natures</a>
+                            <a href="/entreprises">Entreprises</a>
+                        </div>
+                    </div>
                 </div>
-                <br><br><br>
-              </div>
-              <div class="col-sm-11 text-left"> 
-                  <router-outlet></router-outlet>
-              </div>
+                <br>
+                <br>
+                <br>
+            </div>
+            <div class="col-sm-11 text-left">
+                <router-outlet></router-outlet>
+            </div>
         </div>
     </div>
 </div>
 <app-footer-component></app-footer-component>
-

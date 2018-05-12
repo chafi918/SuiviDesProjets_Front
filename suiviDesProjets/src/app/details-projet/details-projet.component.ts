@@ -6,6 +6,7 @@ import {Http} from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observation } from '../../model/model.observation';
 import { Marche } from '../../model/model.marche';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-details-projet',
@@ -18,7 +19,8 @@ export class DetailsProjetComponent implements OnInit {
 
   constructor(public http:Http,public projetService:ProjetService,
     public observationService:ObservationService,
-    public router:Router, private route:ActivatedRoute) {
+    public router:Router, private route:ActivatedRoute,
+  public loginService:LoginService) {
    }
 
   ngOnInit() {
@@ -29,7 +31,8 @@ export class DetailsProjetComponent implements OnInit {
       console.log(data);
       this.projet = data;
     }
-    ,err=>{console.log(err);})
+    ,err=>{this.loginService.logout();
+      this.router.navigateByUrl("/login");})
   }
 
   retourAuComposant(){

@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ContactService } from '../../services/contact.service';
 import { Entreprise } from '../../model/model.entreprise';
 import { EntrepriseService } from '../../services/entreprise.service';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-contact',
@@ -28,7 +29,8 @@ export class ContactComponent implements OnInit {
     public contactService: ContactService,
     public entrepriseService: EntrepriseService,
     public router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private loginService: LoginService) { }
 
   ngOnInit() {
     this.idMarche = Number(this.route.snapshot.paramMap.get('id'));
@@ -41,9 +43,9 @@ export class ContactComponent implements OnInit {
     }
     this.getAllEntreprises();
   }
-  retourAuComposant(){
-    this.mode=0;
-    this.display=0;
+  retourAuComposant() {
+    this.mode = 0;
+    this.display = 0;
   }
 
   defaultInit() {
@@ -52,6 +54,9 @@ export class ContactComponent implements OnInit {
         this.pageContacts = data;
         this.pages = new Array(data.totalPages);
         this.currentPage = data.number;
+      }, err => {
+        this.loginService.logout();
+        this.router.navigateByUrl("/login");
       });
   }
 
@@ -60,7 +65,10 @@ export class ContactComponent implements OnInit {
       .subscribe(data => {
         console.log("getEntrepriseParMarche: " + data);
         this.entreprise = data;
-      }, err => { console.log(err); })
+      }, err => {
+        this.loginService.logout();
+        this.router.navigateByUrl("/login");
+      })
   }
 
   getContactByMarche() {
@@ -69,6 +77,9 @@ export class ContactComponent implements OnInit {
         this.pageContacts = data;
         this.pages = new Array(data.totalPages);
         this.currentPage = data.number;
+      }, err => {
+        this.loginService.logout();
+        this.router.navigateByUrl("/login");
       });
   }
 
@@ -78,16 +89,22 @@ export class ContactComponent implements OnInit {
         .subscribe(data => {
           this.pageContacts = data;
           this.pages = new Array(data.totalPages);
-        }, err => { console.log(err); })
+        }, err => {
+          this.loginService.logout();
+          this.router.navigateByUrl("/login");
+        })
     } else {
       this.contactService.chercherContactOfEntreprise(this.nomContact, this.entreprise.idEntreprise)
-      .subscribe(data => {
-        this.pageContacts = data;
-        this.pages = new Array(data.totalPages);
-      }, err => { console.log(err); })
+        .subscribe(data => {
+          this.pageContacts = data;
+          this.pages = new Array(data.totalPages);
+        }, err => {
+          this.loginService.logout();
+          this.router.navigateByUrl("/login");
+        })
     }
 
-    
+
   }
 
   ajouterContact() {
@@ -100,7 +117,10 @@ export class ContactComponent implements OnInit {
     console.log(this.contact);
     this.contactService.ajouterContact(this.contact)
       .subscribe(data => { this.ngOnInit(); }
-        , err => { console.log(err); });
+        , err => {
+          this.loginService.logout();
+          this.router.navigateByUrl("/login");
+        });
     this.mode = 0;
     this.display = 0
     this.contact = new Contact();
@@ -108,7 +128,10 @@ export class ContactComponent implements OnInit {
   getAllEntreprises() {
     this.contactService.getAllEntreprises()
       .subscribe(data => { this.entreprises = data; },
-        err => { console.log(err); })
+        err => {
+          this.loginService.logout();
+          this.router.navigateByUrl("/login");
+        })
   }
 
 
@@ -135,7 +158,10 @@ export class ContactComponent implements OnInit {
       this.contact.entreprise = this.entreprise;
     }
     this.contactService.updateContact(this.contact)
-      .subscribe(data => { this.ngOnInit(); }, err => { console.log(err); });
+      .subscribe(data => { this.ngOnInit(); }, err => {
+        this.loginService.logout();
+        this.router.navigateByUrl("/login");
+      });
     this.mode = 1;
     this.display = 0
     this.contact = new Contact();
@@ -145,10 +171,13 @@ export class ContactComponent implements OnInit {
     this.display = 1
     this.contactService.getContact(id)
       .subscribe(data => {
-      this.contact = data; console.log(data);
+        this.contact = data; console.log(data);
         this.nomEntreprise = this.contact.entreprise.nomEntreprise;
       }
-        , err => { console.log(err); })
+        , err => {
+          this.loginService.logout();
+          this.router.navigateByUrl("/login");
+        })
   }
 
   onDeleteContact(contact: Contact) {
@@ -160,7 +189,10 @@ export class ContactComponent implements OnInit {
         );
         this.ngOnInit();
       }
-        , err => { console.log(err); })
+        , err => {
+          this.loginService.logout();
+          this.router.navigateByUrl("/login");
+        })
   }
 
   gotoPage(i: number) {
@@ -171,14 +203,17 @@ export class ContactComponent implements OnInit {
         this.pages = new Array(data.totalPages);
         this.currentPage = data.number;
       }
-        , err => { console.log(err); })
+        , err => {
+          this.loginService.logout();
+          this.router.navigateByUrl("/login");
+        })
   }
 
   isValidForm() {
     return this.contact.nomContact
       && this.contact.nomContact.length != 0
       && this.contact.mailContact && this.contact.mailContact.match("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
-      && this.contact.telephone  && this.contact.telephone.match("^0{1}[0-9]{9}$")
+      && this.contact.telephone && this.contact.telephone.match("^0{1}[0-9]{9}$")
       && this.contact.responsabilite.length != 0;
   }
 }

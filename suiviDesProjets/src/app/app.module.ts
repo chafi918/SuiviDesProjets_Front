@@ -36,6 +36,8 @@ import { NatureMarcheComponent } from './nature-marche/nature-marche.component';
 import { NatureService } from '../services/nature.service';
 import { MarcheService } from '../services/marche.service';
 import { EntrepriseService } from '../services/entreprise.service';
+import { LoggedVerif } from '../services/loggedVerif.service';
+import { AdminControl } from '../services/adminControl.service';
 import { ContactComponent } from './contact/contact.component';
 import { DocumentComponent } from './document/document.component';
 import { DocumentService } from '../services/document.service';
@@ -48,26 +50,28 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReferentielDocumentComponent } from './referentiel-document/referentiel-document.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ParametresComponent } from './parametres/parametres.component';
-
+import { LoginAppComponent } from './login-app/login-app.component';
+import { LoginService } from '../services/login.service';
 
 const appRoutes:Routes=[
-  {path:'projets', component:ProjetsComponent},
-  {path:'users', component:UserComponent},
-  {path:'divisions', component:DivisionComponent},
-  {path:'secteurs' , component:SecteurComponent},
-  {path:'statuts', component:StatutComponent},
-  {path:'profils',component:ProfilComponent},
-  {path:'types',component:TypeDocumentComponent},
-  {path:'natures',component:NatureMarcheComponent},
-  {path:'entreprises',component:EntrepriseComponent},
-  {path:'contacts',component:ContactComponent},
-  {path:'documents',component:DocumentComponent},
-  {path:'marches',component:MarcheComponent},
-  {path:'observations',component:ObservationComponent},
-  {path:'detailsProjet/:id',component:DetailsProjetComponent},
-  {path:'detailsMarche/:id',component:DetailsMarcheComponent},
-  {path:'referentielDocument', component:ReferentielDocumentComponent},
-  {path:'parametres',component:ParametresComponent},
+  {path:'projets', component:ProjetsComponent, canActivate: [LoggedVerif]},
+  {path:'users', component:UserComponent, canActivate: [LoggedVerif, AdminControl]},
+  {path:'divisions', component:DivisionComponent, canActivate: [LoggedVerif, AdminControl]},
+  {path:'secteurs' , component:SecteurComponent, canActivate: [LoggedVerif, AdminControl]},
+  {path:'statuts', component:StatutComponent, canActivate: [LoggedVerif, AdminControl]},
+  {path:'profils',component:ProfilComponent, canActivate: [LoggedVerif, AdminControl]},
+  {path:'types',component:TypeDocumentComponent, canActivate: [LoggedVerif, AdminControl]},
+  {path:'natures',component:NatureMarcheComponent, canActivate: [LoggedVerif, AdminControl]},
+  {path:'entreprises',component:EntrepriseComponent, canActivate: [LoggedVerif]},
+  {path:'contacts',component:ContactComponent, canActivate: [LoggedVerif]},
+  {path:'documents',component:DocumentComponent, canActivate: [LoggedVerif]},
+  {path:'marches',component:MarcheComponent, canActivate: [LoggedVerif]},
+  {path:'observations',component:ObservationComponent, canActivate: [LoggedVerif]},
+  {path:'detailsProjet/:id',component:DetailsProjetComponent, canActivate: [LoggedVerif]},
+  {path:'detailsMarche/:id',component:DetailsMarcheComponent, canActivate: [LoggedVerif]},
+  {path:'referentielDocument', component:ReferentielDocumentComponent, canActivate: [LoggedVerif]},
+  {path:'parametres',component:ParametresComponent, canActivate: [LoggedVerif, AdminControl]},
+  {path:'login',component:LoginAppComponent},
   {path:'',redirectTo:'/projets',pathMatch:'full'}
 ];
 
@@ -92,7 +96,8 @@ const appRoutes:Routes=[
     DetailsProjetComponent,
     DetailsMarcheComponent,
     ReferentielDocumentComponent,
-    ParametresComponent
+    ParametresComponent,
+    LoginAppComponent
   ],
   imports: [
     BrowserModule, HttpModule, RouterModule.forRoot(appRoutes), FormsModule,
@@ -100,7 +105,8 @@ const appRoutes:Routes=[
     MatPaginatorModule, MatIconModule, MatSelectModule, ReactiveFormsModule, HttpClientModule, MatExpansionModule
   ],
   providers: [ProjetService, UserService, DivisionService, SecteurService, StatutService, ProfilService, TypeDocService,
-    ContactService, NatureService, MarcheService, EntrepriseService, DocumentService, ObservationService],
+    ContactService, NatureService, MarcheService, EntrepriseService, DocumentService, ObservationService, LoginService,
+    LoggedVerif, AdminControl],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

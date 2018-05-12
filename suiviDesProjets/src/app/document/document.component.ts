@@ -5,10 +5,11 @@ import { DocumentService } from '../../services/document.service';
 import { InputDocument } from '../../model/model.inputDocument';
 import { Type } from '../../model/model.type';
 import { TypeDocService } from '../../services/typeDoc.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { saveAs as importedSaveAs } from "file-saver";
 import 'rxjs/Rx';
 import { Buffer } from 'buffer';
+import { LoginService } from '../../services/login.service';
 
 
 @Component({
@@ -31,7 +32,9 @@ export class DocumentComponent implements OnInit {
 
   constructor(public documentService: DocumentService,
     public typeDocService: TypeDocService,
-    public route: ActivatedRoute) { }
+    public route: ActivatedRoute,
+    public router:Router,
+  public loginService:LoginService) { }
 
   ngOnInit() {
     this.idProjet = Number(this.route.snapshot.paramMap.get('id'));
@@ -46,7 +49,8 @@ export class DocumentComponent implements OnInit {
           this.documentPage = data;
           this.pages = new Array(data.totalPages);
           this.currentPage = data.number;
-        }, err => { console.log(err); }
+        }, err => { this.loginService.logout();
+        this.router.navigateByUrl("/login"); }
       )
   }
   gotoPage(i: number) {
@@ -56,7 +60,8 @@ export class DocumentComponent implements OnInit {
         this.pages = new Array(data.totalPages);
         this.currentPage = data.number;
       }
-        , err => { console.log(err); })
+        , err => {this.loginService.logout();
+          this.router.navigateByUrl("/login"); })
   }
 
   public getAllTypes() {
@@ -66,7 +71,8 @@ export class DocumentComponent implements OnInit {
         console.log(data.content);
         this.types = data.content;
       }
-        , err => { console.log(err); })
+        , err => { this.loginService.logout();
+          this.router.navigateByUrl("/login"); })
 
   }
 
@@ -92,7 +98,8 @@ export class DocumentComponent implements OnInit {
         console.log("return upload: " + data);
         this.ngOnInit();
       }
-        , err => { console.log(err); });
+        , err => { this.loginService.logout();
+          this.router.navigateByUrl("/login"); });
 
     this.display = 0;
     this.mode = 0;
@@ -103,7 +110,8 @@ export class DocumentComponent implements OnInit {
     this.document.dateAjout = new Date();
     this.document.type = this.getTypeByLibelle();
     this.documentService.updateDocument(this.document)
-    .subscribe(data=>{this.ngOnInit();},err=>{console.log(err);});
+    .subscribe(data=>{this.ngOnInit();},err=>{this.loginService.logout();
+      this.router.navigateByUrl("/login");});
     this.mode=1;
 	  this.display=0;
     this.document=new Document();
@@ -128,7 +136,8 @@ export class DocumentComponent implements OnInit {
           this.documentPage.content.indexOf(document), 1);
         this.ngOnInit();
       }
-        , err => { console.log(err); })
+        , err => { this.loginService.logout();
+          this.router.navigateByUrl("/login"); })
   }
 
   retourAuComposant(){

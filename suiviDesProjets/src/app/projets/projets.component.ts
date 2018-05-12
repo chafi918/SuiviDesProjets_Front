@@ -8,7 +8,8 @@ import { Secteur } from '../../model/model.secteur';
 import { Statut } from '../../model/model.statut';
 import { ObservationService } from '../../services/observation.service';
 import { Observation } from '../../model/model.observation';
-import { Router } from '@angular/router';
+import { Router, CanActivate } from '@angular/router';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-projets',
@@ -29,7 +30,8 @@ export class ProjetsComponent implements OnInit {
    statuts:Array<Statut>;
    observation:Observation=new Observation();
    critere:string= "intitule";
-  constructor(public http:Http,public router:Router,public projetService:ProjetService,public observationService:ObservationService) { }
+  constructor(public http:Http,public router:Router,public projetService:ProjetService,
+    public observationService:ObservationService) { }
 
   ngOnInit() {
    this.projetService.getProjets()
