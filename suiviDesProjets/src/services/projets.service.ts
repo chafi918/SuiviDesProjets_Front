@@ -43,6 +43,11 @@ export class ProjetService extends CommonService {
         return this.http.get("http://localhost:8080/admin/secteurs", this.options)
             .map(resp => resp.json());
     }
+    
+    getAllCommunes(){
+        return this.http.get("http://localhost:8080/admin/communes", this.options)
+        .map(resp=>resp.json());
+    }
 
     updateProjet(projet: Projet) {
         return this.http.put("http://localhost:8080/projet/" + projet.idProjet, projet, this.options)
