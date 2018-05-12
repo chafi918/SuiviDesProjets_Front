@@ -42,6 +42,11 @@ export class ProjetService{
         return this.http.get("http://localhost:8080/admin/secteurs")
         .map(resp=>resp.json());
     }
+    
+    getAllCommunes(){
+        return this.http.get("http://localhost:8080/admin/communes")
+        .map(resp=>resp.json());
+    }
 
     updateProjet(projet:Projet){
         return this.http.put("http://localhost:8080/projet/"+projet.idProjet,projet)

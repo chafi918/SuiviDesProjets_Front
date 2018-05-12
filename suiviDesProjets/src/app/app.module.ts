@@ -48,6 +48,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReferentielDocumentComponent } from './referentiel-document/referentiel-document.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ParametresComponent } from './parametres/parametres.component';
+import { CommuneComponent } from './commune/commune.component';
+import { CommuneService } from '../services/commune.service';
 
 
 const appRoutes:Routes=[
@@ -68,6 +70,7 @@ const appRoutes:Routes=[
   {path:'detailsMarche/:id',component:DetailsMarcheComponent},
   {path:'referentielDocument', component:ReferentielDocumentComponent},
   {path:'parametres',component:ParametresComponent},
+  {path:'communes',component:CommuneComponent},
   {path:'',redirectTo:'/projets',pathMatch:'full'}
 ];
 
@@ -92,7 +95,8 @@ const appRoutes:Routes=[
     DetailsProjetComponent,
     DetailsMarcheComponent,
     ReferentielDocumentComponent,
-    ParametresComponent
+    ParametresComponent,
+    CommuneComponent
   ],
   imports: [
     BrowserModule, HttpModule, RouterModule.forRoot(appRoutes), FormsModule,
@@ -100,7 +104,7 @@ const appRoutes:Routes=[
     MatPaginatorModule, MatIconModule, MatSelectModule, ReactiveFormsModule, HttpClientModule, MatExpansionModule
   ],
   providers: [ProjetService, UserService, DivisionService, SecteurService, StatutService, ProfilService, TypeDocService,
-    ContactService, NatureService, MarcheService, EntrepriseService, DocumentService, ObservationService],
+    ContactService, NatureService, MarcheService, EntrepriseService, DocumentService, ObservationService,CommuneService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

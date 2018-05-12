@@ -1,0 +1,61 @@
+<div class="container-fluid text-center spacer tableSpacer">
+  <div class="col-sm-6 position" *ngIf="display==1">
+        <div class="navbar-form">
+          <div class="panel panel-success">
+            <div class="panel-heading" style="display: flex;">
+                <a (click)="retourAuComposant()">
+                    <i class="fas fa-chevron-circle-left cursorElement" style="font-size:2em;margin-right:10px;"></i>
+                </a>
+              <h5 *ngIf="mode==0">Ajouter une commune</h5>
+              <h5 *ngIf="mode==1">Modifier une commune</h5>
+            </div>
+            <div class="inputForm spacer spacerUp" (keyup)="isValidForm()">
+                  <mat-form-field>
+                      <input matInput placeholder="Libellé Commune" [(ngModel)]="commune.libelleCommune" #libelleCommune="ngModel" required>
+                      <mat-error *ngIf="libelleCommune.invalid">Veuillez saisir un libelle pour la commune</mat-error>
+                  </mat-form-field>
+              </div>
+              <button mat-raised-button class="spacerUp" [disabled]="!isValidForm()" color="primary" (click)="ajouterCommune()" style="height:30px;margin:20px;" *ngIf="mode==0">Ajouter</button> 
+              <button mat-raised-button class="spacerUp" [disabled]="!isValidForm()" color="primary" (click)="updateCommune()" style="height:30px;margin:20px;" *ngIf="mode==1">Modifier</button>
+            </div>
+      </div>
+  </div>
+  <div class="col-sm-10" *ngIf="display==0">
+    <div class="navbar-form">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h5>Toutes les communes</h5>
+      </div>
+      <div class="rowMenu spacer">
+          <button color="primary" class="newEntity innerSpacer" style="height:30px"(click)="clickOnAjouterCommune()"> Nouvelle Commune</button>
+          <div class="navbar-form navbar-right row" >
+              <mat-form-field>
+                  <input matInput type="text" [(ngModel)]="libelleCommune" (keyup)="chercher()" placeholder="Rechercher"/>
+              </mat-form-field>
+          </div>
+      </div>
+    <table class="table table-striped">
+        <tr>
+          <th>Libellé Commune</th>
+          <th>Modification</th>
+          <th>Supprimer</th>
+        </tr>
+        <tr *ngFor="let c of pageCommunes?.content">
+          <td>{{c.libelleCommune}}</td>
+          <td><a (click)="onEditCommune(c.idCommune)">
+            <i class="fas fa-edit editIcon cursorElement"></i></a></td>
+          <td><a (click)="onDeleteCommune(c)">
+            <i class="glyphicon glyphicon-remove cursorElement"></i></a></td>
+        </tr>
+    </table>
+    <div class="container spacerUp">
+      <ul class="nav nav-pills">
+        <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages; let i=index">
+          <a (click)="gotoPage(i)" class="marge cursorElement">{{i}}</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+  </div>
+  </div>
+</div>

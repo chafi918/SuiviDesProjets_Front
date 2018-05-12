@@ -18,7 +18,7 @@
                     <mat-error *ngIf="chargeurDocumentV.invalid">Veuillez saisir un nom</mat-error>
                 </mat-form-field>
                 <mat-form-field>
-                    <mat-select placeholder="Type Documnet" [(ngModel)]="libelleType" name="type" #type="ngModel" required>
+                    <mat-select placeholder="Type Document" [(ngModel)]="libelleType" name="type" #type="ngModel" required>
                       <mat-option *ngFor="let type of types" [(value)]="type.libelleType" >
                           {{ type.libelleType }}
                       </mat-option>
