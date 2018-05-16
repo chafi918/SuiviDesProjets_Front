@@ -146,8 +146,6 @@ export class ProjetsComponent implements OnInit {
   }
 
   chercher() {
-    console.log("critére de recherche: " + this.critere);
-    console.log("mc de recherche: " + this.motCle);
     this.projetService.chercherProjet(this.critere, this.motCle)
       .subscribe(data => {
         console.log(data)

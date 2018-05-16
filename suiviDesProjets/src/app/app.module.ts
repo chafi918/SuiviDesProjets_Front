@@ -54,6 +54,8 @@ import { CommuneComponent } from './commune/commune.component';
 import { CommuneService } from '../services/commune.service';
 import { LoginAppComponent } from './login-app/login-app.component';
 import { LoginService } from '../services/login.service';
+import { StatistiquesComponent } from './statistiques/statistiques.component';
+import { StatistiquesService } from '../services/statistiques.service';
 
 const appRoutes:Routes=[
   {path:'projets', component:ProjetsComponent, canActivate: [LoggedVerif]},
@@ -74,6 +76,7 @@ const appRoutes:Routes=[
   {path:'referentielDocument', component:ReferentielDocumentComponent, canActivate: [LoggedVerif]},
   {path:'parametres',component:ParametresComponent, canActivate: [LoggedVerif, AdminControl]},
   {path:'communes',component:CommuneComponent, canActivate: [LoggedVerif, AdminControl]},
+  {path:'statistiques',component:StatistiquesComponent, canActivate: [LoggedVerif]},
   {path:'login',component:LoginAppComponent},
   {path:'',redirectTo:'/projets',pathMatch:'full'}
 ];
@@ -101,7 +104,8 @@ const appRoutes:Routes=[
     ReferentielDocumentComponent,
     ParametresComponent,
     LoginAppComponent,
-    CommuneComponent
+    CommuneComponent,
+    StatistiquesComponent
   ],
   imports: [
     BrowserModule, HttpModule, RouterModule.forRoot(appRoutes), FormsModule,
@@ -110,7 +114,7 @@ const appRoutes:Routes=[
   ],
   providers: [ProjetService, UserService, DivisionService, SecteurService, StatutService, ProfilService, TypeDocService,
     ContactService, NatureService, MarcheService, EntrepriseService, DocumentService, ObservationService, LoginService,
-    LoggedVerif, AdminControl, CommuneService],
+    LoggedVerif, AdminControl, CommuneService, StatistiquesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

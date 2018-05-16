@@ -31,7 +31,7 @@ export class LoginService extends CommonService {
    }
 
    isAdmin(){
-       console.log("isAdmin: " + this.profil[0].authority);
+       //console.log("isAdmin: " + this.profil[0].authority);
        return this.profil[0].authority == "ADMIN";
    }
 }
