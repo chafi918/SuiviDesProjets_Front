@@ -5,11 +5,12 @@
         <h5>Statistiques</h5>
       </div>
       <div class="panel-body">
-        <div style="margin-left:50%;">
+        <div>
           <mat-form-field>
             <mat-select placeholder="Critére de statistique" [(ngModel)]="critere" (change)="showCritere()">
               <mat-option value="secteur">Secteur</mat-option>
               <mat-option value="commune">Commune</mat-option>
+              <mat-option value="annee">Année</mat-option>
             </mat-select>
           </mat-form-field>
         </div>

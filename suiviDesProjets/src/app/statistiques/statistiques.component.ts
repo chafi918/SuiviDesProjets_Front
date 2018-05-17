@@ -10,7 +10,6 @@ import { StatistiquesService } from '../../services/statistiques.service';
 })
 export class StatistiquesComponent implements OnInit {
   myChart: any;
-
   critere: string;
   labels: Array<string>;
   data: any;
@@ -70,6 +69,7 @@ export class StatistiquesComponent implements OnInit {
   }
   showCritere() {
     this.label = 'statistiques de ' + this.critere;
+    this.myChart=null;
     this.ngOnInit()
     console.log(this.critere);
   }
