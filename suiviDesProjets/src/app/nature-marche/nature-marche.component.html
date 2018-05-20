@@ -9,9 +9,6 @@
           <h5 *ngIf="mode==0">Ajouter une nature </h5>
           <h5 *ngIf="mode==1">Modifier une nature </h5>
         </div>
-        <div class="panel-heading">
-
-        </div>
         <div class="inputForm spacer" (keyup)="isValidForm()">
           <mat-form-field>
             <input matInput placeholder="Libellé Nature" [(ngModel)]="nature.libelleNature" name="libelleNature" #libelleNature="ngModel"

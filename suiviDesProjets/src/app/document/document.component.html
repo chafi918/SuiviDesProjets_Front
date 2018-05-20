@@ -1,65 +1,77 @@
-
-    <div class="col-sm-10" *ngIf="display==1">
-            <div class="panel panel-success">
-              <div class="panel-heading" style="display: flex;">
-                  <a (click)="retourAuComposant()">
-                    <i class="fas fa-chevron-circle-left cursorElement" style="font-size:2em;margin-right:10px;"></i>
-                  </a>
-                <h5 *ngIf="mode==0">Ajouter un document</h5>
-                <h5 *ngIf="mode==1">Modifier un document </h5>
-              </div>
-                <div class="inputForm spacer" (keyup)="isValidForm()">
-                    <mat-form-field>
-                        <input matInput placeholder="Titre du document" [(ngModel)]="document.nomDocument" name="name" #nameV="ngModel"> 
-                    </mat-form-field>
-                    <input type="file" (change)="onFileSelected($event)" required>
-                  <mat-form-field>
-                    <input matInput placeholder="Utilisateur" [(ngModel)]="document.chargeurDocument" name="chargeurDocument" #chargeurDocumentV="ngModel" required> 
-                    <mat-error *ngIf="chargeurDocumentV.invalid">Veuillez saisir un nom</mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-select placeholder="Type Document" [(ngModel)]="libelleType" name="type" #type="ngModel" required>
-                      <mat-option *ngFor="let type of types" [(value)]="type.libelleType" >
-                          {{ type.libelleType }}
-                      </mat-option>
-                     </mat-select>
-                     <mat-error *ngIf="type.invalid">Veuillez choisir un type pour le document</mat-error>
-                   </mat-form-field>
-                </div>
-                <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="uploadDocument()" style="height:30px;margin: 20px;" *ngIf="mode==0">Ajouter</button>
-                <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="updateDocument()" style="height:30px;margin: 20px;" *ngIf="mode==1">Modifier</button>
-              </div>
+<div class="col-sm-10" *ngIf="display==1">
+  <div class="panel panel-success">
+    <div class="panel-heading" style="display: flex;">
+      <a (click)="retourAuComposant()">
+        <i class="fas fa-chevron-circle-left cursorElement" style="font-size:2em;margin-right:10px;"></i>
+      </a>
+      <h5 *ngIf="mode==0">Ajouter un document</h5>
+      <h5 *ngIf="mode==1">Modifier un document </h5>
     </div>
-    <div class="col-sm-10" *ngIf="display==0">
-      <div class="panel panel-success">
-        <div class="panel-heading">
-          <h5>Liste des documents</h5>
-        </div>
-        <div class="rowMenu spacer">
-            <button color="primary" class="newEntity innerSpacer" style="height:30px"(click)="clickOnAjouterDocument()"> Nouveau document</button>
-        </div>
+    <div class="inputForm spacer" (keyup)="isValidForm()">
+      <mat-form-field>
+        <input matInput placeholder="Titre du document" [(ngModel)]="document.nomDocument" name="name" #nameV="ngModel">
+      </mat-form-field>
+      <input type="file" (change)="onFileSelected($event)" required>
+      <mat-form-field>
+        <input matInput placeholder="Utilisateur" [(ngModel)]="document.chargeurDocument" name="chargeurDocument" #chargeurDocumentV="ngModel"
+          required>
+        <mat-error *ngIf="chargeurDocumentV.invalid">Veuillez saisir un nom</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Type Document" [(ngModel)]="libelleType" name="type" #type="ngModel" required>
+          <mat-option *ngFor="let type of types" [(value)]="type.libelleType">
+            {{ type.libelleType }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="type.invalid">Veuillez choisir un type pour le document</mat-error>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="uploadDocument()" style="height:30px;margin: 20px;"
+      *ngIf="mode==0">Ajouter</button>
+    <button mat-raised-button class="spacerUp" color="primary" [disabled]="!isValidForm()" (click)="updateDocument()" style="height:30px;margin: 20px;"
+      *ngIf="mode==1">Modifier</button>
+  </div>
+</div>
+<div class="col-sm-10" *ngIf="display==0">
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <h5>Liste des documents</h5>
+    </div>
+    <div class="rowMenu spacer">
+      <button color="primary" class="newEntity innerSpacer" style="height:30px" (click)="clickOnAjouterDocument()"> Nouveau document</button>
+    </div>
+    <div class="panel-body">
       <table class="table table-striped">
-          <tr>
-            <th>Titre document</th>
-            <th>Chargeur du document</th>
-            <th>Date d'ajout</th>
-            <th>Type du document</th>
-            <th>Télécharger</th>
-            <th>Modifier</th>
-            <th>Supprimer</th>
-          </tr>
-          <tr *ngFor="let d of documentPage?.content">
-            <td>{{d.nomDocument}}</td>
-            <td>{{d.chargeurDocument}}</td>
-            <td>{{d.dateAjout}}</td>
-            <td>{{d.type.libelleType}}</td>
-            <td><a (click)="onFileDownload($event, d)">
-                <i class="fas fa-download cursorElement"></i></a></td>
-            <td><a (click)="onEditDocument(d.idDocument)">
-              <i class="fas fa-edit editIcon cursorElement"></i></a></td>
-            <td><a (click)="onDeleteDocument(d)">
-              <i class="glyphicon glyphicon-remove cursorElement"></i></a></td>
-          </tr>
+        <tr>
+          <th>Titre document</th>
+          <th>Chargeur du document</th>
+          <th>Date d'ajout</th>
+          <th>Type du document</th>
+          <th>Télécharger</th>
+          <th>Modifier</th>
+          <th>Supprimer</th>
+        </tr>
+        <tr *ngFor="let d of documentPage?.content">
+          <td>{{d.nomDocument}}</td>
+          <td>{{d.chargeurDocument}}</td>
+          <td>{{d.dateAjout}}</td>
+          <td>{{d.type.libelleType}}</td>
+          <td>
+            <a (click)="onFileDownload($event, d)">
+              <i class="fas fa-download cursorElement"></i>
+            </a>
+          </td>
+          <td>
+            <a (click)="onEditDocument(d.idDocument)">
+              <i class="fas fa-edit editIcon cursorElement"></i>
+            </a>
+          </td>
+          <td>
+            <a (click)="onDeleteDocument(d)">
+              <i class="glyphicon glyphicon-remove cursorElement"></i>
+            </a>
+          </td>
+        </tr>
       </table>
       <div class="container spacerUp">
         <ul class="nav nav-tabs">
@@ -69,4 +81,6 @@
         </ul>
       </div>
     </div>
-    </div>
+
+  </div>
+</div>
