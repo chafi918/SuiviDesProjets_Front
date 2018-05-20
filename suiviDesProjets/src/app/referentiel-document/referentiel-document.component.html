@@ -1,17 +1,16 @@
 <div class="container-fluid text-center spacer" style="margin-top:50px;">
-    <div>
-        <mat-form-field>
-          <mat-select placeholder="Année" [(ngModel)]="annee" (change)="goToYear()">
-            <mat-option [value]="0">
-              
-            </mat-option>
-            <mat-option *ngFor="let annee of years" [value]="annee">
-              {{ annee }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      
-      </div>
+  <div style="margin-bottom: 50px;">
+    <mat-form-field style="position:absolute;left: 50px;">
+      <mat-select placeholder="Année" [(ngModel)]="annee" (change)="goToYear()">
+        <mat-option [value]="0">
+
+        </mat-option>
+        <mat-option *ngFor="let annee of years" [value]="annee">
+          {{ annee }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
   <mat-accordion multi="true">
     <mat-expansion-panel *ngFor="let p of projects" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
@@ -47,10 +46,10 @@
     </mat-expansion-panel>
   </mat-accordion>
   <div class="container spacer">
-      <ul class="nav nav-tabs">
-        <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages; let i=index">
-          <a (click)="gotoPage(i)" class="cursorElement">{{i}}</a>
-        </li>
-      </ul>
-    </div>
+    <ul class="nav nav-tabs">
+      <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages; let i=index">
+        <a (click)="gotoPage(i)" class="cursorElement">{{i}}</a>
+      </li>
+    </ul>
+  </div>
 </div>
