@@ -16,17 +16,26 @@ export class ReferentielDocumentComponent implements OnInit {
   documentMap:Map<string, Map<string,Array<Document>>> = new Map<string, Map<string,Array<Document>>>();
   projects:Array<String>;
   types:Array<String>;
+  years:Array<number>;
   checkSize:number;
+  annee:number=0;
+  pages: Array<number>;
+  currentPage: number = 0;
   constructor(public http:Http,public router:Router,public documentService:DocumentService) { }
 
   ngOnInit() {
-    this.documentService.getDocumentsMap()
+    console.log(this.annee);
+    console.log("onInit: " + this.currentPage);
+    this.documentService.getDocumentsMap(this.annee,this.currentPage)
     .subscribe(data=>{
-      let str = 'test porjet';
       console.log(data);
       this.projects = data.projetsName;
       this.types = data.typesName;
       this.documentMap = data.documentMap;
+      this.years = data.years;
+      this.pages =  new Array(data.totalPages);
+      this.currentPage = data.currentPage;
+      console.log("data: " + this.currentPage);
     }, err => {console.log(err);})
   }
 
@@ -45,5 +54,15 @@ export class ReferentielDocumentComponent implements OnInit {
     //"data:image/png;base64,"+document.contenu;
     window.open(url);
     //importedSaveAs(blob, document.nomDocument);
+  }
+
+  goToYear(){
+    this.currentPage = 0;
+    this.ngOnInit();
+  }
+  gotoPage(i){
+    console.log(i);
+    this.currentPage = i;
+    this.ngOnInit()
   }
 }

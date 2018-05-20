@@ -11,8 +11,8 @@ export class DocumentService extends CommonService{
     constructor(public http:Http){
         super();
     }
-    getDocumentsMap(){
-        return this.http.get("http://localhost:8080/document/documentsMap", this.options)
+    getDocumentsMap(annee, page){
+        return this.http.get("http://localhost:8080/document/documentsMapByYear?year="+annee+"&page="+page, this.options)
         .map(res=>res.json());
     }
     deleteDocument(id:number){
