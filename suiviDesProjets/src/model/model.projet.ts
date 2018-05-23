@@ -10,6 +10,7 @@ export class Projet{
     province:string;
     tauxAvancement:number;
     dateOP:Date;
+    dateFinTravaux:Date;
     chargeDuProjet:string;
     estProjetRoyal:boolean;
     dateCommTravaux:Date;

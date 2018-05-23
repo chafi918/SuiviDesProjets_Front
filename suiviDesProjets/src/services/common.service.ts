@@ -4,11 +4,14 @@ import { JwtHelper } from "angular2-jwt";
 import { isNullOrUndefined } from "util";
 import { Router } from "@angular/router";
 
+//c'est le service parent de tous les autres et qui contient les propriétés communes entre les services
 @Injectable()
 export class CommonService {
     jwtToken: string = null;
     options = null;
     profil: any;
+    //adresse du backend auquel envoyer les requêtes
+    backEndUrl:string = "http://localhost:8080";
     isLogged:boolean=false;
     public router: Router;
     constructor() {

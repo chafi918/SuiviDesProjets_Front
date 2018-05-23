@@ -13,54 +13,54 @@ export class ProjetService extends CommonService {
 
     getProjets() {
         console.log(this.options);
-        return this.http.get("http://localhost:8080/projet/getProjets", this.options)
+        return this.http.get(this.backEndUrl +"/projet/getProjets", this.options)
             .map(resp => resp.json());
     }
 
 
     getProjet(id: number) {
         console.log("fromService idProjet = " + id);
-        return this.http.get("http://localhost:8080/projet/" + id, this.options)
+        return this.http.get(this.backEndUrl +"/projet/" + id, this.options)
             .map(resp => resp.json());
     }
 
     getProjetsParPage(page: number) {
-        return this.http.get("http://localhost:8080/projet/getProjets?page=" + page, this.options)
+        return this.http.get(this.backEndUrl +"/projet/getProjets?page=" + page, this.options)
             .map(resp => resp.json());
     }
 
     ajouterProjet(projet: Projet) {
-        return this.http.post("http://localhost:8080/projet/ajout", projet, this.options)
+        return this.http.post(this.backEndUrl +"/projet/ajout", projet, this.options)
             .map(resp => resp);
     }
 
     getAllStatuts() {
-        return this.http.get("http://localhost:8080/admin/statuts", this.options)
+        return this.http.get(this.backEndUrl +"/admin/statuts", this.options)
             .map(resp => resp.json());
     }
 
     getAllSecteurs() {
-        return this.http.get("http://localhost:8080/admin/secteurs", this.options)
+        return this.http.get(this.backEndUrl +"/admin/secteurs", this.options)
             .map(resp => resp.json());
     }
     
     getAllCommunes(){
-        return this.http.get("http://localhost:8080/admin/communes", this.options)
+        return this.http.get(this.backEndUrl +"/admin/communes", this.options)
         .map(resp=>resp.json());
     }
 
     updateProjet(projet: Projet) {
-        return this.http.put("http://localhost:8080/projet/" + projet.idProjet, projet, this.options)
+        return this.http.put(this.backEndUrl +"/projet/" + projet.idProjet, projet, this.options)
             .map(resp => resp.json());
     }
 
     deleteProjet(id: number) {
-        return this.http.delete("http://localhost:8080/projet/" + id, this.options)
+        return this.http.delete(this.backEndUrl +"/projet/" + id, this.options)
             .map(resp => resp.json());
     }
 
     chercherProjet(critere: string, motCle: string) {
-        return this.http.get("http://localhost:8080/projet/recherche?critere=" + critere + "&mc=" + motCle, this.options)
+        return this.http.get(this.backEndUrl +"/projet/recherche?critere=" + critere + "&mc=" + motCle, this.options)
             .map(resp => resp.json());
 
     }

@@ -8,6 +8,7 @@ export class Marche{
     montantMarche:number;
     montantTravauxRealises:number;
     delaiExecution:string;
+    dateOS:Date;
     tauxAvancement:number;
     nature:Nature;
     entreprise:Entreprise;

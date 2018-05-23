@@ -225,6 +225,7 @@ export class MarcheComponent implements OnInit {
       && this.marche.montantTravauxRealises && this.marche.montantTravauxRealises != 0
       && this.marche.delaiExecution && this.marche.delaiExecution.length != 0
       && this.marche.tauxAvancement && this.marche.tauxAvancement != 0
+      && this.marche.dateOS
       && this.marche.nature
       && this.marche.entreprise;
   }

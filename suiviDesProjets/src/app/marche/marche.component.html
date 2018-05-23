@@ -31,6 +31,11 @@
           <mat-error *ngIf="delaiExecutionV.invalid">Veuillez saisir un délai d'execution</mat-error>
         </mat-form-field>
         <mat-form-field>
+          <input matInput placeholder="Date de l'ordre de service" type="date" [(ngModel)]="marche.dateOS" name="dateOS" #dateOSV="ngModel"
+            required>
+          <mat-error *ngIf="dateOSV.invalid">Veuillez saisir une date</mat-error>
+        </mat-form-field>
+        <mat-form-field>
           <input matInput placeholder="Taux d'avancement" [(ngModel)]="marche.tauxAvancement" name="tauxAvancement" #tauxAvancementV="ngModel"
             required>
           <mat-error *ngIf="tauxAvancementV.invalid">Veuillez saisir un taux</mat-error>
@@ -104,6 +109,7 @@
           <td>Montant du Marché</td>
           <td>Montant des Travaux Réalisés</td>
           <td>Délai d'execution</td>
+          <td>Date de l'ordre de service</td>
           <td>Taux d'avancement</td>
           <td>Nature</td>
           <td>Entreprise</td>
@@ -115,6 +121,7 @@
           <td>{{m.montantMarche}}</td>
           <td>{{m.montantTravauxRealises}}</td>
           <td>{{m.delaiExecution}}</td>
+          <td>{{m.dateOS}}</td>
           <td>{{m.tauxAvancement}}</td>
           <td>{{m.nature.libelleNature}}</td>
           <td>{{m.entreprise.nomEntreprise}}</td>

@@ -11,37 +11,37 @@ export class StatutService extends CommonService{
     }
        
 getStatuts(){
- return this.http.get("http://localhost:8080/admin/getAllStatuts", this.options)
+ return this.http.get(this.backEndUrl +"/admin/getAllStatuts", this.options)
  .map(resp=>resp.json());
 }
 
 getStatusParPage(page:number){
- return this.http.get("http://localhost:8080/admin/getAllStatuts?page="+page, this.options)
+ return this.http.get(this.backEndUrl +"/admin/getAllStatuts?page="+page, this.options)
  .map(resp=>resp.json());
 }
 
 getStatut(id:number){
- return this.http.get("http://localhost:8080/admin/statut/"+id, this.options)
+ return this.http.get(this.backEndUrl +"/admin/statut/"+id, this.options)
  .map(resp=>resp.json());
 }
 
 ajouterStatut(statut:Statut){
- return this.http.post("http://localhost:8080/admin/statut",statut, this.options)
+ return this.http.post(this.backEndUrl +"/admin/statut",statut, this.options)
  .map(resp=>resp);
 }
 
  updateStatut(statut:Statut){
- return this.http.put("http://localhost:8080/admin/statuts/"+statut.idStatut,statut, this.options)
+ return this.http.put(this.backEndUrl +"/admin/statuts/"+statut.idStatut,statut, this.options)
  .map(resp=>resp.json());
 }
 
 deleteStatut(id:number){
- return this.http.delete("http://localhost:8080/admin/statuts/"+id, this.options)
+ return this.http.delete(this.backEndUrl +"/admin/statuts/"+id, this.options)
  .map(resp=>resp.json());
 }
 
  chercherStatut(libelleStatut:string){
-     return this.http.get("http://localhost:8080/admin/statutBN/?name="+libelleStatut, this.options)
+     return this.http.get(this.backEndUrl +"/admin/statutBN/?name="+libelleStatut, this.options)
      .map(resp=>resp.json());
 
  }

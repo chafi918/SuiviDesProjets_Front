@@ -179,6 +179,7 @@ export class ProjetsComponent implements OnInit {
     this.projet.commune = this.getCommuneByName(this.communes, this.libelleCommune);
     return this.projet.intitule && this.projet.intitule.length != 0
       && this.projet.commune
+      && this.projet.dateFinTravaux
       && this.projet.province && this.projet.province.length != 0
       && this.projet.secteur && this.projet.statut
       && this.projet.dateAO

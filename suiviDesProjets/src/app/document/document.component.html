@@ -18,6 +18,11 @@
         <mat-error *ngIf="chargeurDocumentV.invalid">Veuillez saisir un nom</mat-error>
       </mat-form-field>
       <mat-form-field>
+        <input matInput placeholder="Objet" [(ngModel)]="document.objetDocument" name="objetDocument" #objetDocumentV="ngModel"
+          required>
+        <mat-error *ngIf="objetDocumentV.invalid">Veuillez saisir un objet</mat-error>
+      </mat-form-field>
+      <mat-form-field>
         <mat-select placeholder="Type Document" [(ngModel)]="libelleType" name="type" #type="ngModel" required>
           <mat-option *ngFor="let type of types" [(value)]="type.libelleType">
             {{ type.libelleType }}
@@ -45,6 +50,7 @@
         <tr>
           <th>Titre document</th>
           <th>Chargeur du document</th>
+          <th>Objet du document</th>
           <th>Date d'ajout</th>
           <th>Type du document</th>
           <th>Télécharger</th>
@@ -54,6 +60,7 @@
         <tr *ngFor="let d of documentPage?.content">
           <td>{{d.nomDocument}}</td>
           <td>{{d.chargeurDocument}}</td>
+          <td>{{d.objetDocument}}</td>
           <td>{{d.dateAjout}}</td>
           <td>{{d.type.libelleType}}</td>
           <td>

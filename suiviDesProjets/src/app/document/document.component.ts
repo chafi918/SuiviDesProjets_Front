@@ -172,6 +172,7 @@ export class DocumentComponent implements OnInit {
   }
   isValidForm() {
     return this.document.chargeurDocument && this.document.chargeurDocument.length != 0
+      && this.document.objetDocument && this.document.objetDocument.length != 0
       && this.libelleType
       && this.file;
   }

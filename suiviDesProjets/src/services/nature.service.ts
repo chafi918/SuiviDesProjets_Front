@@ -11,37 +11,37 @@ export class NatureService extends CommonService{
    }
    
    getNatures(){
-    return this.http.get("http://localhost:8080/adminNature/getAllNatures", this.options)
+    return this.http.get(this.backEndUrl +"/adminNature/getAllNatures", this.options)
     .map(resp=>resp.json());
    }
 
    getNaturesParPage(page:number){
-    return this.http.get("http://localhost:8080/adminNature/getAllNatures?page="+page, this.options)
+    return this.http.get(this.backEndUrl +"/adminNature/getAllNatures?page="+page, this.options)
     .map(resp=>resp.json());
    }
 
    getNature(id:number){
-    return this.http.get("http://localhost:8080/adminNature/"+id, this.options)
+    return this.http.get(this.backEndUrl +"/adminNature/"+id, this.options)
     .map(resp=>resp.json());
    }
 
    ajouterNature(nature:Nature){
-    return this.http.post("http://localhost:8080/adminNature/ajout",nature, this.options)
+    return this.http.post(this.backEndUrl +"/adminNature/ajout",nature, this.options)
     .map(resp=>resp);
    }
 
     updateNature(nature:Nature){
-    return this.http.put("http://localhost:8080/adminNature/"+nature.idNature,nature, this.options)
+    return this.http.put(this.backEndUrl +"/adminNature/"+nature.idNature,nature, this.options)
     .map(resp=>resp.json());
    }
 
    deleteNature(id:number){
-    return this.http.delete("http://localhost:8080/adminNature/"+id, this.options)
+    return this.http.delete(this.backEndUrl +"/adminNature/"+id, this.options)
     .map(resp=>resp.json());
 }
 
     chercherNature(libelleNature:string){
-        return this.http.get("http://localhost:8080/adminNature/name?name="+libelleNature, this.options)
+        return this.http.get(this.backEndUrl +"/adminNature/name?name="+libelleNature, this.options)
         .map(resp=>resp.json());
 
     }

@@ -7,6 +7,7 @@ export class Document{
     dateAjout:Date;
     contenu:Blob;
     chargeurDocument:string;
+    objetDocument:string;
     type:Type;
     projet:Projet;
 }

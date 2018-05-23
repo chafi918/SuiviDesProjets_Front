@@ -9,7 +9,7 @@ export class StatistiquesService extends CommonService{
     }
 
     getStatistiques(critere) {
-        return this.http.get("http://localhost:8080/projet/statistiques?critere=" + critere, this.options)
+        return this.http.get(this.backEndUrl +"/projet/statistiques?critere=" + critere, this.options)
         .map(resp=>resp.json());
 
     }
