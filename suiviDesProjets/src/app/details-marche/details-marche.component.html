@@ -1,4 +1,4 @@
-<div class="container spacer">
+<div class="container spaceer">
   <div class="col-sm-10">
   <div class="panel panel-success">
     <div class="panel-heading" style="display: flex;">
@@ -26,10 +26,16 @@
           <div class="col-sm-8">
             <p class="form-control-static">{{marche.delaiExecution}}</p>
           </div>
-          <label class="control-label col-sm-3" >Taux d'avancement en %:</label>
+          <label class="control-label col-sm-3" >Date de l'ordre de service:</label>
           <div class="col-sm-8">
-            <p class="form-control-static">{{marche.tauxAvancement}}</p>
+            <p class="form-control-static">{{marche.dateOS}}</p>
           </div>
+          <label class="control-label col-sm-3">Taux d'Avancement:</label>
+          <div class="progress col-sm-8">
+              <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" 
+              [style.width]="marche.tauxAvancement + '%'">
+              {{marche.tauxAvancement}}%</div>
+            </div>
           <label class="control-label col-sm-3" >Nature:</label>
           <div class="col-sm-8">
             <p class="form-control-static">{{marche.nature?.libelleNature}}</p>
