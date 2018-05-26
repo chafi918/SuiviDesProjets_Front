@@ -77,7 +77,6 @@ export class DocumentComponent implements OnInit {
   }
 
   onFileSelected(event) {
-    
     this.file = event.target.files[0];
     console.log(this.file.size);
     let reader = new FileReader();
@@ -94,8 +93,6 @@ export class DocumentComponent implements OnInit {
     //----
     this.input.document = this.document;
     this.input.idProjet = this.idProjet;
-    let formdata: FormData = new FormData();
-    formdata.append('file', this.file);
     this.documentService.uploadDocument(this.input)
       .subscribe(data => {
         console.log("return upload: " + data);
@@ -120,14 +117,6 @@ export class DocumentComponent implements OnInit {
     this.document=new Document();
   }
   
-  uint8ToString(buf) {
-    var i, length, out = '';
-    for (i = 0, length = buf.length; i < length; i += 1) {
-        out += String.fromCharCode(buf[i]);
-    }
-    return out;
-}
-
   onFileDownload(event, documentc) {
     console.log(event);
     //window.open("data:application/octet-stream;base64," + documentc.contenu);
