@@ -77,14 +77,15 @@ export class DocumentComponent implements OnInit {
   }
 
   onFileSelected(event) {
+    
     this.file = event.target.files[0];
+    console.log(this.file.size);
     let reader = new FileReader();
     reader.readAsDataURL(this.file);
     reader.onload = () => {
       this.document.nomDocument = this.document.nomDocument == undefined ? this.file.name : this.document.nomDocument;
       this.input.contenu = reader.result.split(',')[1];
     };
-    console.log(this.file);
   }
 
   uploadDocument() {
@@ -93,6 +94,8 @@ export class DocumentComponent implements OnInit {
     //----
     this.input.document = this.document;
     this.input.idProjet = this.idProjet;
+    let formdata: FormData = new FormData();
+    formdata.append('file', this.file);
     this.documentService.uploadDocument(this.input)
       .subscribe(data => {
         console.log("return upload: " + data);
@@ -117,16 +120,21 @@ export class DocumentComponent implements OnInit {
     this.document=new Document();
   }
   
-  onFileDownload(event, document) {
+  uint8ToString(buf) {
+    var i, length, out = '';
+    for (i = 0, length = buf.length; i < length; i += 1) {
+        out += String.fromCharCode(buf[i]);
+    }
+    return out;
+}
+
+  onFileDownload(event, documentc) {
     console.log(event);
-    //console.log(document.contenu);
-    var buffer = new Buffer( document.contenu );
-    var bufferBase64 = buffer.toString('base64');
-    console.log("bufferBase64: " + bufferBase64)
-    var url = "data:application/octet-stream;charset=utf-8;base64,bW9uIGNvZXVyIGVzdCBlbiBwYXlzIGRlcyBtZXJ2ZWlsbGVzIC4uLg=="
-    //"data:image/png;base64,"+document.contenu;
-    window.open(url);
-    //importedSaveAs(blob, document.nomDocument);
+    //window.open("data:application/octet-stream;base64," + documentc.contenu);
+    var link = document.createElement('a');
+    link.href = "data:application/octet-stream;base64," + documentc.contenu;
+    link.download = documentc.nomDocument;
+    link.click();
   }
 
   onDeleteDocument(document: Document) {

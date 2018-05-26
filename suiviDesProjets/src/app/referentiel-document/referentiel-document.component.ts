@@ -44,16 +44,11 @@ export class ReferentielDocumentComponent implements OnInit {
     return documents;
   }
 
-  onFileDownload(event, document) {
-    console.log(event);
-    //console.log(document.contenu);
-    var buffer = new Buffer( document.contenu );
-    var bufferBase64 = buffer.toString('base64');
-    //console.log("bufferBase64: " + bufferBase64)
-    var url = "data:application/octet-stream;charset=utf-8;base64,bW9uIGNvZXVyIGVzdCBlbiBwYXlzIGRlcyBtZXJ2ZWlsbGVzIC4uLg=="
-    //"data:image/png;base64,"+document.contenu;
-    window.open(url);
-    //importedSaveAs(blob, document.nomDocument);
+  onFileDownload(event, documentc) {
+    var link = document.createElement('a');
+    link.href = "data:application/octet-stream;base64," + documentc.contenu;
+    link.download = documentc.nomDocument;
+    link.click();
   }
 
   goToYear(){

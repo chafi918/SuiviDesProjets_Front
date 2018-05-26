@@ -27,11 +27,6 @@
             <mat-error *ngIf="provinceV.invalid">Veuillez saisir la province</mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Date de fin des travaux" type="date" [(ngModel)]="projet.dateFinTravaux" name="dateFinTravaux" #dateFinTravaux="ngModel"
-              required>
-            <mat-error *ngIf="dateFinTravaux.invalid">Veuillez saisir une date</mat-error>
-            </mat-form-field>
-          <mat-form-field>
             <input matInput placeholder="Taux d'avancement" [(ngModel)]="projet.tauxAvancement" name="tauxAvancement" #tauxAvancementV="ngModel"
               required>
             <mat-error *ngIf="tauxAvancementV.invalid">Veuillez saisir un taux</mat-error>
