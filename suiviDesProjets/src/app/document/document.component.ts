@@ -10,6 +10,7 @@ import { saveAs as importedSaveAs } from "file-saver";
 import 'rxjs/Rx';
 import { Buffer } from 'buffer';
 import { LoginService } from '../../services/login.service';
+import { isNull } from 'util';
 
 
 @Component({
@@ -33,8 +34,8 @@ export class DocumentComponent implements OnInit {
   constructor(public documentService: DocumentService,
     public typeDocService: TypeDocService,
     public route: ActivatedRoute,
-    public router:Router,
-  public loginService:LoginService) { }
+    public router: Router,
+    public loginService: LoginService) { }
 
   ngOnInit() {
     this.idProjet = Number(this.route.snapshot.paramMap.get('id'));
@@ -49,8 +50,10 @@ export class DocumentComponent implements OnInit {
           this.documentPage = data;
           this.pages = new Array(data.totalPages);
           this.currentPage = data.number;
-        }, err => { this.loginService.logout();
-        this.router.navigateByUrl("/login"); }
+        }, err => {
+          this.loginService.logout();
+          this.router.navigateByUrl("/login");
+        }
       )
   }
   gotoPage(i: number) {
@@ -60,8 +63,10 @@ export class DocumentComponent implements OnInit {
         this.pages = new Array(data.totalPages);
         this.currentPage = data.number;
       }
-        , err => {this.loginService.logout();
-          this.router.navigateByUrl("/login"); })
+        , err => {
+          this.loginService.logout();
+          this.router.navigateByUrl("/login");
+        })
   }
 
   public getAllTypes() {
@@ -71,8 +76,10 @@ export class DocumentComponent implements OnInit {
         console.log(data.content);
         this.types = data.content;
       }
-        , err => { this.loginService.logout();
-          this.router.navigateByUrl("/login"); })
+        , err => {
+          this.loginService.logout();
+          this.router.navigateByUrl("/login");
+        })
 
   }
 
@@ -98,25 +105,29 @@ export class DocumentComponent implements OnInit {
         console.log("return upload: " + data);
         this.ngOnInit();
       }
-        , err => { this.loginService.logout();
-          this.router.navigateByUrl("/login"); });
+        , err => {
+          this.loginService.logout();
+          this.router.navigateByUrl("/login");
+        });
 
     this.display = 0;
     this.mode = 0;
     this.document = new Document();
   }
 
-  updateDocument(){
+  updateDocument() {
     this.document.dateAjout = new Date();
     this.document.type = this.getTypeByLibelle();
     this.documentService.updateDocument(this.document)
-    .subscribe(data=>{this.ngOnInit();},err=>{this.loginService.logout();
-      this.router.navigateByUrl("/login");});
-    this.mode=1;
-	  this.display=0;
-    this.document=new Document();
+      .subscribe(data => { this.ngOnInit(); }, err => {
+        this.loginService.logout();
+        this.router.navigateByUrl("/login");
+      });
+    this.mode = 1;
+    this.display = 0;
+    this.document = new Document();
   }
-  
+
   onFileDownload(event, documentc) {
     console.log(event);
     //window.open("data:application/octet-stream;base64," + documentc.contenu);
@@ -133,15 +144,17 @@ export class DocumentComponent implements OnInit {
           this.documentPage.content.indexOf(document), 1);
         this.ngOnInit();
       }
-        , err => { this.loginService.logout();
-          this.router.navigateByUrl("/login"); })
+        , err => {
+          this.loginService.logout();
+          this.router.navigateByUrl("/login");
+        })
   }
 
-  retourAuComposant(){
-    this.mode=0;
-    this.display=0;
+  retourAuComposant() {
+    this.mode = 0;
+    this.display = 0;
   }
-  
+
   onEditDocument(id: number) {
     this.mode = 1;
     this.display = 1;
@@ -168,10 +181,13 @@ export class DocumentComponent implements OnInit {
     }
   }
   isValidForm() {
-    return this.document.chargeurDocument && this.document.chargeurDocument.length != 0
+    let first:boolean = this.document.chargeurDocument && this.document.chargeurDocument.length != 0
       && this.document.objetDocument && this.document.objetDocument.length != 0
-      && this.libelleType
-      && this.file;
+      && !isNull(this.libelleType)
+      if (this.mode == 0) {
+        first = first && !isNull(this.file);
+      }
+    return first;
   }
 
   clickOnAjouterDocument() {

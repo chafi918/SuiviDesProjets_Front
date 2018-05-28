@@ -34,7 +34,7 @@ export class CommuneService extends CommonService{
    }
 
    deleteCommune(id:number){
-    return this.http.delete(this.backEndUrl +"admin/deleteCommune/"+id, this.options)
+    return this.http.delete(this.backEndUrl +"/admin/deleteCommune/"+id, this.options)
     .map(resp=>resp.json());
 }
 

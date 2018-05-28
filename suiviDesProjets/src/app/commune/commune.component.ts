@@ -79,14 +79,16 @@ export class CommuneComponent implements OnInit {
   }
 
   onDeleteCommune(commune:Commune){
-    this.communeService.deleteCommune(commune.idCommune)
-    .subscribe(data=>{
-      this.pageCommunes.content.splice(
-        this.pageCommunes.content.indexOf(commune),1
-      );
-      this.ngOnInit();
+    if(confirm("Est vous sûr de vouloir supprimer la commune: "+commune.libelleCommune)) {
+      this.communeService.deleteCommune(commune.idCommune)
+      .subscribe(data=>{
+        this.pageCommunes.content.splice(
+          this.pageCommunes.content.indexOf(commune),1
+        );
+        this.ngOnInit();
+      }
+      ,err=>{console.log(err);})
     }
-    ,err=>{console.log(err);})
   }
 
   gotoPage(i:number){

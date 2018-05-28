@@ -14,6 +14,7 @@ export class StatistiquesComponent implements OnInit {
   labels: Array<string>;
   data: any;
   label: string = 'projets par ' + (isNullOrUndefined(this.critere) ? 'années !' : this.critere+'s');
+  allData:any;
 
   constructor(public statService: StatistiquesService) { }
 
@@ -22,6 +23,7 @@ export class StatistiquesComponent implements OnInit {
       .subscribe(
         data => {
           console.log(data.statMap);
+          this.allData = data;
           this.labels = Object.keys(data.statMap);
           this.data = Object.values(data.statMap);
           this.initializeChartComponent();
@@ -102,7 +104,7 @@ export class StatistiquesComponent implements OnInit {
     this.myChart = new Chart(ctx, {
       type: this.getChartType(), //same type just change the value: bars, pie, ...
       data: {
-        labels: this.labels,
+        labels: this.labels.map(key => { return key+' (Nb: '+this.allData.statMap[key]+')'}),
         datasets: [{
           label: this.label,
           data: this.data,
@@ -119,8 +121,7 @@ export class StatistiquesComponent implements OnInit {
     });
   }
   showCritere() {
-    //this.label = 'projets par ' + this.critere;
-    this.myChart=null;
+    this.myChart.destroy();
     this.ngOnInit()
     console.log(this.critere);
   }
