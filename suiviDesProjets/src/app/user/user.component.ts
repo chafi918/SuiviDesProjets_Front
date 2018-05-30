@@ -142,6 +142,7 @@ utilisateur:Utilisateur=new Utilisateur();
   }
 
   onDeleteUser(utilisateur:Utilisateur){
+    if(confirm("Est vous sûr de vouloir supprimer l'utilisateur': "+utilisateur.nomUser + utilisateur.prenomUser)) {
     this.userService.deleteUser(utilisateur.idUser)
     .subscribe(data=>{
       this.pageUsers.content.splice(
@@ -150,6 +151,7 @@ utilisateur:Utilisateur=new Utilisateur();
       this.ngOnInit();
     }
     ,err=>{console.log(err);})
+  }
   }
 
   isValidForm(){

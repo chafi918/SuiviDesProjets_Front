@@ -135,6 +135,7 @@ export class ProjetsComponent implements OnInit {
   }
 
   onDeleteProjet(projet: Projet) {
+    if(confirm("Est vous sûr de vouloir supprimer le projet: "+projet.intitule)) {
     this.projetService.deleteProjet(projet.idProjet)
       .subscribe(data => {
         this.pageProjets.content.splice(
@@ -143,6 +144,7 @@ export class ProjetsComponent implements OnInit {
         this.ngOnInit();
       }
         , err => { console.log(err); })
+    }
   }
 
   chercher() {

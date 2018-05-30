@@ -77,6 +77,7 @@ export class NatureMarcheComponent implements OnInit {
   }
 
   onDeleteNature(nature:Nature){
+    if(confirm("Est vous sûr de vouloir supprimer la nature: "+nature.libelleNature)) {
     this.natureService.deleteNature(nature.idNature)
     .subscribe(data=>{
       this.pageNatures.content.splice(
@@ -85,6 +86,7 @@ export class NatureMarcheComponent implements OnInit {
       this.ngOnInit();
     }
     ,err=>{console.log(err);})
+  }
   }
 
   gotoPage(i:number){

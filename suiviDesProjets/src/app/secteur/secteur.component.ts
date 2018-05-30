@@ -94,6 +94,7 @@ export class SecteurComponent implements OnInit {
   }
   
   onDeleteSecteur(secteur:Secteur){
+    if(confirm("Est vous sûr de vouloir supprimer le secteur: "+secteur.libelleSecteur)) {
     this.secteurService.deleteSecteur(secteur.idSecteur)
     .subscribe(data=>{
       this.pageSecteurs.content.splice(
@@ -102,6 +103,7 @@ export class SecteurComponent implements OnInit {
       this.ngOnInit();
     }
     ,err=>{console.log(err);})
+  }
   }
 
   gotoPage(i:number){

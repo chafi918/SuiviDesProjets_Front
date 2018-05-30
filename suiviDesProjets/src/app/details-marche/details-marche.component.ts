@@ -76,6 +76,7 @@ export class DetailsMarcheComponent implements OnInit {
   }
 
   onDeleteEntreprise(entreprise: Entreprise) {
+    if(confirm("Est vous sûr de vouloir supprimer l'entreprise': "+entreprise.nomEntreprise)) {
     this.entrepriseService.deleteEntreprise(entreprise.idEntreprise)
       .subscribe(data => {
         this.pageEntreprises.content.splice(
@@ -87,6 +88,7 @@ export class DetailsMarcheComponent implements OnInit {
           this.loginService.logout();
           this.router.navigateByUrl("/login");
         })
+      }
   }
 
   isValidForm() {

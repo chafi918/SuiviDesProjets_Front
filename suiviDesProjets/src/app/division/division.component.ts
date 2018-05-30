@@ -113,6 +113,7 @@ export class DivisionComponent implements OnInit {
   }
 
   onDeleteDivision(division: Division) {
+    if(confirm("Est vous sûr de vouloir supprimer la division: "+division.libelleDivision)) {
     this.divisionService.deleteDivision(division.idDivision)
       .subscribe(data => {
         this.pageDivisions.content.splice(
@@ -124,6 +125,7 @@ export class DivisionComponent implements OnInit {
           this.loginService.logout();
           this.router.navigateByUrl("/login");
         })
+      }
   }
 
   gotoPage(i: number) {

@@ -181,6 +181,7 @@ export class ContactComponent implements OnInit {
   }
 
   onDeleteContact(contact: Contact) {
+    if(confirm("Est vous sûr de vouloir supprimer le contact: "+contact.nomContact)) {
     this.display = 0;
     this.contactService.deleteContact(contact.idContact)
       .subscribe(data => {
@@ -193,6 +194,7 @@ export class ContactComponent implements OnInit {
           this.loginService.logout();
           this.router.navigateByUrl("/login");
         })
+      }
   }
 
   gotoPage(i: number) {

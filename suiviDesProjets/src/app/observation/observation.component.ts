@@ -102,6 +102,7 @@ export class ObservationComponent implements OnInit {
   }
 
   onDeleteObservation(observation:Observation){
+    if(confirm("Est vous sûr de vouloir supprimer cette observation ? ")) {
     this.observationService.deleteObservation(observation.idObservation)
     .subscribe(data=>{  
       this.pageObservations.content.splice(
@@ -109,6 +110,7 @@ export class ObservationComponent implements OnInit {
       this.ngOnInit();
   }
     ,err=>{console.log(err);})
+  }
   }
 
   gotoPage(i:number){

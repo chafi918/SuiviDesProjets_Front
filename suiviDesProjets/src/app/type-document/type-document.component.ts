@@ -77,6 +77,7 @@ export class TypeDocumentComponent implements OnInit {
   }
 
   onDeleteType(type:Type){
+    if(confirm("Est vous sûr de vouloir supprimer le type: "+type.libelleType)) {
     this.typeDocService.deleteType(type.idTypeDoc)
     .subscribe(data=>{
       this.pageTypes.content.splice(
@@ -85,6 +86,7 @@ export class TypeDocumentComponent implements OnInit {
       this.ngOnInit();
     }
     ,err=>{console.log(err);})
+  }
   }
 
   gotoPage(i:number){

@@ -188,6 +188,7 @@ export class MarcheComponent implements OnInit {
     this.display = 0;
   }
   onDeleteMarche(marche: Marche) {
+    if(confirm("Est vous sûr de vouloir supprimer le marché: "+marche.numeroMarche)) {
     this.marcheService.deleteMarche(marche.idMarche)
       .subscribe(data => {
         this.pageMarches.content.splice(
@@ -199,6 +200,7 @@ export class MarcheComponent implements OnInit {
           this.loginService.logout();
           this.router.navigateByUrl("/login");
         })
+      }
   }
 
   gotoPage(i: number) {

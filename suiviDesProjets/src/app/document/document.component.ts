@@ -138,6 +138,7 @@ export class DocumentComponent implements OnInit {
   }
 
   onDeleteDocument(document: Document) {
+    if(confirm("Est vous sûr de vouloir supprimer le document: "+document.nomDocument)) {
     this.documentService.deleteDocument(document.idDocument)
       .subscribe(data => {
         this.documentPage.content.splice(
@@ -148,7 +149,8 @@ export class DocumentComponent implements OnInit {
           this.loginService.logout();
           this.router.navigateByUrl("/login");
         })
-  }
+      }
+      }
 
   retourAuComposant() {
     this.mode = 0;

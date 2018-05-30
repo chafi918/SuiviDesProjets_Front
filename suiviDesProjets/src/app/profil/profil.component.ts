@@ -76,6 +76,7 @@ export class ProfilComponent implements OnInit {
   }
 
   onDeleteProfil(profil:Profil){
+    if(confirm("Est vous sûr de vouloir supprimer le profil: "+profil.libelleProfil)) {
     this.profilService.deleteProfil(profil.idProfil)
     .subscribe(data=>{
       this.pageProfils.content.splice(
@@ -84,6 +85,7 @@ export class ProfilComponent implements OnInit {
       this.ngOnInit();
     }
     ,err=>{console.log(err);})
+  }
   }
 
   retourAuComposant(){

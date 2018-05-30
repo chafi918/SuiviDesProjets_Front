@@ -90,6 +90,7 @@ export class StatutComponent implements OnInit {
   }
 
   onDeleteStatut(statut:Statut){
+    if(confirm("Est vous sûr de vouloir supprimer le statut: "+statut.libelleStatut)) {
     this.statutService.deleteStatut(statut.idStatut)
     .subscribe(data=>{
       this.pageStatuts.content.splice(
@@ -98,6 +99,7 @@ export class StatutComponent implements OnInit {
       this.ngOnInit();
     }
     ,err=>{console.log(err);})
+  }
   }
 
   gotoPage(i:number){
