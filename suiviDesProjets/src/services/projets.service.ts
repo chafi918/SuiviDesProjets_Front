@@ -64,4 +64,9 @@ export class ProjetService extends CommonService {
             .map(resp => resp.json());
 
     }
+
+    exportCSV(){
+        return this.http.get(this.backEndUrl +"/projet/exportProjets", this.options)
+            .map(resp => resp.json());
+    }
 }

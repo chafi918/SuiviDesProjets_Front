@@ -10,11 +10,12 @@ import { StatistiquesService } from '../../services/statistiques.service';
 })
 export class StatistiquesComponent implements OnInit {
   myChart: any;
+  fileName:string = 'statistiques-'+new Date()+'.pdf';
   critere: string = "annee";
   labels: Array<string>;
   data: any;
   label: string = 'projets par ' + (isNullOrUndefined(this.critere) ? 'années !' : this.critere+'s');
-  allData:any;
+  allData: any;
 
   constructor(public statService: StatistiquesService) { }
 
@@ -22,7 +23,6 @@ export class StatistiquesComponent implements OnInit {
     this.statService.getStatistiques(this.critere)
       .subscribe(
         data => {
-          console.log(data.statMap);
           this.allData = data;
           this.labels = Object.keys(data.statMap);
           this.data = Object.values(data.statMap);
@@ -31,7 +31,7 @@ export class StatistiquesComponent implements OnInit {
         err => { console.log(err); })
   }
 
-  getChartType(){
+  getChartType() {
     switch (this.critere) {
       case 'annee':
         return 'bar';
@@ -50,17 +50,16 @@ export class StatistiquesComponent implements OnInit {
     for (let index = 0; index < n; index++) {
       resultColors.push(this.getRandomColor());
     }
-    console.log(resultColors);
     return resultColors;
   }
 
-  initializeChartComponent(){
+  initializeChartComponent() {
     switch (this.critere) {
       case 'annee':
         this.initialiseBarChar();
         break;
       default:
-      this.initiaseDefaultChart()
+        this.initiaseDefaultChart()
         break;
     }
   }
@@ -83,20 +82,26 @@ export class StatistiquesComponent implements OnInit {
         }]
       },
       options: {
+        legend: {
+          display: false,
+        },
         responsive: true,
         scales: {
           yAxes: [{
-              ticks: {
-                stepSize: 1,
-                beginAtZero:true
-              }
+            ticks: {
+              stepSize: 1,
+              beginAtZero: true
+            }
           }],
           xAxes: [{
-            barThickness : 50
-        }]}
+            barThickness: 50
+          }]
+        }
       }
     });
   }
+
+  releadChart
 
   initiaseDefaultChart() {
     var colors = this.getBackgroundColors();
@@ -104,7 +109,7 @@ export class StatistiquesComponent implements OnInit {
     this.myChart = new Chart(ctx, {
       type: this.getChartType(), //same type just change the value: bars, pie, ...
       data: {
-        labels: this.labels.map(key => { return key+' (Nb: '+this.allData.statMap[key]+')'}),
+        labels: this.labels.map(key => { return key + ' (Nb: ' + this.allData.statMap[key] + ')' }),
         datasets: [{
           label: this.label,
           data: this.data,
@@ -123,6 +128,5 @@ export class StatistiquesComponent implements OnInit {
   showCritere() {
     this.myChart.destroy();
     this.ngOnInit()
-    console.log(this.critere);
   }
 }

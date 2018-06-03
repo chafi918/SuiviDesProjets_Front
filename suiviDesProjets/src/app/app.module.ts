@@ -56,6 +56,8 @@ import { LoginAppComponent } from './login-app/login-app.component';
 import { LoginService } from '../services/login.service';
 import { StatistiquesComponent } from './statistiques/statistiques.component';
 import { StatistiquesService } from '../services/statistiques.service';
+import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
+import { ExportComponent } from './export/export.component';
 
 const appRoutes:Routes=[
   {path:'projets', component:ProjetsComponent, canActivate: [LoggedVerif]},
@@ -105,12 +107,14 @@ const appRoutes:Routes=[
     ParametresComponent,
     LoginAppComponent,
     CommuneComponent,
-    StatistiquesComponent
+    StatistiquesComponent,
+    ExportComponent
   ],
   imports: [
     BrowserModule, HttpModule, RouterModule.forRoot(appRoutes), FormsModule,
     BrowserAnimationsModule, MatToolbarModule, MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
-    MatPaginatorModule, MatIconModule, MatSelectModule, ReactiveFormsModule, HttpClientModule, MatExpansionModule
+    MatPaginatorModule, MatIconModule, MatSelectModule, ReactiveFormsModule, HttpClientModule, MatExpansionModule,
+    PDFExportModule
   ],
   providers: [ProjetService, UserService, DivisionService, SecteurService, StatutService, ProfilService, TypeDocService,
     ContactService, NatureService, MarcheService, EntrepriseService, DocumentService, ObservationService, LoginService,

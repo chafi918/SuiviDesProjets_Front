@@ -20,7 +20,10 @@
     .row.content {height:auto;} 
   }
 
-
+  .k-pdf-export .noExport {
+    display: none;
+  }
+  
   .home-button-container{
     display:inline-block;
   }

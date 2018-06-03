@@ -175,6 +175,20 @@ export class ProjetsComponent implements OnInit {
     this.router.navigate(['/detailsProjet/' + idProjet]);
   }
 
+  exportCSV(){
+    this.projetService.exportCSV()
+    .subscribe(data => {
+      this.download(data.data);
+    }
+      , err => { console.log(err); })
+  }
+
+  download(data) {
+    var link = document.createElement('a');
+    link.href = "data:application/octet-stream;base64," + btoa(data);
+    link.download = "projects.csv";
+    link.click();
+  }
   isValidForm() {
     this.projet.secteur = this.getSecteurByName(this.secteurs, this.libelleSecteur);
     this.projet.statut = this.getStatutByName(this.statuts, this.libelleStatut);

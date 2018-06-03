@@ -5,7 +5,7 @@
         <h5>Statistiques</h5>
       </div>
       <div class="panel-body">
-        <div>
+        <div class="row" style="margin:10px;">
           <mat-form-field>
             <mat-select placeholder="Critère de statistique" [(ngModel)]="critere" (change)="showCritere()">
               <mat-option value="secteur">Nombre de projets par secteur</mat-option>
@@ -14,10 +14,14 @@
               <mat-option value="annee">Nombre de projets par année</mat-option>
             </mat-select>
           </mat-form-field>
+          <app-export [titre]="critere" [type]="'statistiques'" [pdf]="pdf" style="float:right;"></app-export>
+          <a (click)="ngOnInit()" style="margin-left:10px"><i class="fas fa-redo cursorElement" style="font-size:20"></i></a>
         </div>
-        <div style="padding:10%;">
+        <div style="padding:5%;">
           <div>
-              <canvas id="myChart">{{ myChart }}</canvas>
+              <kendo-pdf-export #pdf paperSize="A4" margin="2cm">
+                  <canvas id="myChart">{{ myChart }}</canvas>
+                </kendo-pdf-export>
           </div>
         </div>
       </div>
