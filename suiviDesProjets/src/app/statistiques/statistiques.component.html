@@ -14,8 +14,10 @@
               <mat-option value="annee">Nombre de projets par année</mat-option>
             </mat-select>
           </mat-form-field>
-          <app-export [titre]="critere" [type]="'statistiques'" [pdf]="pdf" style="float:right;"></app-export>
-          <a (click)="ngOnInit()" style="margin-left:10px"><i class="fas fa-redo cursorElement" style="font-size:20"></i></a>
+        </div>
+        <div>
+          <button (click)="ngOnInit()" style="margin-left:10px">Recharger</button>
+          <app-export [titre]="critere" [type]="'statistiques'" [pdf]="pdf" style="margin-left:20px"></app-export>
         </div>
         <div style="padding:5%;">
           <div>

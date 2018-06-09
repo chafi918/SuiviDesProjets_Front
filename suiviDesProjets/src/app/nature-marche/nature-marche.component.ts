@@ -94,7 +94,7 @@ export class NatureMarcheComponent implements OnInit {
     .subscribe(data=>{
       this.pageNatures=data;
       this.pages=new Array(data.totalPages);
-      this.currentPage = data.number;}
+      this.currentPage = i;}
     ,err=>{console.log(err);})
   }
 

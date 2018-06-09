@@ -154,6 +154,15 @@ utilisateur:Utilisateur=new Utilisateur();
   }
   }
 
+  gotoPage(i:number){
+    this.userService.getUsersParPage(i)
+    .subscribe(data=>{
+      this.pageUsers=data;
+      this.pages=new Array(data.totalPages);
+      this.currentPage = i;}
+    ,err=>{console.log(err);})
+  }
+
   isValidForm(){
     this.utilisateur.division = this.getDivisionByName(this.divisions, this.libelleDivision);
     this.utilisateur.profil = this.getProfilByName(this.profils, this.libelleProfil);

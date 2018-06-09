@@ -16,11 +16,11 @@
             </div>
             <label class="control-label col-sm-3" >Montant du Marché:</label>
             <div class="col-sm-8">
-              <p class="form-control-static">{{marche.montantMarche}}</p>
+              <p class="form-control-static">{{marche.montantMarche}} Dirhams</p>
             </div>
           <label class="control-label col-sm-3" >Montant des Travaux Réalisés:</label>
           <div class="col-sm-8">
-            <p class="form-control-static">{{marche.montantTravauxRealises}}</p>
+            <p class="form-control-static">{{marche.montantTravauxRealises}} Dirhams</p>
           </div>
           <label class="control-label col-sm-3" >Délai d'execution:</label>
           <div class="col-sm-8">
@@ -30,7 +30,7 @@
           <div class="col-sm-8">
             <p class="form-control-static">{{marche.dateOS}}</p>
           </div>
-          <label class="control-label col-sm-3">Taux d'Avancement:</label>
+          <label class="control-label col-sm-3">Taux d'Avancement en %:</label>
           <div class="progress col-sm-8">
               <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" 
               [style.width]="marche.tauxAvancement + '%'">

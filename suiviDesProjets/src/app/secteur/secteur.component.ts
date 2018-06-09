@@ -111,7 +111,7 @@ export class SecteurComponent implements OnInit {
     .subscribe(data=>{
       this.pageSecteurs=data;
       this.pages=new Array(data.totalPages);
-      this.currentPage = data.number;}
+      this.currentPage = i;}
     ,err=>{console.log(err);})
   }
 

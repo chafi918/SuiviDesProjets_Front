@@ -10,55 +10,55 @@
       <div class="panel-body">
           <form class="form-horizontal">
               <div class="form-group">
-                <label class="control-label col-sm-3">Intitulé:</label>
-                <div class="col-sm-8">
+                <label class="control-label col-sm-4">Intitulé:</label>
+                <div class="col-sm-7">
                   <p class="form-control-static">{{projet.intitule}}</p>
                 </div>
-                <label class="control-label col-sm-3">Commune:</label>
-                <div class="col-sm-8">
+                <label class="control-label col-sm-4">Commune:</label>
+                <div class="col-sm-7">
                   <p class="form-control-static">{{projet.commune?.libelleCommune}}</p>
                 </div>
-                <label class="control-label col-sm-3">Province:</label>
-                <div class="col-sm-8">
+                <label class="control-label col-sm-4">Province:</label>
+                <div class="col-sm-7">
                   <p class="form-control-static">{{projet.province}}</p>
                 </div>
-                <label class="control-label col-sm-3">Date de fin des travaux</label>
-                <div class="col-sm-8">
-                  <p class="form-control-static">{{projet.dateFinTravaux}}</p>
+                <label class="control-label col-sm-4">Montant Programmé:</label>
+                <div class="col-sm-7">
+                  <p class="form-control-static">{{projet.montantProgramme}} Dirhams</p>
                 </div>
-                <label class="control-label col-sm-3">Taux d'Avancement:</label>
+                <label class="control-label col-sm-4">Date d'Appel d'offre:</label>
+                <div class="col-sm-7">
+                  <p class="form-control-static">{{projet.dateAO}}</p>
+                </div>
+                <label class="control-label col-sm-4">Date d'ouverture des plis:</label>
+                <div class="col-sm-7">
+                  <p class="form-control-static">{{projet.dateOP}}</p>
+                </div>
+                <label class="control-label col-sm-4">Date commencement des travaux:</label>
+                <div class="col-sm-7">
+                  <p class="form-control-static">{{projet.dateCommTravaux}}</p>
+                </div>
+                <label class="control-label col-sm-4">Secteur:</label>
+                <div class="col-sm-7">
+                  <p class="form-control-static">{{projet.secteur?.libelleSecteur}}</p>
+                </div>
+                <label class="control-label col-sm-4">Statut:</label>
+                <div class="col-sm-7">
+                  <p class="form-control-static">{{projet.statut?.libelleStatut}}</p>
+                </div>
+                <label class="control-label col-sm-4">Chargé du projet:</label>
+                <div class="col-sm-7">
+                  <p class="form-control-static">{{projet.chargeDuProjet}}</p>
+                </div>
+                <label class="control-label col-sm-4">Taux d'Avancement en %:</label>
                 <div class="progress col-sm-7">
                     <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" 
                     [style.width]="projet.tauxAvancement + '%'">
                         {{projet.tauxAvancement}}%</div>
-                  </div>
-                <label class="control-label col-sm-3">Montant Programmé</label>
-                <div class="col-sm-8">
-                  <p class="form-control-static">{{projet.montantProgramme}}</p>
                 </div>
-                <label class="control-label col-sm-3">Secteur</label>
-                <div class="col-sm-8">
-                  <p class="form-control-static">{{projet.secteur?.libelleSecteur}}</p>
-                </div>
-                <label class="control-label col-sm-3">Statut</label>
-                <div class="col-sm-8">
-                  <p class="form-control-static">{{projet.statut?.libelleStatut}}</p>
-                </div>
-                <label class="control-label col-sm-3">Date d'ouverture des plis</label>
-                <div class="col-sm-8">
-                  <p class="form-control-static">{{projet.dateOP}}</p>
-                </div>
-                <label class="control-label col-sm-3">Chargé du projet</label>
-                <div class="col-sm-8">
-                  <p class="form-control-static">{{projet.chargeDuProjet}}</p>
-                </div>
-                <label class="control-label col-sm-3">Date d'Appel d'offre</label>
-                <div class="col-sm-8">
-                  <p class="form-control-static">{{projet.dateAO}}</p>
-                </div>
-                <label class="control-label col-sm-3">Date commencement des travaux</label>
-                <div class="col-sm-8">
-                  <p class="form-control-static">{{projet.dateCommTravaux}}</p>
+                <label class="control-label col-sm-4">Date de fin des travaux:</label>
+                <div class="col-sm-7">
+                  <p class="form-control-static">{{projet.dateFinTravaux}}</p>
                 </div>
             </div>
           </form>

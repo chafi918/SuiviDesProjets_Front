@@ -118,7 +118,7 @@ export class ObservationComponent implements OnInit {
     .subscribe(data=>{
       this.pageObservations=data;
       this.pages=new Array(data.totalPages);
-      this.currentPage = data.number;}
+      this.currentPage = i;}
     ,err=>{console.log(err);})
   }
 

@@ -107,7 +107,7 @@ export class StatutComponent implements OnInit {
     .subscribe(data=>{
       this.pageStatuts=data;
       this.pages=new Array(data.totalPages);
-      this.currentPage = data.number;}
+      this.currentPage = i;}
     ,err=>{console.log(err);})
   }
   retourAuComposant(){

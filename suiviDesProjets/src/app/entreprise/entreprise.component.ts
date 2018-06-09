@@ -118,7 +118,7 @@ export class EntrepriseComponent implements OnInit {
       .subscribe(data => {
         this.pageEntreprises = data;
         this.pages = new Array(data.totalPages);
-        this.currentPage = data.number;
+        this.currentPage = i;
       }
         , err => {
           this.loginService.logout();

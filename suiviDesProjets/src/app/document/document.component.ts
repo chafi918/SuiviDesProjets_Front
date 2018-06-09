@@ -61,7 +61,7 @@ export class DocumentComponent implements OnInit {
       .subscribe(data => {
         this.documentPage = data;
         this.pages = new Array(data.totalPages);
-        this.currentPage = data.number;
+        this.currentPage = i;
       }
         , err => {
           this.loginService.logout();

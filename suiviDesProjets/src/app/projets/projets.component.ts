@@ -166,6 +166,7 @@ export class ProjetsComponent implements OnInit {
       .subscribe(data => {
         this.pageProjets = data;
         this.pages = new Array(data.totalPages);
+        this.currentPage = i;
       }
         , err => { console.log(err); })
   }

@@ -14,6 +14,10 @@ export class UserService extends CommonService{
     .map(resp=>resp.json());
    }
    
+   getUsersParPage(page:number){
+    return this.http.get(this.backEndUrl +"/users/getAllUtilisateurs?page="+page, this.options)
+    .map(resp=>resp.json());
+   }
 
    getAllDivisions(){
     return this.http.get(this.backEndUrl +"/division/divisions", this.options)
