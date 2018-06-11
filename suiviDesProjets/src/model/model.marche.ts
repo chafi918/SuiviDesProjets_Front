@@ -7,8 +7,10 @@ export class Marche{
     numeroMarche:string;
     montantMarche:number;
     montantTravauxRealises:number;
+    montantEmis:number;
     delaiExecution:string;
     dateOS:Date;
+    dateReceptionProvisoire:Date;
     tauxAvancement:number;
     nature:Nature;
     entreprise:Entreprise;

@@ -23,8 +23,33 @@
             <mat-error *ngIf="commune.invalid">Veuillez choisir une commune pour le projet</mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Province" [(ngModel)]="projet.province" name="province" #provinceV="ngModel" required>
-            <mat-error *ngIf="provinceV.invalid">Veuillez saisir la province</mat-error>
+            <mat-select placeholder="Province" [(ngModel)]="libelleProvince" name="province" #province="ngModel" required>
+              <mat-option *ngFor="let province of provinces" [(value)]="province.libelleProvince">
+                {{ province.libelleProvince }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="province.invalid">Veuillez choisir une province pour le projet</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Année de programmation" [(ngModel)]="projet.anneeDeProgrammation" name="anneeDeProgrammation" #anneeDeProgrammationV="ngModel"
+              required>
+            <mat-error *ngIf="anneeDeProgrammationV.invalid">Veuillez saisir une année</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Secteur" [(ngModel)]="libelleSecteur" name="secteur" #secteur="ngModel" required>
+              <mat-option *ngFor="let secteur of secteurs" [(value)]="secteur.libelleSecteur">
+                {{ secteur.libelleSecteur }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="secteur.invalid">Veuillez choisir un secteur pour le projet</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Statut" [(ngModel)]="libelleStatut" name="statut" #statut="ngModel" required>
+              <mat-option *ngFor="let statut of statuts" [(value)]="statut.libelleStatut">
+                {{ statut.libelleStatut }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="statut.invalid">Veuillez choisir un statut pour le projet</mat-error>
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Taux d'avancement" [(ngModel)]="projet.tauxAvancement" name="tauxAvancement" #tauxAvancementV="ngModel"
@@ -50,25 +75,11 @@
               required>
             <mat-error *ngIf="dateAO.invalid">Veuillez saisir une date</mat-error>
           </mat-form-field>
-          <mat-form-field>
-            <mat-select placeholder="Secteur" [(ngModel)]="libelleSecteur" name="secteur" #secteur="ngModel" required>
-              <mat-option *ngFor="let secteur of secteurs" [(value)]="secteur.libelleSecteur">
-                {{ secteur.libelleSecteur }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="secteur.invalid">Veuillez choisir un secteur pour le projet</mat-error>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-select placeholder="Statut" [(ngModel)]="libelleStatut" name="statut" #statut="ngModel" required>
-              <mat-option *ngFor="let statut of statuts" [(value)]="statut.libelleStatut">
-                {{ statut.libelleStatut }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="statut.invalid">Veuillez choisir un statut pour le projet</mat-error>
-          </mat-form-field>
           <mat-checkbox class="checkbox" [(ngModel)]="projet.estProjetRoyal" required>Royal</mat-checkbox>
           <mat-checkbox class="checkbox" [(ngModel)]="projet.estMasque" required>Masqué</mat-checkbox>
-
+          <mat-form-field>
+            <input matInput placeholder="Date de fin des Travaux" type="date" [(ngModel)]="projet.dateFinTravaux">
+          </mat-form-field>
         </div>
         <button mat-raised-button class="spacerUp" [disabled]="!isValidForm()" color="primary" (click)="ajouterProjet()" style="height:40px;margin: 20px;"
           *ngIf="mode==0">Ajouter</button>
@@ -111,6 +122,7 @@
               <th>Titre</th>
               <th>Commune</th>
               <th>Province</th>
+              <th>Année de programmation</th>
               <th>Montant du projet</th>
               <th>Secteur</th>
               <th>Modifier</th>
@@ -120,7 +132,8 @@
             <tr *ngFor="let p of pageProjets?.content">
               <td>{{p.intitule}}</td>
               <td>{{p.commune.libelleCommune}}</td>
-              <td>{{p.province}}</td>
+              <td>{{p.province.libelleProvince}}</td>
+              <td>{{p.anneeDeProgrammation}}</td>
               <td>{{p.montantProgramme}}</td>
               <td>{{p.secteur.libelleSecteur}}</td>
               <td>
@@ -141,7 +154,7 @@
           </table>
         </div>
         <div class="container">
-          <ul class="nav nav-tabs">
+          <ul class="pager">
             <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages; let i=index">
               <a (click)="gotoPage(i)" class="cursorElement">{{i}}</a>
             </li>

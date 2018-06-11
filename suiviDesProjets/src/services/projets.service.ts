@@ -48,6 +48,10 @@ export class ProjetService extends CommonService {
         return this.http.get(this.backEndUrl +"/admin/communes", this.options)
         .map(resp=>resp.json());
     }
+    getAllProvinces(){
+        return this.http.get(this.backEndUrl +"/admin/provinces", this.options)
+        .map(resp=>resp.json());
+    }
 
     updateProjet(projet: Projet) {
         return this.http.put(this.backEndUrl +"/projet/" + projet.idProjet, projet, this.options)

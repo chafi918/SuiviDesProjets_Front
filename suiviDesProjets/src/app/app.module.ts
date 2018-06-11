@@ -58,6 +58,8 @@ import { StatistiquesComponent } from './statistiques/statistiques.component';
 import { StatistiquesService } from '../services/statistiques.service';
 import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import { ExportComponent } from './export/export.component';
+import { ProvinceComponent } from './province/province.component';
+import { ProvinceService } from '../services/province.service';
 
 const appRoutes:Routes=[
   {path:'projets', component:ProjetsComponent, canActivate: [LoggedVerif]},
@@ -78,6 +80,7 @@ const appRoutes:Routes=[
   {path:'referentielDocument', component:ReferentielDocumentComponent, canActivate: [LoggedVerif]},
   {path:'parametres',component:ParametresComponent, canActivate: [LoggedVerif, AdminControl]},
   {path:'communes',component:CommuneComponent, canActivate: [LoggedVerif, AdminControl]},
+  {path:'provinces',component:ProvinceComponent, canActivate: [LoggedVerif, AdminControl]},
   {path:'statistiques',component:StatistiquesComponent, canActivate: [LoggedVerif]},
   {path:'login',component:LoginAppComponent},
   {path:'',redirectTo:'/projets',pathMatch:'full'}
@@ -108,7 +111,8 @@ const appRoutes:Routes=[
     LoginAppComponent,
     CommuneComponent,
     StatistiquesComponent,
-    ExportComponent
+    ExportComponent,
+    ProvinceComponent
   ],
   imports: [
     BrowserModule, HttpModule, RouterModule.forRoot(appRoutes), FormsModule,
@@ -118,7 +122,7 @@ const appRoutes:Routes=[
   ],
   providers: [ProjetService, UserService, DivisionService, SecteurService, StatutService, ProfilService, TypeDocService,
     ContactService, NatureService, MarcheService, EntrepriseService, DocumentService, ObservationService, LoginService,
-    LoggedVerif, AdminControl, CommuneService, StatistiquesService],
+    LoggedVerif, AdminControl, CommuneService, StatistiquesService,ProvinceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,6 +11,7 @@ import { Observation } from '../../model/model.observation';
 import { Router, CanActivate } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { Commune } from '../../model/model.commune';
+import { Province } from '../../model/model.province';
 
 @Component({
   selector: 'app-projets',
@@ -26,11 +27,13 @@ export class ProjetsComponent implements OnInit {
   libelleSecteur: string;
   libelleStatut: string;
   libelleCommune: string;
+  libelleProvince:string;
   mode: number = 0;
   display: number = 0;
   secteurs: Array<Secteur>;
   statuts: Array<Statut>;
   communes: Array<Commune>;
+  provinces:Array<Province>;
   observation: Observation = new Observation();
   critere: string = "intitule";
   constructor(public http: Http, public router: Router, public projetService: ProjetService,
@@ -46,7 +49,8 @@ export class ProjetsComponent implements OnInit {
         this.getAllSecteurs();
         this.getAllStatuts();
         this.getAllCommunes();
-        this.libelleStatut = this.libelleSecteur = this.libelleCommune = "";
+        this.getAllProvinces();
+        this.libelleStatut = this.libelleSecteur = this.libelleCommune = this.libelleProvince="";
       }
         , err => { console.log(err); })
   }
@@ -55,6 +59,7 @@ export class ProjetsComponent implements OnInit {
     this.projet.secteur = this.getSecteurByName(this.secteurs, this.libelleSecteur);
     this.projet.statut = this.getStatutByName(this.statuts, this.libelleStatut);
     this.projet.commune = this.getCommuneByName(this.communes, this.libelleCommune);
+    this.projet.province = this.getProvinceByName(this.provinces, this.libelleProvince);
     console.log(this.projet);
     this.projetService.ajouterProjet(this.projet)
       .subscribe(data => { this.ngOnInit(); }
@@ -85,6 +90,13 @@ export class ProjetsComponent implements OnInit {
       }
     }
   }
+  getProvinceByName(provinces, libelleProvince) {
+    for (let index = 0; index < provinces.length; index++) {
+      if (provinces[index].libelleProvince === libelleProvince) {
+        return provinces[index];
+      }
+    }
+  }
   getAllSecteurs() {
     this.projetService.getAllSecteurs()
       .subscribe(data => { this.secteurs = data; },
@@ -100,11 +112,16 @@ export class ProjetsComponent implements OnInit {
       .subscribe(data => { this.communes = data; },
         err => { console.log(err); })
   }
+  getAllProvinces() {
+    this.projetService.getAllProvinces()
+      .subscribe(data => { this.provinces = data; },
+        err => { console.log(err); })
+  }
   clickOnAjouterProjet() {
     this.mode = 0;
     this.display = 1;
     this.projet = new Projet();
-    this.libelleSecteur = this.libelleStatut = this.libelleCommune = "";
+    this.libelleSecteur = this.libelleStatut = this.libelleCommune =this.libelleProvince= "";
   }
   clickOnAjouterObservation() {
     this.mode = 0;
@@ -129,6 +146,7 @@ export class ProjetsComponent implements OnInit {
         this.libelleStatut = this.projet.statut.libelleStatut;
         this.libelleSecteur = this.projet.secteur.libelleSecteur;
         this.libelleCommune = this.projet.commune.libelleCommune;
+        this.libelleProvince = this.projet.province.libelleProvince;
         console.log(data);
       }
         , err => { console.log(err); })
@@ -194,11 +212,13 @@ export class ProjetsComponent implements OnInit {
     this.projet.secteur = this.getSecteurByName(this.secteurs, this.libelleSecteur);
     this.projet.statut = this.getStatutByName(this.statuts, this.libelleStatut);
     this.projet.commune = this.getCommuneByName(this.communes, this.libelleCommune);
+    this.projet.province = this.getProvinceByName(this.provinces, this.libelleProvince);
     return this.projet.intitule && this.projet.intitule.length != 0
       && this.projet.commune
-      && this.projet.province && this.projet.province.length != 0
+      && this.projet.province
       && this.projet.secteur && this.projet.statut
       && this.projet.dateAO
+      && this.projet.anneeDeProgrammation
       && this.projet.montantProgramme && this.projet.montantProgramme != 0;
 
   }

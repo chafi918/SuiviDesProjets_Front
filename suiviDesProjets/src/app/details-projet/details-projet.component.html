@@ -20,7 +20,19 @@
                 </div>
                 <label class="control-label col-sm-4">Province:</label>
                 <div class="col-sm-7">
-                  <p class="form-control-static">{{projet.province}}</p>
+                  <p class="form-control-static">{{projet.province.libelleProvince}}</p>
+                </div>
+                <label class="control-label col-sm-4">Année de Programmation:</label>
+                <div class="col-sm-7">
+                  <p class="form-control-static">{{projet.anneeDeProgrammation}}</p>
+                </div>
+                <label class="control-label col-sm-4">Secteur:</label>
+                <div class="col-sm-7">
+                  <p class="form-control-static">{{projet.secteur?.libelleSecteur}}</p>
+                </div>
+                <label class="control-label col-sm-4">Statut:</label>
+                <div class="col-sm-7">
+                  <p class="form-control-static">{{projet.statut?.libelleStatut}}</p>
                 </div>
                 <label class="control-label col-sm-4">Montant Programmé:</label>
                 <div class="col-sm-7">
@@ -37,14 +49,6 @@
                 <label class="control-label col-sm-4">Date commencement des travaux:</label>
                 <div class="col-sm-7">
                   <p class="form-control-static">{{projet.dateCommTravaux}}</p>
-                </div>
-                <label class="control-label col-sm-4">Secteur:</label>
-                <div class="col-sm-7">
-                  <p class="form-control-static">{{projet.secteur?.libelleSecteur}}</p>
-                </div>
-                <label class="control-label col-sm-4">Statut:</label>
-                <div class="col-sm-7">
-                  <p class="form-control-static">{{projet.statut?.libelleStatut}}</p>
                 </div>
                 <label class="control-label col-sm-4">Chargé du projet:</label>
                 <div class="col-sm-7">

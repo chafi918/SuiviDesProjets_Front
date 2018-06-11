@@ -6,17 +6,17 @@
                 <a (click)="retourAuComposant()">
                     <i class="fas fa-chevron-circle-left cursorElement" style="font-size:2em;margin-right:10px;"></i>
                 </a>
-              <h5 *ngIf="mode==0">Ajouter une commune</h5>
-              <h5 *ngIf="mode==1">Modifier une commune</h5>
+              <h5 *ngIf="mode==0">Ajouter une province</h5>
+              <h5 *ngIf="mode==1">Modifier une province</h5>
             </div>
             <div class="inputForm spacer spacerUp" (keyup)="isValidForm()">
                   <mat-form-field>
-                      <input matInput placeholder="Libellé Commune" [(ngModel)]="commune.libelleCommune" #libelleCommune="ngModel" required>
-                      <mat-error *ngIf="libelleCommune.invalid">Veuillez saisir un libelle pour la commune</mat-error>
+                      <input matInput placeholder="Libellé Province" [(ngModel)]="province.libelleProvince" #libelleProvince="ngModel" required>
+                      <mat-error *ngIf="libelleProvince.invalid">Veuillez saisir un libelle pour la province</mat-error>
                   </mat-form-field>
               </div>
-              <button mat-raised-button class="spacerUp" [disabled]="!isValidForm()" color="primary" (click)="ajouterCommune()" style="height:30px;margin:20px;" *ngIf="mode==0">Ajouter</button> 
-              <button mat-raised-button class="spacerUp" [disabled]="!isValidForm()" color="primary" (click)="updateCommune()" style="height:30px;margin:20px;" *ngIf="mode==1">Modifier</button>
+              <button mat-raised-button class="spacerUp" [disabled]="!isValidForm()" color="primary" (click)="ajouterProvince()" style="height:30px;margin:20px;" *ngIf="mode==0">Ajouter</button> 
+              <button mat-raised-button class="spacerUp" [disabled]="!isValidForm()" color="primary" (click)="updateProvince()" style="height:30px;margin:20px;" *ngIf="mode==1">Modifier</button>
             </div>
       </div>
   </div>
@@ -24,27 +24,27 @@
     <div class="navbar-form">
     <div class="panel panel-success">
       <div class="panel-heading">
-        <h5>Toutes les communes</h5>
+        <h5>Toutes les provinces</h5>
       </div>
       <div class="rowMenu spacer">
-          <button color="primary" class="newEntity innerSpacer" style="height:30px"(click)="clickOnAjouterCommune()"> Nouvelle Commune</button>
+          <button color="primary" class="newEntity innerSpacer" style="height:30px"(click)="clickOnAjouterProvince()"> Nouvelle Province</button>
           <div class="navbar-form navbar-right row" >
               <mat-form-field>
-                  <input matInput type="text" [(ngModel)]="libelleCommune" (keyup)="chercher()" placeholder="Rechercher"/>
+                  <input matInput type="text" [(ngModel)]="libelleProvince" (keyup)="chercher()" placeholder="Rechercher"/>
               </mat-form-field>
           </div>
       </div>
     <table class="table table-striped">
         <tr>
-          <th>Libellé Commune</th>
+          <th>Libellé Province</th>
           <th>Modification</th>
           <th>Supprimer</th>
         </tr>
-        <tr *ngFor="let c of pageCommunes?.content">
-          <td>{{c.libelleCommune}}</td>
-          <td><a (click)="onEditCommune(c.idCommune)">
+        <tr *ngFor="let p of pageProvinces?.content">
+          <td>{{p.libelleProvince}}</td>
+          <td><a (click)="onEditProvince(p.idProvince)">
             <i class="fas fa-edit editIcon cursorElement"></i></a></td>
-          <td><a (click)="onDeleteCommune(c)">
+          <td><a (click)="onDeleteProvince(p)">
             <i class="glyphicon glyphicon-remove cursorElement"></i></a></td>
         </tr>
     </table>

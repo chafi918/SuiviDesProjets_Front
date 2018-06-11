@@ -87,7 +87,7 @@
           </tr>
       </table>
       <div class="container spacerUp">
-        <ul class="nav nav-pills">
+        <ul class="pager">
           <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages; let i=index">
             <a (click)="gotoPage(i)" class="marge cursorElement">{{i}}</a>
           </li>

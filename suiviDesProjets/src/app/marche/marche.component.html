@@ -26,6 +26,11 @@
           <mat-error *ngIf="montantTravauxRealisesV.invalid">Veuillez saisir un montant</mat-error>
         </mat-form-field>
         <mat-form-field>
+          <input matInput placeholder="Montant Emis" [(ngModel)]="marche.montantEmis" name="montantEmis"
+            #montantEmisV="ngModel" required>
+          <mat-error *ngIf="montantEmisV.invalid">Veuillez saisir un montant</mat-error>
+        </mat-form-field>
+        <mat-form-field>
           <input matInput placeholder="Délai d'éxecution" [(ngModel)]="marche.delaiExecution" name="delaiExecution" #delaiExecutionV="ngModel"
             required>
           <mat-error *ngIf="delaiExecutionV.invalid">Veuillez saisir un délai d'execution</mat-error>
@@ -34,6 +39,11 @@
           <input matInput placeholder="Date de l'ordre de service" type="date" [(ngModel)]="marche.dateOS" name="dateOS" #dateOSV="ngModel"
             required>
           <mat-error *ngIf="dateOSV.invalid">Veuillez saisir une date</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Date de Réception Provisoire" type="date" [(ngModel)]="marche.dateReceptionProvisoire" name="dateReceptionProvisoire" #dateReceptionProvisoireV="ngModel"
+            required>
+          <mat-error *ngIf="dateReceptionProvisoireV.invalid">Veuillez saisir une date</mat-error>
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="Taux d'avancement" [(ngModel)]="marche.tauxAvancement" name="tauxAvancement" #tauxAvancementV="ngModel"
@@ -140,7 +150,7 @@
         </tr>
       </table>
       <div class="container spacerUp">
-        <ul class="nav nav-tabs">
+        <ul class="pager">
           <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages; let i=index">
             <a (click)="gotoPage(i)" class="marge cursorElement">{{i}}</a>
           </li>
