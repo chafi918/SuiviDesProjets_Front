@@ -10,11 +10,11 @@ import { StatistiquesService } from '../../services/statistiques.service';
 })
 export class StatistiquesComponent implements OnInit {
   myChart: any;
-  fileName:string = 'statistiques-'+new Date()+'.pdf';
+  fileName: string = 'statistiques-' + new Date() + '.pdf';
   critere: string = "annee";
   labels: Array<string>;
   data: any;
-  label: string = 'projets par ' + (isNullOrUndefined(this.critere) ? 'années !' : this.critere+'s');
+  label: string = 'Projets par ' + (isNullOrUndefined(this.critere) || this.critere == 'annee'? 'années !' : this.critere + 's');
   allData: any;
 
   constructor(public statService: StatistiquesService) { }
@@ -82,6 +82,12 @@ export class StatistiquesComponent implements OnInit {
         }]
       },
       options: {
+        title: {
+          display: true,
+          position: 'top',
+          text: this.label,
+          fontSize:20
+        },
         legend: {
           display: false,
         },
@@ -101,7 +107,9 @@ export class StatistiquesComponent implements OnInit {
     });
   }
 
-  releadChart
+  releadChart() {
+
+  }
 
   initiaseDefaultChart() {
     var colors = this.getBackgroundColors();
@@ -121,11 +129,19 @@ export class StatistiquesComponent implements OnInit {
         }]
       },
       options: {
+        title: {
+          display: true,
+          position: 'top',
+          text: this.label,
+          fontSize:20
+        },
         responsive: true
       }
     });
   }
   showCritere() {
+    console.log(this.critere);
+    this.label = 'Projets par ' + (this.critere =='annee' ? 'années !' : this.critere + 's');
     this.myChart.destroy();
     this.ngOnInit()
   }

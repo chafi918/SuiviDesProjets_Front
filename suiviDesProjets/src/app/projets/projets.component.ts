@@ -27,22 +27,22 @@ export class ProjetsComponent implements OnInit {
   libelleSecteur: string;
   libelleStatut: string;
   libelleCommune: string;
-  libelleProvince:string;
   mode: number = 0;
   display: number = 0;
   secteurs: Array<Secteur>;
   statuts: Array<Statut>;
   communes: Array<Commune>;
-  provinces:Array<Province>;
   observation: Observation = new Observation();
   critere: string = "intitule";
+  provinces: Array<Province>
+  libelleProvince:string;
+
   constructor(public http: Http, public router: Router, public projetService: ProjetService,
     public observationService: ObservationService) { }
 
   ngOnInit() {
     this.projetService.getProjets()
       .subscribe(data => {
-        console.log(data);
         this.pageProjets = data;
         this.pages = new Array(data.totalPages);
         this.currentPage = data.number;
@@ -50,7 +50,7 @@ export class ProjetsComponent implements OnInit {
         this.getAllStatuts();
         this.getAllCommunes();
         this.getAllProvinces();
-        this.libelleStatut = this.libelleSecteur = this.libelleCommune = this.libelleProvince="";
+        this.libelleStatut = this.libelleSecteur = this.libelleCommune = this.libelleProvince = "";
       }
         , err => { console.log(err); })
   }
@@ -59,8 +59,7 @@ export class ProjetsComponent implements OnInit {
     this.projet.secteur = this.getSecteurByName(this.secteurs, this.libelleSecteur);
     this.projet.statut = this.getStatutByName(this.statuts, this.libelleStatut);
     this.projet.commune = this.getCommuneByName(this.communes, this.libelleCommune);
-    this.projet.province = this.getProvinceByName(this.provinces, this.libelleProvince);
-    console.log(this.projet);
+    this.projet.province = this.getProvinceByName(this.provinces, this.libelleProvince)
     this.projetService.ajouterProjet(this.projet)
       .subscribe(data => { this.ngOnInit(); }
         , err => { console.log(err); });
@@ -97,6 +96,11 @@ export class ProjetsComponent implements OnInit {
       }
     }
   }
+  getAllProvinces(){
+    this.projetService.getAllProvinces()
+    .subscribe(data => {this.provinces = data; },
+      err => { console.log(err); })
+  }
   getAllSecteurs() {
     this.projetService.getAllSecteurs()
       .subscribe(data => { this.secteurs = data; },
@@ -112,16 +116,11 @@ export class ProjetsComponent implements OnInit {
       .subscribe(data => { this.communes = data; },
         err => { console.log(err); })
   }
-  getAllProvinces() {
-    this.projetService.getAllProvinces()
-      .subscribe(data => { this.provinces = data; },
-        err => { console.log(err); })
-  }
   clickOnAjouterProjet() {
     this.mode = 0;
     this.display = 1;
     this.projet = new Projet();
-    this.libelleSecteur = this.libelleStatut = this.libelleCommune =this.libelleProvince= "";
+    this.libelleSecteur = this.libelleStatut = this.libelleCommune = "";
   }
   clickOnAjouterObservation() {
     this.mode = 0;
@@ -147,7 +146,6 @@ export class ProjetsComponent implements OnInit {
         this.libelleSecteur = this.projet.secteur.libelleSecteur;
         this.libelleCommune = this.projet.commune.libelleCommune;
         this.libelleProvince = this.projet.province.libelleProvince;
-        console.log(data);
       }
         , err => { console.log(err); })
   }
@@ -168,7 +166,6 @@ export class ProjetsComponent implements OnInit {
   chercher() {
     this.projetService.chercherProjet(this.critere, this.motCle)
       .subscribe(data => {
-        console.log(data)
         this.pageProjets = data;
         this.pages = new Array(data.totalPages);
         this.currentPage = data.number;
@@ -184,13 +181,11 @@ export class ProjetsComponent implements OnInit {
       .subscribe(data => {
         this.pageProjets = data;
         this.pages = new Array(data.totalPages);
-        this.currentPage = i;
       }
         , err => { console.log(err); })
   }
 
   onDetailsProjet(idProjet: number) {
-    console.log(idProjet)
     this.router.navigate(['/detailsProjet/' + idProjet]);
   }
 
@@ -218,7 +213,6 @@ export class ProjetsComponent implements OnInit {
       && this.projet.province
       && this.projet.secteur && this.projet.statut
       && this.projet.dateAO
-      && this.projet.anneeDeProgrammation
       && this.projet.montantProgramme && this.projet.montantProgramme != 0;
 
   }

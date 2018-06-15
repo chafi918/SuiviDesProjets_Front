@@ -60,7 +60,7 @@
         <tr *ngFor="let d of documentPage?.content">
           <td>{{d.nomDocument}}</td>
           <td>{{d.chargeurDocument}}</td>
-          <td>{{d.objetDocument}}</td>
+          <td style="word-wrap: break-word;max-width:80px;max-height:80px;">{{d.objetDocument}}</td>
           <td>{{d.dateAjout}}</td>
           <td>{{d.type.libelleType}}</td>
           <td>

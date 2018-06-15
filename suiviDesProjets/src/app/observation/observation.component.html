@@ -44,7 +44,7 @@
               <th>Supprimer</th>
             </tr>
             <tr *ngFor="let o of pageObservations?.content">
-              <td>{{o.observation}}</td>
+              <td style="word-wrap: break-word;max-width:80px;max-height:80px;">{{o.observation}}</td>
               <td>{{o.dateObservation}}</td>
               <td>{{o.nomObservant}}</td>
               <td>

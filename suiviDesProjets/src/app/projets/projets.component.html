@@ -31,8 +31,8 @@
             <mat-error *ngIf="province.invalid">Veuillez choisir une province pour le projet</mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Année de programmation" [(ngModel)]="projet.anneeDeProgrammation" name="anneeDeProgrammation" #anneeDeProgrammationV="ngModel"
-              required>
+            <input matInput placeholder="Année de programmation" [(ngModel)]="projet.anneeDeProgrammation" name="anneeDeProgrammation"
+              #anneeDeProgrammationV="ngModel" required>
             <mat-error *ngIf="anneeDeProgrammationV.invalid">Veuillez saisir une année</mat-error>
           </mat-form-field>
           <mat-form-field>
@@ -54,6 +54,9 @@
           <mat-form-field>
             <input matInput placeholder="Taux d'avancement" [(ngModel)]="projet.tauxAvancement" name="tauxAvancement" #tauxAvancementV="ngModel"
               required>
+            <span matSuffix>
+              <b>%</b>
+            </span>
             <mat-error *ngIf="tauxAvancementV.invalid">Veuillez saisir un taux</mat-error>
           </mat-form-field>
           <mat-form-field>
@@ -65,21 +68,27 @@
           <mat-form-field>
             <input matInput placeholder="Montant Programmé" type="number" [(ngModel)]="projet.montantProgramme" name="montantProgramme"
               #montantProgramme="ngModel" required>
+            <span matSuffix>
+              <b>MAD</b>
+            </span>
             <mat-error *ngIf="montantProgramme.invalid">Veuillez saisir un montant</mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Date de commencement des Travaux" type="date" [(ngModel)]="projet.dateCommTravaux">
+            <input matInput placeholder="Date de commencement des Travaux" type="date" [(ngModel)]="projet.dateCommTravaux" name="dateCommTravaux"
+              #dateCommTravaux="ngModel" required>
+            <mat-error *ngIf="dateCommTravaux.invalid">Veuillez saisir un montant</mat-error>
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Date d'Appel d'Offre" type="date" [(ngModel)]="projet.dateAO" name="dateAO" #dateAO="ngModel"
               required>
             <mat-error *ngIf="dateAO.invalid">Veuillez saisir une date</mat-error>
           </mat-form-field>
-          <mat-checkbox class="checkbox" [(ngModel)]="projet.estProjetRoyal" required>Royal</mat-checkbox>
-          <mat-checkbox class="checkbox" [(ngModel)]="projet.estMasque" required>Masqué</mat-checkbox>
           <mat-form-field>
             <input matInput placeholder="Date de fin des Travaux" type="date" [(ngModel)]="projet.dateFinTravaux">
           </mat-form-field>
+          <mat-checkbox class="checkbox" [(ngModel)]="projet.estProjetRoyal" required>Royal</mat-checkbox>
+          <mat-checkbox class="checkbox" [(ngModel)]="projet.estMasque" required>Masqué</mat-checkbox>
+
         </div>
         <button mat-raised-button class="spacerUp" [disabled]="!isValidForm()" color="primary" (click)="ajouterProjet()" style="height:40px;margin: 20px;"
           *ngIf="mode==0">Ajouter</button>
@@ -112,7 +121,9 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <a (click)="exportCSV()"><i class="fas fa-file-excel cursorElement exportButton"></i></a>
+          <a (click)="exportCSV()">
+            <i class="fas fa-file-excel cursorElement exportButton"></i>
+          </a>
         </div>
       </div>
       <div class="panel-body">
